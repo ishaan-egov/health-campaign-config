@@ -5,16 +5,16 @@ ServiceMaps:
     - topic: save-product-variant-topic
       configKey: INDEX
       indexes:
-        - name: productVariantIndex-v1
-          type: productVariant
-          id: $.*.id
+        - name: product-variant-index-v1
+          type: product-variant
+          id: $.id
           isBulk: true
           jsonPath: $.*
-          timeStampField: $.*.auditDetails.createdTime
+          timeStampField: $.auditDetails.createdTime
     - topic: save-product-topic
       configKey: INDEX
       indexes:
-        - name: productIndex-v1
+        - name: product-index-v1
           type: product
           id: $.*.id
           isBulk: true
