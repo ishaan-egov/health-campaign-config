@@ -46,13 +46,13 @@ serviceMaps:
         - query: INSERT INTO eg_digit_mapping(dhis2RecordInternalID, digitId, digitEntityType, createdBy,lastModifiedBy,createdTime,lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?);
           basePath: $.*
           jsonMaps:
-              - jsonPath: $.*.dhis2RecordInternalID
-              - jsonPath: $.*.digitId
-              - jsonPath: $.*.digitEntityType
-              - jsonPath: $.*.auditDetails.createdBy
-              - jsonPath: $.*.auditDetails.lastModifiedBy
-              - jsonPath: $.*.auditDetails.createdTime
-              - jsonPath: $.*.auditDetails.lastModifiedTime
+            - jsonPath: $.*.dhis2RecordInternalID
+            - jsonPath: $.*.digitId
+            - jsonPath: $.*.digitEntityType
+            - jsonPath: $.*.auditDetails.createdBy
+            - jsonPath: $.*.auditDetails.lastModifiedBy
+            - jsonPath: $.*.auditDetails.createdTime
+            - jsonPath: $.*.auditDetails.lastModifiedTime
 
     - version: 1.0
       description: Updates DHIS2 to Digit identifiers mapping into the tables
@@ -114,22 +114,78 @@ serviceMaps:
 
 
     - version: 1.0
-      description: Persists Boundary data into the tables
+      description: Persists Boundary data into the table
       fromTopic: create-boundary-data
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO eg_boundary(id, name, parent, path, children, boundaryLevel, createdBy, lastModifiedBy, createdTime, lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO eg_boundary(id, name, parent, path, children, boundaryLevel, boundary, createdBy, lastModifiedBy, createdTime, lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET name=?, parent=?, path=?, children=?, boundaryLevel=?, boundary=?, lastModifiedBy=?, lastModifiedTime=?;
           basePath: $.*
           jsonMaps:
             - jsonPath: $.*.id
+
             - jsonPath: $.*.name
+
             - jsonPath: $.*.parent
+
             - jsonPath: $.*.path
+
             - jsonPath: $.*.children
-              type: ARRAY
-              dbType: STRING
+
             - jsonPath: $.*.boundaryLevel
+
+            - jsonPath: $.*.boundary
+
             - jsonPath: $.*.auditDetails.createdBy
+
             - jsonPath: $.*.auditDetails.lastModifiedBy
+
             - jsonPath: $.*.auditDetails.createdTime
+
+            - jsonPath: $.*.auditDetails.lastModifiedTime
+
+            - jsonPath: $.*.name
+
+            - jsonPath: $.*.parent
+
+            - jsonPath: $.*.path
+
+            - jsonPath: $.*.children
+
+            - jsonPath: $.*.boundaryLevel
+
+            - jsonPath: $.*.boundary
+
+            - jsonPath: $.*.auditDetails.lastModifiedBy
+
+            - jsonPath: $.*.auditDetails.lastModifiedTime
+
+
+    - version: 1.0
+      description: Persists HCM events into the table
+      fromTopic: create-hcm-event-history
+      isTransaction: true
+      queryMaps:
+        - query: INSERT INTO eg_hcm_event_history(eventId, jobId, url, payload, status, message, createdBy, lastModifiedBy, createdTime, lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: $.*
+          jsonMaps:
+            - jsonPath: $.*.eventID
+
+            - jsonPath: $.*.jobID
+
+            - jsonPath: $.*.url
+
+            - jsonPath: $.*.payload
+              type: JSON
+              dbType: JSONB
+
+            - jsonPath: $.*.status
+
+            - jsonPath: $.*.message
+
+            - jsonPath: $.*.auditDetails.createdBy
+
+            - jsonPath: $.*.auditDetails.lastModifiedBy
+
+            - jsonPath: $.*.auditDetails.createdTime
+
             - jsonPath: $.*.auditDetails.lastModifiedTime
