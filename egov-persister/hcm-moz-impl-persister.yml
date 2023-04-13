@@ -6,9 +6,10 @@ serviceMaps:
       fromTopic: create-dhis2-record
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO eg_dhis2_record(dhis2Id,dhis2EntityType,dhis2DataPayload,source,createdBy,lastModifiedBy,createdTime,lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO eg_dhis2_record(dhis2RecordInternalID,dhis2Id,dhis2EntityType,dhis2DataPayload,source,createdBy,lastModifiedBy,createdTime,lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.*
           jsonMaps:
+            - jsonPath: $.*.dhis2RecordInternalID
             - jsonPath: $.*.dhis2Id
             - jsonPath: $.*.dhis2EntityType
             - jsonPath: $.*.dhis2DataPayload
@@ -43,9 +44,10 @@ serviceMaps:
       fromTopic: create-dhis2-digit-mapping
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO eg_digit_mapping(dhis2RecordInternalID, digitId, digitEntityType, createdBy,lastModifiedBy,createdTime,lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO eg_digit_mapping(digitMappingId, dhis2RecordInternalID, digitId, digitEntityType, createdBy,lastModifiedBy,createdTime,lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.*
           jsonMaps:
+            - jsonPath: $.*.digitMappingId
             - jsonPath: $.*.dhis2RecordInternalID
             - jsonPath: $.*.digitId
             - jsonPath: $.*.digitEntityType
