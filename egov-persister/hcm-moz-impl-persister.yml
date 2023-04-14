@@ -120,7 +120,7 @@ serviceMaps:
       fromTopic: create-boundary-data
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO eg_boundary(id, name, parent, path, children, boundaryLevel, boundary, createdBy, lastModifiedBy, createdTime, lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET name=?, parent=?, path=?, children=?, boundaryLevel=?, boundary=?, lastModifiedBy=?, lastModifiedTime=?;
+        - query: INSERT INTO eg_boundary(id, name, parent, path, children, boundaryLevel, boundary, campaignStartDate, campaignEndDate, totalHouseholds, targetedHouseholds, totalIndividuals, targetedIndividuals, bednetsEstimated, createdBy, lastModifiedBy, createdTime, lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET name=?, parent=?, path=?, children=?, boundaryLevel=?, boundary=?, lastModifiedBy=?, lastModifiedTime=?;
           basePath: $.*
           jsonMaps:
             - jsonPath: $.*.id
@@ -136,6 +136,20 @@ serviceMaps:
             - jsonPath: $.*.boundaryLevel
 
             - jsonPath: $.*.boundary
+
+            - jsonPath: $.*.campaignStartDate
+
+            - jsonPath: $.*.campaignEndDate
+
+            - jsonPath: $.*.totalHouseholds
+
+            - jsonPath: $.*.targetedHouseholds
+
+            - jsonPath: $.*.totalIndividuals
+
+            - jsonPath: $.*.targetedIndividuals
+
+            - jsonPath: $.*.bednetsEstimated
 
             - jsonPath: $.*.auditDetails.createdBy
 
