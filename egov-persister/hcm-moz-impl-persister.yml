@@ -6,12 +6,11 @@ serviceMaps:
       fromTopic: create-dhis2-record
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO eg_dhis2_record(dhis2RecordInternalID,dhis2Id,parentId,dhis2EntityType,dhis2DataPayload,source,createdBy,lastModifiedBy,createdTime,lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO eg_dhis2_record(dhis2RecordInternalID,dhis2Id,dhis2EntityType,dhis2DataPayload,source,createdBy,lastModifiedBy,createdTime,lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.*
           jsonMaps:
             - jsonPath: $.*.dhis2RecordInternalID
             - jsonPath: $.*.dhis2Id
-            - jsonPath: $.*.parentId
             - jsonPath: $.*.dhis2EntityType
             - jsonPath: $.*.dhis2DataPayload
               type: JSON
@@ -39,23 +38,23 @@ serviceMaps:
             - jsonPath: $.*.auditDetails.lastModifiedBy
             - jsonPath: $.*.dhis2RecordInternalID
 
+
     - version: 1.0
       description: Persists DHIS2 to Digit identifiers mapping into the tables
       fromTopic: create-dhis2-digit-mapping
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO eg_digit_mapping(digitMappingId, dhis2RecordInternalID, digitId, parentId, digitEntityType, createdBy,lastModifiedBy,createdTime,lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?);
+        - query: INSERT INTO eg_digit_mapping(digitMappingId, dhis2RecordInternalID, digitId, digitEntityType, createdBy,lastModifiedBy,createdTime,lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.*
           jsonMaps:
             - jsonPath: $.*.digitMappingId
             - jsonPath: $.*.dhis2RecordInternalID
             - jsonPath: $.*.digitId
-            - jsonPath: $.*.parentId
             - jsonPath: $.*.digitEntityType
             - jsonPath: $.*.auditDetails.createdBy
             - jsonPath: $.*.auditDetails.lastModifiedBy
             - jsonPath: $.*.auditDetails.createdTime
-                          - jsonPath: $.*.auditDetails.lastModifiedTime
+            - jsonPath: $.*.auditDetails.lastModifiedTime
 
     - version: 1.0
       description: Updates DHIS2 to Digit identifiers mapping into the tables
@@ -71,7 +70,7 @@ serviceMaps:
             - jsonPath: $.*.auditDetails.lastModifiedTime
             - jsonPath: $.*.auditDetails.lastModifiedBy
             - jsonPath: $.*.digitMappingId
-                -
+
     - version: 1.0
       description: Persists DHIS2 to Digit transformation job history into the tables
       fromTopic: create-dhis2-job
