@@ -44,13 +44,14 @@ serviceMaps:
       fromTopic: create-dhis2-digit-mapping
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO eg_digit_mapping(digitMappingId, dhis2RecordInternalID, digitId, parentId, digitEntityType, createdBy,lastModifiedBy,createdTime,lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?);
+        - query: INSERT INTO eg_digit_mapping(digitMappingId, dhis2RecordInternalID, digitId, parentId, rowVersion, digitEntityType, createdBy,lastModifiedBy,createdTime,lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.*
           jsonMaps:
             - jsonPath: $.*.digitMappingId
             - jsonPath: $.*.dhis2RecordInternalID
             - jsonPath: $.*.digitId
             - jsonPath: $.*.parentId
+            - jsonPath: $.*.rowVersion
             - jsonPath: $.*.digitEntityType
             - jsonPath: $.*.auditDetails.createdBy
             - jsonPath: $.*.auditDetails.lastModifiedBy
@@ -62,7 +63,7 @@ serviceMaps:
       fromTopic: update-dhis2-digit-mapping
       isTransaction: true
       queryMaps:
-        - query: UPDATE eg_digit_mapping SET  digitId= ?, digitEntityType=?, dhis2RecordInternalID=?, lastModifiedTime=?, lastModifiedBy=?  WHERE digitMappingId=?;
+        - query: UPDATE eg_digit_mapping SET  digitId= ?, digitEntityType=?, dhis2RecordInternalID=?, lastModifiedTime=?, lastModifiedBy=?, rowVersion=?  WHERE digitMappingId=?;
           basePath: $.*
           jsonMaps:
             - jsonPath: $.*.digitId
@@ -70,8 +71,8 @@ serviceMaps:
             - jsonPath: $.*.dhis2RecordInternalID
             - jsonPath: $.*.auditDetails.lastModifiedTime
             - jsonPath: $.*.auditDetails.lastModifiedBy
+            - jsonPath: $.*.rowVersion
             - jsonPath: $.*.digitMappingId
-                -
     - version: 1.0
       description: Persists DHIS2 to Digit transformation job history into the tables
       fromTopic: create-dhis2-job
