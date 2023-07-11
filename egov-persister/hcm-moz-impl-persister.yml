@@ -78,7 +78,7 @@ serviceMaps:
       fromTopic: create-dhis2-job
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO eg_scheduler_job_history(jobID, jobType, jobName, executionStartTime, executionCompletionTime, executionStatus, executionRetryCount, createdBy,lastModifiedBy,createdTime,lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO eg_scheduler_job_history(jobID, jobType, jobName, executionStartTime, executionCompletionTime, executionStatus, executionRetryCount, createdBy,lastModifiedBy,createdTime,lastModifiedTime,syncCount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.Job
           jsonMaps:
             - jsonPath: $.Job.jobID
@@ -92,18 +92,24 @@ serviceMaps:
             - jsonPath: $.Job.auditDetails.lastModifiedBy
             - jsonPath: $.Job.auditDetails.createdTime
             - jsonPath: $.Job.auditDetails.lastModifiedTime
+            - jsonPath: $.Job.syncCount
+              type: JSON
+              dbType: JSONB
 
     - version: 1.0
       description: Update DHIS2 to Digit transformation job history in table
       fromTopic: update-dhis2-job
       isTransaction: true
       queryMaps:
-        - query: UPDATE eg_scheduler_job_history SET executionStatus = ?, executionCompletionTime = ?, executionRetryCount = ? WHERE jobID=?;
+        - query: UPDATE eg_scheduler_job_history SET executionStatus = ?, executionCompletionTime = ?, executionRetryCount = ?, syncCount = ? WHERE jobID=?;
           basePath: $.Job
           jsonMaps:
             - jsonPath: $.Job.executionStatus
             - jsonPath: $.Job.executionCompletionTime
             - jsonPath: $.Job.executionRetryCount
+            - jsonPath: $.Job.syncCount
+              type: JSON
+              dbType: JSONB
             - jsonPath: $.Job.jobID
 
     - version: 1.0
@@ -122,7 +128,7 @@ serviceMaps:
       fromTopic: create-boundary-data
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO eg_boundary(id, name, parent, path, children, boundaryLevel, boundary, source, campaignStartDate, campaignEndDate, totalHouseholds, targetedHouseholds, totalIndividuals, targetedIndividuals, bednetsEstimated, totalBednets, createdBy, lastModifiedBy, createdTime, lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET name=?, parent=?, path=?, children=?, boundaryLevel=?, boundary=?, source=?, lastModifiedBy=?, lastModifiedTime=?, totalHouseholds=?, targetedHouseholds=?, totalIndividuals=?, targetedIndividuals=?, bednetsEstimated=?, totalBednets=?;
+        - query: INSERT INTO eg_dhis2_boundary(id, name, parent, path, children, boundaryLevel, boundary, source, campaignStartDate, campaignEndDate, totalHouseholds, targetedHouseholds, totalIndividuals, targetedIndividuals, bednetsEstimated, totalBednets, createdBy, lastModifiedBy, createdTime, lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET name=?, parent=?, path=?, children=?, boundaryLevel=?, boundary=?, source=?, lastModifiedBy=?, lastModifiedTime=?, totalHouseholds=?, targetedHouseholds=?, totalIndividuals=?, targetedIndividuals=?, bednetsEstimated=?, totalBednets=?;
           basePath: $.*
           jsonMaps:
             - jsonPath: $.*.id
