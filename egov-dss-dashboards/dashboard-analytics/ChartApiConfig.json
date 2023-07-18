@@ -1786,7 +1786,6 @@
     "valueType": "number",
     "drillChart": "rdUncoveredPopulationDistrict",
     "documentType": "_doc",
-    "targetLineChart": "rdUncoveredPopulationTargetLineProvince",
     "computeMultiPaths": true,
     "filterKeys": [{"key": "district"}],
     "aggregationPaths": ["Overall Population target","Total Population covered"],
@@ -1868,7 +1867,6 @@
     "valueType": "number",
     "drillChart": "rdUncoveredPopulationAP",
     "documentType": "_doc",
-    "targetLineChart": "rdUncoveredPopulationTargetLineDistrict",
     "computeMultiPaths": true,
     "filterKeys": [{"key": "administrativeProvince"}],
     "aggregationPaths": ["Overall Population target","Total Population covered"],
@@ -1950,7 +1948,6 @@
     "valueType": "number",
     "drillChart": "rdUncoveredPopulationLocality",
     "documentType": "_doc",
-    "targetLineChart": "rdUncoveredPopulationTargetLineAP",
     "computeMultiPaths": true,
     "filterKeys": [{"key": "locality"}],
     "aggregationPaths": ["Overall Population target","Total Population covered"],
@@ -2032,7 +2029,6 @@
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
-    "targetLineChart": "rdUncoveredPopulationTargetLineLocality",
     "computeMultiPaths": true,
     "filterKeys": [{"key": "village"}],
     "aggregationPaths": ["Overall Population target","Total Population covered"],
@@ -4238,10 +4234,12 @@
         "aggrQuery": "{\n  \"aggs\": {\n    \"Open filter by Village\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.service.applicationStatus.keyword\": \"PENDING_ASSIGNMENT\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Open Complaints\": {\n          \"terms\": {\n            \"field\": \"Data.village.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Open Complaints Count\": {\n              \"value_count\": {\n                \"field\": \"Data.service.auditDetails.lastModifiedTime\"\n              }\n            }\n          }\n        }\n      }\n    },\n    \"Resolved filter by Village\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.service.applicationStatus.keyword\": \"RESOLVED\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Resolved Complaints\": {\n          \"terms\": {\n            \"field\": \"Data.village.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Resolved Complaints Count\": {\n              \"value_count\": {\n                \"field\": \"Data.service.auditDetails.lastModifiedTime\"\n              }\n            }\n          }\n        }\n      }\n    },\n    \"Rejected filter by Village\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.service.applicationStatus.keyword\": \"REJECTED\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Rejected Complaints\": {\n          \"terms\": {\n            \"field\": \"Data.village.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Rejected Complaints Count\": {\n              \"value_count\": {\n                \"field\": \"Data.service.auditDetails.lastModifiedTime\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
-
+    "filterKeys": [
+      {"key": "village", "column": "Village"}
+    ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "none",
+    "drillChart": "complaintsList",
     "documentType": "_doc",
     "action": "",
     "showFooter": true,
@@ -4278,6 +4276,66 @@
         "newField" : "Open",
         "_comments": ""
       }
+    ],
+    "insight": {
+    },
+    "sort": "sortKeyAsc",
+    "_comment": " "
+  },
+  "complaintsList": {
+    "kind": "drillDown",
+    "chartName": "DSS_HEALTH_COMPLAINTS_LIST_SUMMARY",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\",\"administrativeProvince\":\"Data.administrativeProvince.keyword\",\"locality\":\"Data.locality.keyword\",\"village\":\"Data.village.keyword\"}",
+        "indexName": "pgr-services",
+        "aggrQuery": "{\n  \"size\": 0,\n  \"aggs\": {\n    \"Complaints Id\": {\n      \"terms\": {\n        \"field\": \"Data.service.serviceRequestId.keyword\",\n        \"size\": 10000\n      },\n      \"aggs\": {\n        \"Created Time\": {\n          \"terms\": {\n            \"script\": {\n              \"lang\": \"painless\",\n              \"source\": \"def createdTime = doc['Data.service.auditDetails.createdTime'].value;\\n def dateFormat = new SimpleDateFormat('dd MMM yyyy');\\n def formattedDate = dateFormat.format(new Date(createdTime));\\n return formattedDate\"\n            },\n            \"size\": 1,\n            \"order\": {\n              \"_key\": \"asc\"\n            }},\n          \"aggs\": {\n            \"Complaint Status\": {\n              \"terms\": {\n                \"field\": \"Data.service.applicationStatus.keyword\",\n                \"size\": 1\n              },\n              \"aggs\": {\n                \"Complaint Type\": {\n                  \"terms\": {\n                    \"field\": \"Data.service.serviceCode.keyword\",\n                    \"size\": 1\n                  },\n                  \"aggs\": {\n                    \"Administrative Area\": {\n                      \"terms\": {\n                       \"script\": {\n                         \"lang\": \"painless\",\n                         \"source\": \"def village = params['_source']['Data']['village']; \\n def locality = params['_source']['Data']['locality']; \\n def administrativeProvince = params['_source']['Data']['administrativeProvince']; \\n def district = params['_source']['Data']['district']; \\n def province = params['_source']['Data']['province']; \\n if(village != null ) {return village;\\n}\\n else if(locality != null ) {return locality;\\n}\\n else if(administrativeProvince != null ) {return administrativeProvince;\\n}\\n else if(district != null ) {return district;\\n}\\n else if(province != null ) {return province;\\n} \\n else {return 'N/A'; \\n}\\n\"\n                       },\n                       \"size\": 1\n                      },\n                      \"aggs\": {\n                        \"Complainant Phone Number\": {\n                          \"terms\": {\n                            \"field\": \"Data.RequestInfo.userInfo.mobileNumber.keyword\",\n                            \"size\": 1\n                          },\n                          \"aggs\": {\n                            \"Supervisor Contact Number\": {\n                              \"terms\": {\n                                \"script\": {\n                                  \"lang\": \"painless\",\n                                  \"source\": \"def additionalDetail = params['_source']['Data']['service']['additionalDetail'];\\nif (additionalDetail != null && additionalDetail.contains('\\\"supervisorContactNumber\\\":\\\"')) {\\n  int startIndex = additionalDetail.indexOf('\\\"supervisorContactNumber\\\":') + 27;\\n  int endIndex = additionalDetail.indexOf(',', startIndex);\\n  if (endIndex != -1) {\\n    String supervisorContactNumber = additionalDetail.substring(startIndex, endIndex-1);\\n    if (supervisorContactNumber!=':null ') return supervisorContactNumber;\\n  }\\n}\\nreturn 'N/A';\"\n                                    },\n                                    \"size\": 1\n                                },\n                              \"aggs\": {\n                                \"Details\": {\n                                  \"terms\": {\n                                      \"field\": \"Data.service.description.keyword\", \n                                      \"size\": 1\n                                    }\n                                }\n                              }\n                            }\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+
+    "chartType": "table",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "pathDataTypeMapping": [
+      {
+        "Complaints Id": "string"
+      },
+      {
+        "Created Time": "string"
+      },
+      {
+        "Complaint Status": "string"
+      },
+      {
+        "Complaint Type": "string"
+      },
+      {
+        "Administrative Area": "string"
+      },
+      {
+        "Complainant Phone Number": "string"
+      },
+      {
+        "Supervisor Contact Number": "string"
+      },
+      {
+        "Details": "string"
+      }
+    ],
+    "plotLabel": "Complaint ID",
+    "aggregationPaths": [
+      "Complaints Id",
+      "Created Time",
+      "Complaint Status",
+      "Complaint Type",
+      "Details",
+      "Administrative Area",
+      "Complainant Phone Number",
+      "Supervisor Contact Number"
     ],
     "insight": {
     },
@@ -4982,10 +5040,12 @@
         "aggrQuery": "{\n  \"aggs\": {\n    \"Open\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.service.applicationStatus.keyword\": \"PENDING_ASSIGNMENT\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Open complaints\": {\n          \"terms\": {\n            \"field\": \"Data.village.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_term\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Open Complaints count\": {\n              \"date_range\": {\n                \"field\": \"Data.@timestamp\",\n                \"keyed\": true,\n                \"ranges\": [\n                  {\n                    \"from\": \"now-6h\",\n                    \"to\": \"now\",\n                    \"key\": \"open since 6h\"\n                  },\n                  {\n                    \"from\": \"now-12h\",\n                    \"to\": \"now-6h\",\n                    \"key\": \"open since 6h-12h\"\n                  },\n                  {\n                    \"from\": \"now-24h\",\n                    \"to\": \"now-12h\",\n                    \"key\": \"open since 12h-24h\"\n                  },\n                  {\n                    \"from\": \"now-48h\",\n                    \"to\": \"now-24h\",\n                    \"key\": \"open since 24h-48h\"\n                  },\n                  {\n                    \"to\": \"now-48h\",\n                    \"key\": \"open for more than 48h\"\n                  }\n\n                ]\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
-
+    "filterKeys": [
+      {"key": "village", "column": "Open complaints Village"}
+    ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "none",
+    "drillChart": "openComplaintsList",
     "documentType": "_doc",
     "action": "",
     "showFooter": true,
@@ -4995,6 +5055,62 @@
     "hideHeaderDenomination": true,
     "aggregationPaths": ["open since 6h","open since 6h-12h","open since 12h-24h","open since 24h-48h","open for more than 48h"],
     "computedFields": [],
+    "insight": {
+    },
+    "sort": "sortKeyAsc",
+    "_comment": " "
+  },
+  "openComplaintsList": {
+    "kind": "drillDown",
+    "chartName": "DSS_HEALTH_COMPLAINTS_LIST_SUMMARY",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\",\"administrativeProvince\":\"Data.administrativeProvince.keyword\",\"locality\":\"Data.locality.keyword\",\"village\":\"Data.village.keyword\"}",
+        "indexName": "pgr-services",
+        "aggrQuery": "{\n  \"size\": 0,\n  \"aggs\": {\n    \"Open Filter\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.service.applicationStatus.keyword\": {\n                  \"value\": \"PENDING_ASSIGNMENT\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n    \"Complaints Id\": {\n      \"terms\": {\n        \"field\": \"Data.service.serviceRequestId.keyword\",\n        \"size\": 1000000\n      },\n      \"aggs\": {\n        \"Created Time\": {\n          \"terms\": {\n            \"script\": {\n              \"lang\": \"painless\",\n              \"source\": \"def createdTime = doc['Data.service.auditDetails.createdTime'].value;\\n def dateFormat = new SimpleDateFormat('dd MMM yyyy');\\n def formattedDate = dateFormat.format(new Date(createdTime));\\n return formattedDate\"\n            },\n            \"size\": 1,\n            \"order\": {\n              \"_key\": \"asc\"\n            }},\n            \"aggs\": {\n              \"Complaint Type\": {\n                \"terms\": {\n                  \"field\": \"Data.service.serviceCode.keyword\",\n                  \"size\": 1\n                },\n                \"aggs\": {\n                  \"Administrative Area\": {\n                    \"terms\": {\n                     \"script\": {\n                       \"lang\": \"painless\",\n                       \"source\": \"def village = params['_source']['Data']['village']; \\n def locality = params['_source']['Data']['locality']; \\n def administrativeProvince = params['_source']['Data']['administrativeProvince']; \\n def district = params['_source']['Data']['district']; \\n def province = params['_source']['Data']['province']; \\n if(village != null ) {return village;\\n}\\n else if(locality != null ) {return locality;\\n}\\n else if(administrativeProvince != null ) {return administrativeProvince;\\n}\\n else if(district != null ) {return district;\\n}\\n else if(province != null ) {return province;\\n} \\n else {return 'N/A'; \\n}\\n\"\n                     },\n                     \"size\": 1\n                    },\n                    \"aggs\": {\n                      \"Complainant Phone Number\": {\n                        \"terms\": {\n                          \"field\": \"Data.RequestInfo.userInfo.mobileNumber.keyword\",\n                          \"size\": 1\n                        },\n                        \"aggs\": {\n                          \"Supervisor Contact Number\": {\n                            \"terms\": {\n                              \"script\": {\n                                \"lang\": \"painless\",\n                                \"source\": \"def additionalDetail = params['_source']['Data']['service']['additionalDetail'];\\nif (additionalDetail != null && additionalDetail.contains('\\\"supervisorContactNumber\\\":\\\"')) {\\n  int startIndex = additionalDetail.indexOf('\\\"supervisorContactNumber\\\":') + 27;\\n  int endIndex = additionalDetail.indexOf(',', startIndex);\\n  if (endIndex != -1) {\\n    String supervisorContactNumber = additionalDetail.substring(startIndex, endIndex-1);\\n    if (supervisorContactNumber!=':null ') return supervisorContactNumber;\\n  }\\n}\\nreturn 'N/A';\"\n                                  },\n                                  \"size\": 1\n                              },\n                            \"aggs\": {\n                              \"Details\": {\n                                \"terms\": {\n                                    \"field\": \"Data.service.description.keyword\", \n                                    \"size\": 1\n                                  }\n                              }\n                            }\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+
+    "chartType": "table",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "pathDataTypeMapping": [
+      {
+        "Complaints Id": "string"
+      },
+      {
+        "Created Time": "string"
+      },
+      {
+        "Complaint Type": "string"
+      },
+      {
+        "Administrative Area": "string"
+      },
+      {
+        "Complainant Phone Number": "string"
+      },
+      {
+        "Supervisor Contact Number": "string"
+      },
+      {
+        "Details": "string"
+      }
+    ],
+    "plotLabel": "Complaint ID",
+    "aggregationPaths": [
+      "Complaints Id",
+      "Created Time",
+      "Complaint Type",
+      "Details",
+      "Administrative Area",
+      "Complainant Phone Number",
+      "Supervisor Contact Number"
+    ],
     "insight": {
     },
     "sort": "sortKeyAsc",
