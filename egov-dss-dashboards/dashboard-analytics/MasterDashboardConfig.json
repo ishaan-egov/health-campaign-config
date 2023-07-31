@@ -1893,7 +1893,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "InventorySummaryByAP",
+                  "id": "InventorySummaryByWarehouse",
                   "name": "DSS_HEALTH_INVENTORY_SUMMARY_BY_AP",
                   "code": "",
                   "chartType": "table",

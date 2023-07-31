@@ -4456,7 +4456,6 @@
         "aggrQuery": "{\n  \"size\": 0,\n  \"aggs\": {\n    \"Complaints Id\": {\n      \"terms\": {\n        \"field\": \"Data.service.serviceRequestId.keyword\",\n        \"size\": 10000\n      },\n      \"aggs\": {\n        \"Created Time\": {\n          \"terms\": {\n            \"script\": {\n              \"lang\": \"painless\",\n              \"source\": \"def createdTime = doc['Data.service.auditDetails.createdTime'].value;\\n def dateFormat = new SimpleDateFormat('dd MMM yyyy hh mm ss');\\n def formattedDate = dateFormat.format(new Date(createdTime));\\n def stringDate = formattedDate.toString();\\n def day = stringDate.substring(0, 2);\\n def month = stringDate.substring(3, 6);\\n def year = stringDate.substring(7, 11);\\n def hour = stringDate.substring(12, 14);\\n def minute = stringDate.substring(15, 17);\\n def seconds = stringDate.substring(18, 20);\\n  return day + ' ' + month + ' ' + year + ' ' + hour + 'h ' + minute + 'm ' + seconds + 's'\"\n            },\n            \"size\": 1,\n            \"order\": {\n              \"_key\": \"asc\"\n            }},\n          \"aggs\": {\n            \"Complaint Status\": {\n              \"terms\": {\n                \"field\": \"Data.service.applicationStatus.keyword\",\n                \"size\": 1\n              },\n              \"aggs\": {\n                \"Complaint Type\": {\n                  \"terms\": {\n                    \"field\": \"Data.service.serviceCode.keyword\",\n                    \"size\": 1\n                  },\n                  \"aggs\": {\n                    \"Administrative Area\": {\n                      \"terms\": {\n                       \"script\": {\n                         \"lang\": \"painless\",\n                         \"source\": \"def village = params['_source']['Data']['village']; \\n def locality = params['_source']['Data']['locality']; \\n def administrativeProvince = params['_source']['Data']['administrativeProvince']; \\n def district = params['_source']['Data']['district']; \\n def province = params['_source']['Data']['province']; \\n if(village != null ) {return village;\\n}\\n else if(locality != null ) {return locality;\\n}\\n else if(administrativeProvince != null ) {return administrativeProvince;\\n}\\n else if(district != null ) {return district;\\n}\\n else if(province != null ) {return province;\\n} \\n else {return 'N/A'; \\n}\\n\"\n                       },\n                       \"size\": 1\n                      },\n                      \"aggs\": {\n                        \"Complainant Phone Number\": {\n                          \"terms\": {\n                            \"field\": \"Data.RequestInfo.userInfo.mobileNumber.keyword\",\n                            \"size\": 1\n                          },\n                          \"aggs\": {\n                            \"Supervisor Contact Number\": {\n                              \"terms\": {\n                                \"script\": {\n                                  \"lang\": \"painless\",\n                                  \"source\": \"def additionalDetail = params['_source']['Data']['service']['additionalDetail'];\\nif (additionalDetail != null && additionalDetail.contains('\\\"supervisorContactNumber\\\":\\\"')) {\\n  int startIndex = additionalDetail.indexOf('\\\"supervisorContactNumber\\\":') + 27;\\n  int endIndex = additionalDetail.indexOf(',', startIndex);\\n  if (endIndex != -1) {\\n    String supervisorContactNumber = additionalDetail.substring(startIndex, endIndex-1);\\n    if (supervisorContactNumber!=':null ') return supervisorContactNumber;\\n  }\\n}\\nreturn 'N/A';\"\n                                    },\n                                    \"size\": 1\n                                },\n                              \"aggs\": {\n                                \"Details\": {\n                                  \"terms\": {\n                                      \"field\": \"Data.service.description.keyword\", \n                                      \"size\": 1\n                                    }\n                                }\n                              }\n                            }\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
-
     "chartType": "table",
     "valueType": "number",
     "drillChart": "none",
@@ -4684,7 +4683,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "none",
+    "drillChart": "InventorySummaryByWarehouse",
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Inventory summary By District",
@@ -4730,6 +4729,70 @@
         "actionName": "PercentageComputedField",
         "fields" : [ "Total Stock","Target for days to last" ],
         "newField" : "Days To Last",
+        "_comments": ""
+      }
+    ],
+    "insight": {
+    },
+    "sort": "sortKeyAsc",
+    "_comment": " "
+  },
+  "InventorySummaryByWarehouse": {
+    "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_WAREHOUSE",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.eventTimeStamp",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "stock-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"exists\": {\n                    \"field\": \"Data.district.keyword\"\n                  }\n                },\n                {\n                  \"match_phrase\": {\n                    \"Data.productVariant\": \"PVAR\"\n                  }\n                },\n                {\n                  \"term\": {\n                    \"Data.eventType.keyword\": \"RECEIVED\"\n                  }\n                }\n              ]\n            }\n          },\n      \"aggs\": {\n        \"Available Stock\": {\n          \"terms\": {\n            \"size\": 500,\n            \"field\": \"Data.facilityName.keyword\",\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Incoming\": {\n              \"sum\": {\n                \"field\": \"Data.physicalCount\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.eventTimeStamp",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "stock-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"exists\": {\n                    \"field\": \"Data.district.keyword\"\n                  }\n                },\n                {\n                  \"match_phrase\": {\n                    \"Data.productVariant\": \"PVAR\"\n                  }\n                },\n                {\n                  \"term\": {\n                    \"Data.eventType.keyword\": \"DISPATCHED\"\n                  }\n                }\n              ]\n            }\n          },\n      \"aggs\": {\n        \"Available Stock\": {\n          \"terms\": {\n            \"size\": 500,\n            \"field\": \"Data.facilityName.keyword\",\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Outgoing\": {\n              \"sum\": {\n                \"field\": \"Data.physicalCount\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "stock-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"exists\": {\n                    \"field\": \"Data.district.keyword\"\n                  }\n                },\n                {\n                  \"match_phrase\": {\n                    \"Data.productVariant\": \"PVAR\"\n                  }\n                }\n              ]\n            }\n          },\n      \"aggs\": {\n        \"Available Stock\": {\n          \"terms\": {\n            \"size\": 500,\n            \"field\": \"Data.facilityName.keyword\",\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Incoming Stock\": {\n              \"filter\": {\n                \"term\": {\n                  \"Data.eventType.keyword\": \"RECEIVED\"\n                }\n              },\n              \"aggs\": {\n                \"SUM\": {\n                  \"sum\": {\n                    \"field\": \"Data.physicalCount\"\n                  }\n                }\n              }\n            },\n            \"Outgoing Stock\": {\n              \"filter\": {\n                \"term\": {\n                  \"Data.eventType.keyword\": \"DISPATCHED\"\n                }\n              },\n              \"aggs\": {\n                \"SUM\": {\n                  \"sum\": {\n                    \"field\": \"Data.physicalCount\"\n                  }\n                }\n              }\n            },\n            \"Total Stock\": {\n              \"bucket_script\": {\n                \"buckets_path\": {\n                  \"IS\": \"Incoming Stock>SUM\",\n                  \"OS\": \"Outgoing Stock>SUM\"\n                },\n                \"script\": \"params.IS-params.OS\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Inventory summary By Warehouse",
+    "divisorFields": [],
+    "showFooter": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "excludedColumns": ["SUM","Target for range","Target per day","Target for days to last","Incoming","Outgoing","Total Stock"],
+    "computedFields": [
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "Incoming" ],
+        "newField" : "Incoming Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "Outgoing" ],
+        "newField" : "Outgoing Stock",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "Total Stock" ],
+        "newField" : "Stock Left",
         "_comments": ""
       }
     ],
