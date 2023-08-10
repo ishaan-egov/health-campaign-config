@@ -1510,7 +1510,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "householdsVisitedLatLongPoints",
+                  "id": "householdsVisitedLatLongPointsDistrict",
                   "name": "DSS_HEALTH_RD_HH_VISITED_LATLONG",
                   "code": "",
                   "chartType": "points",
