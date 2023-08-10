@@ -581,7 +581,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "householdsVisitedLatLongPoints",
+                  "id": "householdsVisitedLatLongPointsProvince",
                   "name": "DSS_HEALTH_RD_HH_VISITED_LATLONG",
                   "code": "",
                   "chartType": "points",
@@ -1473,7 +1473,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "householdsCoverageHeatMapProvince",
+                  "id": "householdsCoverageHeatMapDistrict",
                   "name": "DSS_HEALTH_HOUSEHOLDS_COVERAGE_HEATMAP_PROVINCE",
                   "code": "",
                   "chartType": "heatmap",
@@ -1482,7 +1482,7 @@
                   "tabName": "HOUSEHOLD"
                 },
                 {
-                  "id": "populationCoverageHeatMapProvince",
+                  "id": "populationCoverageHeatMapDistrict",
                   "name": "DSS_HEALTH_POPULATION_COVERAGE_HEATMAP_PROVINCE",
                   "code": "",
                   "chartType": "heatmap",
@@ -1491,7 +1491,7 @@
                   "tabName": "POPULATION"
                 },
                 {
-                  "id": "bednetsCoverageHeatMapProvince",
+                  "id": "bednetsCoverageHeatMapDistrict",
                   "name": "DSS_HEALTH_BEDNETS_COVERAGE_HEATMAP_PROVINCE",
                   "code": "",
                   "chartType": "heatmap",
@@ -1510,7 +1510,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "householdsVisitedLatLongPoints",
+                  "id": "householdsVisitedLatLongPointsDistrict",
                   "name": "DSS_HEALTH_RD_HH_VISITED_LATLONG",
                   "code": "",
                   "chartType": "points",
