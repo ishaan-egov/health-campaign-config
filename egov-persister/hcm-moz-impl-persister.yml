@@ -40,6 +40,46 @@ serviceMaps:
             - jsonPath: $.*.dhis2RecordInternalID
 
     - version: 1.0
+      description: Persists DIGIT Records into the tables
+      fromTopic: create-digit-record
+      isTransaction: true
+      queryMaps:
+        - query: INSERT INTO eg_digit_record(digitRecordInternalId,digitId,parentId,referenceId,digitEntityType,digitDataPayload,source,createdBy,lastModifiedBy,createdTime,lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: $.*
+          jsonMaps:
+            - jsonPath: $.*.digitRecordInternalId
+            - jsonPath: $.*.digitId
+            - jsonPath: $.*.parentId
+            - jsonPath: $.*.referenceId
+            - jsonPath: $.*.digitEntityType
+            - jsonPath: $.*.digitDataPayload
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.*.source
+            - jsonPath: $.*.auditDetails.createdBy
+            - jsonPath: $.*.auditDetails.lastModifiedBy
+            - jsonPath: $.*.auditDetails.createdTime
+            - jsonPath: $.*.auditDetails.lastModifiedTime
+
+    - version: 1.0
+      description: Updates DIGIT records into the tables
+      fromTopic: update-digit-record
+      isTransaction: true
+      queryMaps:
+        - query: UPDATE eg_digit_record SET  digitId= ?,referenceId=? ,digitEntityType=?, digitDataPayload=?, lastModifiedTime=?, lastModifiedBy=? WHERE digitRecordInternalId=?;
+          basePath: $.*
+          jsonMaps:
+            - jsonPath: $.*.digitId
+            - jsonPath: $.*.referenceId
+            - jsonPath: $.*.digitEntityType
+            - jsonPath: $.*.digitDataPayload
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.*.auditDetails.lastModifiedTime
+            - jsonPath: $.*.auditDetails.lastModifiedBy
+            - jsonPath: $.*.digitRecordInternalId
+
+    - version: 1.0
       description: Persists DHIS2 to Digit identifiers mapping into the tables
       fromTopic: create-dhis2-digit-mapping
       isTransaction: true
@@ -73,6 +113,40 @@ serviceMaps:
             - jsonPath: $.*.auditDetails.lastModifiedBy
             - jsonPath: $.*.rowVersion
             - jsonPath: $.*.digitMappingId
+
+    - version: 1.0
+      description: Persists Digit to DHIS2 identifiers mapping into the tables
+      fromTopic: create-digit-dhis2-mapping
+      isTransaction: true
+      queryMaps:
+        - query: INSERT INTO eg_dhis2_mapping(dhis2MappingId, digitRecordInternalId, dhis2d,parentId,dhis2EntityType, createdBy,lastModifiedBy,createdTime,lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: $.*
+          jsonMaps:
+            - jsonPath: $.*.dhis2MappingId
+            - jsonPath: $.*.digitRecordInternalId
+            - jsonPath: $.*.dhis2d
+            - jsonPath: $.*.parentId
+            - jsonPath: $.*.dhis2EntityType
+            - jsonPath: $.*.auditDetails.createdBy
+            - jsonPath: $.*.auditDetails.lastModifiedBy
+            - jsonPath: $.*.auditDetails.createdTime
+            - jsonPath: $.*.auditDetails.lastModifiedTime
+
+    - version: 1.0
+      description: Updates Digit to DHIS2 identifiers mapping into the tables
+      fromTopic: update-digit-dhis2-mapping
+      isTransaction: true
+      queryMaps:
+        - query: UPDATE eg_dhis2_mapping SET  dhis2d= ?, dhis2EntityType=?, digitRecordInternalId=?, lastModifiedTime=?, lastModifiedBy=? WHERE dhis2MappingId=?;
+          basePath: $.*
+          jsonMaps:
+            - jsonPath: $.*.dhis2d
+            - jsonPath: $.*.dhis2EntityType
+            - jsonPath: $.*.digitRecordInternalId
+            - jsonPath: $.*.auditDetails.lastModifiedTime
+            - jsonPath: $.*.auditDetails.lastModifiedBy
+            - jsonPath: $.*.dhis2MappingId
+
     - version: 1.0
       description: Persists DHIS2 to Digit transformation job history into the tables
       fromTopic: create-dhis2-job
