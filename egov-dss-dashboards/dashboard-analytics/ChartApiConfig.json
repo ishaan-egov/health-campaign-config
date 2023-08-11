@@ -5018,7 +5018,7 @@
     "action": "",
     "plotLabel": "Inventory summary By District",
     "filterKeys": [
-      {"key": "Data.district.keyword", "column": "Inventory summary By District"}
+      {"key": "district", "column": "Inventory summary By District"}
     ],
     "divisorFields": [],
     "showFooter": false,
@@ -5171,7 +5171,7 @@
     "action": "",
     "plotLabel": "Inventory summary By AP",
     "filterKeys": [
-      {"key": "Data.administrativeProvince.keyword", "column": "Inventory summary By AP"}
+      {"key": "administrativeProvince", "column": "Inventory summary By AP"}
     ],
     "divisorFields": [],
     "showFooter": false,
