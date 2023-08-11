@@ -1928,14 +1928,14 @@
             },
             {
               "id": 362,
-              "name": "DSS_HEALTH_SUPERVISION_USER_SYNC_RATE_BY_AP",
-              "label": "DSS_HEALTH_SUPERVISION_USER_SYNC_RATE_BY_AP",
+              "name": "DSS_HEALTH_SUPERVISION_USER_SYNC_RATE_BY_DISTRICT",
+              "label": "DSS_HEALTH_SUPERVISION_USER_SYNC_RATE_BY_DISTRICT",
               "vizType": "chart",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "userSyncRateByAP",
+                  "id": "userSyncRateByDistrict",
                   "name": "DSS_HEALTH_SUPERVISION_USER_SYNC_RATE_BY_AP",
                   "code": "",
                   "chartType": "bar",
