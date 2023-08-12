@@ -350,8 +350,8 @@ serviceMaps:
       tenantIdJsonPath: $.tenantId
       transactionCodeJsonPath: $.id
       #below twofields of audit are applied on the whole object recieved in the kafka
-      userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
-      auditAttributeBasePath: $.*   
+      userUuidJsonPath: $.Projects.[0].auditDetails.lastModifiedBy
+      auditAttributeBasePath: $.Projects.*   
       queryMaps:
         - query: UPDATE project SET name = ?, projectType = ?, projectTypeId = ?, projectSubType = ?, department = ?, description = ?, referenceId = ?, startDate = ?, endDate = ?, isTaskEnabled = ?, natureOfWork = ?, additionalDetails = ?, isDeleted = ?, rowVersion = ?, lastModifiedBy = ?, lastModifiedTime = ? WHERE id = ?;
           basePath: $.Projects.*
