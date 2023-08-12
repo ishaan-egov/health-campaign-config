@@ -114,6 +114,7 @@ serviceMaps:
     - version: 1.0
       description: Deletes household.
       fromTopic: delete-household-topic
+      isTransaction: true
       isAuditEnabled: true
       module: HOUSEHOLD-DELETE
       objecIdJsonPath: $.id
