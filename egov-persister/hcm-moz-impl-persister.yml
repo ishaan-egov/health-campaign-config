@@ -5,6 +5,13 @@ serviceMaps:
       description: Persists DHIS2 Records into the tables
       fromTopic: create-dhis2-record
       isTransaction: true
+      isAuditEnabled: true
+      module: DHIS2
+      objecIdJsonPath: $.id
+      tenantIdJsonPath: $.tenantId
+      userUuidJsonPath: $.[0].auditDetails.createdBy
+      transactionCodeJsonPath: $.dhis2RecordInternalID
+      auditAttributeBasePath: $.*
       queryMaps:
         - query: INSERT INTO eg_dhis2_record(dhis2RecordInternalID,dhis2Id,parentId,dhis2EntityType,dhis2DataPayload,source,createdBy,lastModifiedBy,createdTime,lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.*
@@ -26,6 +33,13 @@ serviceMaps:
       description: Updates DHIS2 records into the tables
       fromTopic: update-dhis2-record
       isTransaction: true
+      isAuditEnabled: true
+      module: DHIS2-UPDATE
+      objecIdJsonPath: $.id
+      tenantIdJsonPath: $.tenantId
+      userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+      transactionCodeJsonPath: $.dhis2RecordInternalID
+      auditAttributeBasePath: $.*      
       queryMaps:
         - query: UPDATE eg_dhis2_record SET  dhis2Id= ?, dhis2EntityType=?, dhis2DataPayload=?, lastModifiedTime=?, lastModifiedBy=?  WHERE dhis2RecordInternalID=?;
           basePath: $.*
@@ -43,6 +57,13 @@ serviceMaps:
       description: Persists DIGIT Records into the tables
       fromTopic: create-digit-record
       isTransaction: true
+      isAuditEnabled: true
+      module: DHIS2-DIGIT
+      objecIdJsonPath: $.id
+      tenantIdJsonPath: $.tenantId
+      userUuidJsonPath: $.[0].auditDetails.createdBy
+      transactionCodeJsonPath: $.dhis2RecordInternalID
+      auditAttributeBasePath: $.*
       queryMaps:
         - query: INSERT INTO eg_digit_record(digitRecordInternalId,digitId,parentId,referenceId,digitEntityType,digitDataPayload,source,createdBy,lastModifiedBy,createdTime,lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.*
@@ -64,6 +85,13 @@ serviceMaps:
     - version: 1.0
       description: Updates DIGIT records into the tables
       fromTopic: update-digit-record
+      isAuditEnabled: true
+      module: DHIS2-DIGIT-UPDATE
+      objecIdJsonPath: $.id
+      tenantIdJsonPath: $.tenantId
+      userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+      transactionCodeJsonPath: $.dhis2RecordInternalID
+      auditAttributeBasePath: $.*      
       isTransaction: true
       queryMaps:
         - query: UPDATE eg_digit_record SET  digitId= ?,referenceId=? ,digitEntityType=?, digitDataPayload=?, lastModifiedTime=?, lastModifiedBy=? WHERE digitRecordInternalId=?;
