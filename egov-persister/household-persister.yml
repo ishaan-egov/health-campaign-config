@@ -5,6 +5,13 @@ serviceMaps:
       description: Persists household.
       fromTopic: save-household-topic
       isTransaction: true
+      isAuditEnabled: true
+      module: HOUSEHOLD
+      objecIdJsonPath: $.id
+      tenantIdJsonPath: $.tenantId
+      userUuidJsonPath: $.[0].auditDetails.createdBy
+      transactionCodeJsonPath: $.clientReferenceId
+      auditAttributeBasePath: $.*
       queryMaps:
         - query: INSERT INTO HOUSEHOLD(id, tenantId, clientReferenceId, numberOfMembers, addressId, additionalDetails, createdBy, lastModifiedBy, createdTime, lastModifiedTime, rowVersion, isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.*
@@ -47,6 +54,13 @@ serviceMaps:
       description: Updates household.
       fromTopic: update-household-topic
       isTransaction: true
+      isAuditEnabled: true
+      module: HOUSEHOLD-UPDATE
+      objecIdJsonPath: $.id
+      tenantIdJsonPath: $.tenantId
+      userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+      transactionCodeJsonPath: $.clientReferenceId
+      auditAttributeBasePath: $.*
       queryMaps:
         - query: UPDATE HOUSEHOLD SET tenantId = ?, clientReferenceId = ?, numberOfMembers = ?, addressId = ?, additionalDetails = ?, lastModifiedBy = ?, lastModifiedTime = ?, rowVersion = ?, isDeleted = ? WHERE ID = ?;
           basePath: $.*
@@ -101,6 +115,13 @@ serviceMaps:
       description: Deletes household.
       fromTopic: delete-household-topic
       isTransaction: true
+      isAuditEnabled: true
+      module: HOUSEHOLD-DELETE
+      objecIdJsonPath: $.id
+      tenantIdJsonPath: $.tenantId
+      userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+      transactionCodeJsonPath: $.householdClientReferenceId
+      auditAttributeBasePath: $.*
       queryMaps:
         - query: UPDATE HOUSEHOLD SET lastModifiedBy = ?, lastModifiedTime = ?, rowVersion = ?, isDeleted = ?, additionalDetails=? WHERE ID = ?;
           basePath: $.*
@@ -118,6 +139,13 @@ serviceMaps:
       description: Persists household member.
       fromTopic: save-household-member-topic
       isTransaction: true
+      isAuditEnabled: true
+      module: HOUSEHOLD-MEMBER
+      objecIdJsonPath: $.id
+      tenantIdJsonPath: $.tenantId
+      userUuidJsonPath: $.[0].auditDetails.createdBy
+      transactionCodeJsonPath: $.householdClientReferenceId
+      auditAttributeBasePath: $.*
       queryMaps:
         - query: INSERT INTO HOUSEHOLD_MEMBER(id, tenantId, individualId, individualClientReferenceId, householdId, householdClientReferenceId, isHeadOfHousehold, additionalDetails, createdBy, lastModifiedBy, createdTime, lastModifiedTime, rowVersion, isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.*
@@ -142,6 +170,13 @@ serviceMaps:
       description: Update household member.
       fromTopic: update-household-member-topic
       isTransaction: true
+      isAuditEnabled: true
+      module: HOUSEHOLD-MEMBER-UPDATE
+      objecIdJsonPath: $.id
+      tenantIdJsonPath: $.tenantId
+      userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+      transactionCodeJsonPath: $.individualId
+      auditAttributeBasePath: $.*      
       queryMaps:
         - query: UPDATE HOUSEHOLD_MEMBER SET isHeadOfHousehold=?, additionalDetails=?, lastModifiedBy=?, lastModifiedTime=?, rowVersion=?, isDeleted=? WHERE individualId=? AND householdId=? AND isDeleted=false;
           basePath: $.*
@@ -160,6 +195,13 @@ serviceMaps:
       description: Deletes household Member.
       fromTopic: delete-household-member-topic
       isTransaction: true
+      isAuditEnabled: true
+      module: HOUSEHOLD-MEMBER-DELETE
+      objecIdJsonPath: $.id
+      tenantIdJsonPath: $.tenantId
+      userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
+      transactionCodeJsonPath: $.id
+      auditAttributeBasePath: $.* 
       queryMaps:
         - query: UPDATE HOUSEHOLD_MEMBER SET lastModifiedBy = ?, lastModifiedTime = ?, rowVersion = ?, isDeleted = ?, additionalDetails=? WHERE ID = ?;
           basePath: $.*

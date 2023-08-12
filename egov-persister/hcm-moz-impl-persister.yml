@@ -25,7 +25,7 @@ serviceMaps:
     - version: 1.0
       description: Updates DHIS2 records into the tables
       fromTopic: update-dhis2-record
-      isTransaction: true
+      isTransaction: true  
       queryMaps:
         - query: UPDATE eg_dhis2_record SET  dhis2Id= ?, dhis2EntityType=?, dhis2DataPayload=?, lastModifiedTime=?, lastModifiedBy=?  WHERE dhis2RecordInternalID=?;
           basePath: $.*
@@ -63,7 +63,7 @@ serviceMaps:
 
     - version: 1.0
       description: Updates DIGIT records into the tables
-      fromTopic: update-digit-record
+      fromTopic: update-digit-record    
       isTransaction: true
       queryMaps:
         - query: UPDATE eg_digit_record SET  digitId= ?,referenceId=? ,digitEntityType=?, digitDataPayload=?, lastModifiedTime=?, lastModifiedBy=? WHERE digitRecordInternalId=?;
