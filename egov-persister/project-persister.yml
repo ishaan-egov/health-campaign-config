@@ -99,7 +99,7 @@ serviceMaps:
       #below there fields are applied on each index if the object is an array
       objecIdJsonPath: $.id
       tenantIdJsonPath: $.tenantId
-      transactionCodeJsonPath: $.id
+      transactionCodeJsonPath: $.clientReferenceId
       #below twofields of audit are applied on the whole object recieved in the kafka
       userUuidJsonPath: $.[0].auditDetails.createdBy
       auditAttributeBasePath: $.*   
@@ -133,7 +133,7 @@ serviceMaps:
       #below there fields are applied on each index if the object is an array
       objecIdJsonPath: $.id
       tenantIdJsonPath: $.tenantId
-      transactionCodeJsonPath: $.id
+      transactionCodeJsonPath: $.clientReferenceId
       #below twofields of audit are applied on the whole object recieved in the kafka
       userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
       auditAttributeBasePath: $.*   
