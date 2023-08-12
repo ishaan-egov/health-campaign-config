@@ -193,8 +193,8 @@ serviceMaps:
       tenantIdJsonPath: $.tenantId
       transactionCodeJsonPath: $.id
       #below twofields of audit are applied on the whole object recieved in the kafka
-      userUuidJsonPath: $.[0].auditDetails.createdBy
-      auditAttributeBasePath: $.*   
+      userUuidJsonPath: $.Projects.[0].auditDetails.lastModifiedBy
+      auditAttributeBasePath: $.Projects.*   
       queryMaps:
         - query: INSERT INTO project(id,tenantId,projectNumber,name,projectType,projectTypeId,projectSubType,department,description,referenceId,startDate,endDate,isTaskEnabled,parent,projectHierarchy,natureOfWork,additionalDetails,isDeleted,rowVersion,createdBy,lastModifiedBy,createdTime,lastModifiedTime) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
           basePath: $.Projects.*
@@ -350,7 +350,7 @@ serviceMaps:
       tenantIdJsonPath: $.tenantId
       transactionCodeJsonPath: $.id
       #below twofields of audit are applied on the whole object recieved in the kafka
-      userUuidJsonPath: $.[0].auditDetails.createdBy
+      userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
       auditAttributeBasePath: $.*   
       queryMaps:
         - query: UPDATE project SET name = ?, projectType = ?, projectTypeId = ?, projectSubType = ?, department = ?, description = ?, referenceId = ?, startDate = ?, endDate = ?, isTaskEnabled = ?, natureOfWork = ?, additionalDetails = ?, isDeleted = ?, rowVersion = ?, lastModifiedBy = ?, lastModifiedTime = ? WHERE id = ?;
