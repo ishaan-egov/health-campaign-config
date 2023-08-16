@@ -1032,6 +1032,7 @@
     "aggregationPaths": ["Percentage of Bednets Distributed","Bednets Targeted"],
     "isCappedByCampaignPeriod": ["Overall Target"],
     "filterKeys": [{"key": "district"}],
+    "sort": "sortKeyAsc",
     "computedFields": [
       {
         "postAggregationTheory" : "repsonseToDifferenceOfDates",
@@ -1097,6 +1098,7 @@
     "aggregationPaths": ["Percentage of Bednets Distributed","Bednets Targeted"],
     "isCappedByCampaignPeriod": ["Overall Target"],
     "filterKeys": [{"key": "administrativeProvince"}],
+    "sort": "sortKeyAsc",
     "computedFields": [
       {
         "postAggregationTheory" : "repsonseToDifferenceOfDates",
@@ -1162,6 +1164,7 @@
     "aggregationPaths": ["Percentage of Bednets Distributed","Bednets Targeted"],
     "isCappedByCampaignPeriod": ["Overall Target"],
     "filterKeys": [{"key": "locality"}],
+    "sort": "sortKeyAsc",
     "computedFields": [
       {
         "postAggregationTheory" : "repsonseToDifferenceOfDates",
@@ -1225,6 +1228,7 @@
     "action": "percentage",
     "aggregationPaths": ["Percentage of Bednets Distributed","Bednets Targeted"],
     "isCappedByCampaignPeriod": ["Overall Target"],
+    "sort": "sortKeyAsc",
     "computedFields": [
       {
         "postAggregationTheory" : "repsonseToDifferenceOfDates",
@@ -1289,6 +1293,7 @@
     "aggregationPaths": ["Percentage of Population Covered","Population Targeted"],
     "isCappedByCampaignPeriod": ["Overall Target"],
     "filterKeys": [{"key": "district"}],
+    "sort": "sortKeyAsc",
     "computedFields": [
       {
         "postAggregationTheory" : "repsonseToDifferenceOfDates",
@@ -1355,6 +1360,7 @@
     "aggregationPaths": ["Percentage of Population Covered","Population Targeted"],
     "isCappedByCampaignPeriod": ["Overall Target"],
     "filterKeys": [{"key": "administrativeProvince"}],
+    "sort": "sortKeyAsc",
     "computedFields": [
       {
         "postAggregationTheory" : "repsonseToDifferenceOfDates",
@@ -1421,6 +1427,7 @@
     "aggregationPaths": ["Percentage of Population Covered","Population Targeted"],
     "isCappedByCampaignPeriod": ["Overall Target"],
     "filterKeys": [{"key": "locality"}],
+    "sort": "sortKeyAsc",
     "computedFields": [
       {
         "postAggregationTheory" : "repsonseToDifferenceOfDates",
@@ -1485,6 +1492,7 @@
     "action": "percentage",
     "aggregationPaths": ["Percentage of Population Covered","Population Targeted"],
     "isCappedByCampaignPeriod": ["Overall Target"],
+    "sort": "sortKeyAsc",
     "computedFields": [
       {
         "postAggregationTheory" : "repsonseToDifferenceOfDates",
@@ -1548,6 +1556,7 @@
     "aggregationPaths": ["Percentage of Households Visited","Households Targeted"],
     "isCappedByCampaignPeriod": ["Overall Target"],
     "filterKeys": [{"key": "district"}],
+    "sort": "sortKeyAsc",
     "computedFields": [
       {
         "postAggregationTheory" : "repsonseToDifferenceOfDates",
@@ -1613,6 +1622,7 @@
     "aggregationPaths": ["Percentage of Households Visited","Households Targeted"],
     "isCappedByCampaignPeriod": ["Overall Target"],
     "filterKeys": [{"key": "administrativeProvince"}],
+    "sort": "sortKeyAsc",
     "computedFields": [
       {
         "postAggregationTheory" : "repsonseToDifferenceOfDates",
@@ -1678,6 +1688,7 @@
     "aggregationPaths": ["Percentage of Households Visited","Households Targeted"],
     "isCappedByCampaignPeriod": ["Overall Target"],
     "filterKeys": [{"key": "locality"}],
+    "sort": "sortKeyAsc",
     "computedFields": [
       {
         "postAggregationTheory" : "repsonseToDifferenceOfDates",
@@ -1741,6 +1752,7 @@
     "action": "percentage",
     "aggregationPaths": ["Percentage of Households Visited","Households Targeted"],
     "isCappedByCampaignPeriod": ["Overall Target"],
+    "sort": "sortKeyAsc",
     "computedFields": [
       {
         "postAggregationTheory" : "repsonseToDifferenceOfDates",
@@ -1789,6 +1801,7 @@
     "computeMultiPaths": true,
     "filterKeys": [{"key": "district"}],
     "aggregationPaths": ["Overall Population target","Total Population covered"],
+    "sort": "sortKeyAsc",
     "action": "",
     "insight": { },
     "_comment": " "
@@ -1870,6 +1883,7 @@
     "computeMultiPaths": true,
     "filterKeys": [{"key": "administrativeProvince"}],
     "aggregationPaths": ["Overall Population target","Total Population covered"],
+    "sort": "sortKeyAsc",
     "action": "",
     "insight": { },
     "_comment": " "
@@ -1951,6 +1965,7 @@
     "computeMultiPaths": true,
     "filterKeys": [{"key": "locality"}],
     "aggregationPaths": ["Overall Population target","Total Population covered"],
+    "sort": "sortKeyAsc",
     "action": "",
     "insight": { },
     "_comment": " "
@@ -2032,6 +2047,7 @@
     "computeMultiPaths": true,
     "filterKeys": [{"key": "village"}],
     "aggregationPaths": ["Overall Population target","Total Population covered"],
+    "sort": "sortKeyAsc",
     "action": "",
     "insight": { },
     "_comment": " "
@@ -2100,6 +2116,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
+    "sort": "sortKeyAsc",
     "aggregationPaths": ["No. of Days Stock Can Last", "Target Per Day"],
     "insight": { },
     "_comment": " "
