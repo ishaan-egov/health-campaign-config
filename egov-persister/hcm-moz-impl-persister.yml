@@ -203,7 +203,7 @@ serviceMaps:
       fromTopic: create-boundary-data
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO eg_dhis2_boundary(id, name, parent, path, children, boundaryLevel, boundary, source, campaignStartDate, campaignEndDate, totalHouseholds, targetedHouseholds, totalIndividuals, targetedIndividuals, bednetsEstimated, totalBednets, createdBy, lastModifiedBy, createdTime, lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET name=?, parent=?, path=?, children=?, boundaryLevel=?, boundary=?, source=?, lastModifiedBy=?, lastModifiedTime=?, totalHouseholds=?, targetedHouseholds=?, totalIndividuals=?, targetedIndividuals=?, bednetsEstimated=?, totalBednets=?;
+        - query: INSERT INTO eg_dhis2_boundary(id, name, parent, path, children, boundaryLevel, boundary, source, campaignStartDate, campaignEndDate, totalHouseholds, targetedHouseholds, totalIndividuals, targetedIndividuals, bednetsEstimated, totalBednets, createdBy, lastModifiedBy, createdTime, lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET name=?, parent=?, path=?, children=?, boundaryLevel=?, boundary=?, source=?, lastModifiedBy=?, lastModifiedTime=?, campaignStartDate=?, campaignEndDate=?, totalHouseholds=?, targetedHouseholds=?, totalIndividuals=?, targetedIndividuals=?, bednetsEstimated=?, totalBednets=?;
           basePath: $.*
           jsonMaps:
             - jsonPath: $.*.id
@@ -263,6 +263,10 @@ serviceMaps:
             - jsonPath: $.*.auditDetails.lastModifiedBy
 
             - jsonPath: $.*.auditDetails.lastModifiedTime
+
+            - jsonPath: $.*.campaignStartDate
+
+            - jsonPath: $.*.campaignEndDate
 
             - jsonPath: $.*.totalHouseholds
 
