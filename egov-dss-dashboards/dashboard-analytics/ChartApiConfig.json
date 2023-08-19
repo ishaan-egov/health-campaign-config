@@ -2452,6 +2452,13 @@
       {
         "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
+        "fields" : ["Household Target for Date Range"],
+        "newField" : "Households Targeted for Date Range",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
         "fields" : ["Households distributed count"],
         "newField" : "Households distributed",
         "_comments": ""
@@ -2459,8 +2466,22 @@
       {
         "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
+        "fields" : ["Population Target for Date Range"],
+        "newField" : "Population Targeted for Date Range",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
         "fields" : ["Population covered count"],
         "newField" : "Population covered",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : ["Bednets Target for Date Range"],
+        "newField" : "Bednets Targeted for date Range",
         "_comments": ""
       },
       {
@@ -2650,6 +2671,13 @@
       {
         "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
+        "fields" : ["Household Target for Date Range"],
+        "newField" : "Households Targeted for Date Range",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
         "fields" : ["Households distributed count"],
         "newField" : "Households distributed",
         "_comments": ""
@@ -2657,8 +2685,22 @@
       {
         "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
+        "fields" : ["Population Target for Date Range"],
+        "newField" : "Population Targeted for Date Range",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
         "fields" : ["Population covered count"],
         "newField" : "Population covered",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : ["Bednets Target for Date Range"],
+        "newField" : "Bednets Targeted for date Range",
         "_comments": ""
       },
       {
@@ -2848,6 +2890,13 @@
       {
         "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
+        "fields" : ["Household Target for Date Range"],
+        "newField" : "Households Targeted for Date Range",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
         "fields" : ["Households distributed count"],
         "newField" : "Households distributed",
         "_comments": ""
@@ -2855,8 +2904,22 @@
       {
         "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
+        "fields" : ["Population Target for Date Range"],
+        "newField" : "Population Targeted for Date Range",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
         "fields" : ["Population covered count"],
         "newField" : "Population covered",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : ["Bednets Target for Date Range"],
+        "newField" : "Bednets Targeted for date Range",
         "_comments": ""
       },
       {
@@ -3044,6 +3107,13 @@
       {
         "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
+        "fields" : ["Household Target for Date Range"],
+        "newField" : "Households Targeted for Date Range",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
         "fields" : ["Households distributed count"],
         "newField" : "Households distributed",
         "_comments": ""
@@ -3051,8 +3121,22 @@
       {
         "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
+        "fields" : ["Population Target for Date Range"],
+        "newField" : "Population Targeted for Date Range",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
         "fields" : ["Population covered count"],
         "newField" : "Population covered",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : ["Bednets Target for Date Range"],
+        "newField" : "Bednets Targeted for date Range",
         "_comments": ""
       },
       {
