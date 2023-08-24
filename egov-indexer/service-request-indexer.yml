@@ -7,7 +7,7 @@ ServiceMaps:
       indexes:
         - name: service-task-v1
           type: service
-          id: $.id
+          id: $.clientReferenceId
           isBulk: true
           jsonPath: $
           customJsonMapping:
