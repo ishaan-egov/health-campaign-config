@@ -7,7 +7,7 @@ ServiceMaps:
       indexes:
         - name: stock-index-v1
           type: stock
-          id: $.clientReferenceId
+          id: $.clientReferenceId,$.tenantId
           isBulk: true
           jsonPath: $
           customJsonMapping:
