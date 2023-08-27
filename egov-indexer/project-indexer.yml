@@ -38,7 +38,7 @@ ServiceMaps:
                 outJsonPath: $.Data.locality
               - inJsonPath: $.village
                 outJsonPath: $.Data.village
-          timeStampField: $.createdTime
+          timeStampField: $.lastModifiedTime
 
     - topic: save-project-beneficiary-topic
       configKey: INDEX
