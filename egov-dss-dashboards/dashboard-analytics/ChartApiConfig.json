@@ -3796,16 +3796,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Target" ],
+        "fields" : ["Overall Target" ],
         "newField" : "Household Target",
         "_comments": ""
       },
@@ -3851,16 +3850,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Administrative Province",
-    "isCappedByCampaignPeriod": ["Overall Target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Target" ],
+        "fields" : [ "Overall Target" ],
         "newField" : "Household Target",
         "_comments": ""
       },
@@ -3906,16 +3904,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Administrative Province",
-    "isCappedByCampaignPeriod": ["Overall Target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Target" ],
+        "fields" : [ "Overall Target" ],
         "newField" : "Household Target",
         "_comments": ""
       },
@@ -4077,16 +4074,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Population target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Population target" ],
+        "fields" : [ "Overall Population target" ],
         "newField" : "Population Target",
         "_comments": ""
       },
@@ -4132,16 +4128,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Population target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Population target" ],
+        "fields" : [ "Overall Population target" ],
         "newField" : "Population Target",
         "_comments": ""
       },
@@ -4187,16 +4182,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Population target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Population target" ],
+        "fields" : [ "Overall Population target" ],
         "newField" : "Population Target",
         "_comments": ""
       },
@@ -4923,16 +4917,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Bednets target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Bednets target" ],
+        "fields" : [ "Overall Bednets target" ],
         "newField" : "Bednets Target",
         "_comments": ""
       },
@@ -4978,16 +4971,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Bednets target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Bednets target" ],
+        "fields" : [ "Overall Bednets target" ],
         "newField" : "Bednets Target",
         "_comments": ""
       },
@@ -5033,16 +5025,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Bednets target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Bednets target" ],
+        "fields" : [ "Overall Bednets target" ],
         "newField" : "Bednets Target",
         "_comments": ""
       },
