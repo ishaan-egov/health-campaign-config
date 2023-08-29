@@ -4923,7 +4923,7 @@
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
         "fields" : [ "Overall Bednets target" ],
         "newField" : "Bednets Target",
@@ -4977,7 +4977,7 @@
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
         "fields" : [ "Overall Bednets target" ],
         "newField" : "Bednets Target",
@@ -5031,7 +5031,7 @@
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
         "fields" : [ "Overall Bednets target" ],
         "newField" : "Bednets Target",
