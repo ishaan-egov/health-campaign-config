@@ -238,7 +238,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.createdTime",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
         "indexName": "project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"Total visits\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"match_phrase\": {\"Data.productVariant\": \"PVAR\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
@@ -553,7 +553,7 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.createdTime",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
         "indexName": "project-task-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"Total Distributions Coverage\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\":[\n            {\n              \"term\":{\n                \"Data.deliveredTo.keyword\":\"HOUSEHOLD\"\n              }\n            },\n            {\n              \"match_phrase\":{\n                \"Data.productVariant\":\"PVAR\"\n              }\n            }]\n        }\n      },\n      \"aggs\": {\n        \"overallQuantity\": {\n          \"sum\": {\n            \"field\": \"Data.quantity\"\n          }\n        }\n      }\n    }\n  }\n}"
@@ -716,7 +716,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.createdTime",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
         "indexName": "project-task-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filters\": {\n        \"filters\": {\n          \"Household\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"term\": {\n                    \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n                  }\n                },\n                {\n                  \"match_phrase\": {\n                    \"Data.productVariant\": \"PVAR\"\n                  }\n                }\n              ]\n            }\n          }\n        }\n      },\n      \"aggs\": {\n        \"SUM\": {\n          \"sum\": {\n            \"field\": \"Data.quantity\"\n          }\n        },\n        \"Population Covered till Today\": {\n          \"bucket_script\": {\n            \"buckets_path\": {\n              \"sum\": \"SUM\"\n            },\n            \"script\": \"(params.sum) * 1.8\"\n          }\n        }\n      }\n    }\n  }\n}"
