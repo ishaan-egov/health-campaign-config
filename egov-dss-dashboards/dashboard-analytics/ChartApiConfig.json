@@ -5752,7 +5752,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n\"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"terms\": {\n                \"Data.supervisorLevel.keyword\": [\n                  \"NATIONAL_SUPERVISOR\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Checklist name\": {\n          \"terms\": {\n            \"field\": \"Data.checklistName.keyword\"\n          },\n          \"aggs\": {\n            \"Checklist Count\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n"
@@ -5775,7 +5775,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n\"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"terms\": {\n                \"Data.supervisorLevel.keyword\": [\n                  \"PROVINCIAL_SUPERVISOR\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Checklist name\": {\n          \"terms\": {\n            \"field\": \"Data.checklistName.keyword\"\n          },\n          \"aggs\": {\n            \"Checklist Count\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n"
@@ -5798,7 +5798,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n\"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"terms\": {\n                \"Data.supervisorLevel.keyword\": [\n                  \"DISTRICT_SUPERVISOR\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Checklist name\": {\n          \"terms\": {\n            \"field\": \"Data.checklistName.keyword\"\n          },\n          \"aggs\": {\n            \"Checklist Count\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n"
