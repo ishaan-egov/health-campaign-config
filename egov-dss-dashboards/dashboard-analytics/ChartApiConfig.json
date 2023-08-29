@@ -3813,16 +3813,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Target" ],
+        "fields" : ["Overall Target" ],
         "newField" : "Household Target",
         "_comments": ""
       },
@@ -3868,16 +3867,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Administrative Province",
-    "isCappedByCampaignPeriod": ["Overall Target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Target" ],
+        "fields" : [ "Overall Target" ],
         "newField" : "Household Target",
         "_comments": ""
       },
@@ -3923,16 +3921,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Administrative Province",
-    "isCappedByCampaignPeriod": ["Overall Target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Target" ],
+        "fields" : [ "Overall Target" ],
         "newField" : "Household Target",
         "_comments": ""
       },
@@ -4094,16 +4091,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Population target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Population target" ],
+        "fields" : [ "Overall Population target" ],
         "newField" : "Population Target",
         "_comments": ""
       },
@@ -4149,16 +4145,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Population target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Population target" ],
+        "fields" : [ "Overall Population target" ],
         "newField" : "Population Target",
         "_comments": ""
       },
@@ -4204,16 +4199,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Population target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Population target" ],
+        "fields" : [ "Overall Population target" ],
         "newField" : "Population Target",
         "_comments": ""
       },
@@ -4940,16 +4934,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Bednets target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Bednets target" ],
+        "fields" : [ "Overall Bednets target" ],
         "newField" : "Bednets Target",
         "_comments": ""
       },
@@ -4995,16 +4988,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Bednets target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Bednets target" ],
+        "fields" : [ "Overall Bednets target" ],
         "newField" : "Bednets Target",
         "_comments": ""
       },
@@ -5050,16 +5042,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Bednets target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Bednets target" ],
+        "fields" : [ "Overall Bednets target" ],
         "newField" : "Bednets Target",
         "_comments": ""
       },
@@ -5778,7 +5769,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n\"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"terms\": {\n                \"Data.supervisorLevel.keyword\": [\n                  \"NATIONAL_SUPERVISOR\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Checklist name\": {\n          \"terms\": {\n            \"field\": \"Data.checklistName.keyword\"\n          },\n          \"aggs\": {\n            \"Checklist Count\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n"
@@ -5801,7 +5792,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n\"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"terms\": {\n                \"Data.supervisorLevel.keyword\": [\n                  \"PROVINCIAL_SUPERVISOR\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Checklist name\": {\n          \"terms\": {\n            \"field\": \"Data.checklistName.keyword\"\n          },\n          \"aggs\": {\n            \"Checklist Count\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n"
@@ -5824,7 +5815,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n\"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"terms\": {\n                \"Data.supervisorLevel.keyword\": [\n                  \"DISTRICT_SUPERVISOR\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Checklist name\": {\n          \"terms\": {\n            \"field\": \"Data.checklistName.keyword\"\n          },\n          \"aggs\": {\n            \"Checklist Count\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n"
