@@ -116,6 +116,7 @@ serviceMaps:
       description: Updates Individual
       fromTopic: update-individual-topic
       isTransaction: true
+      isAuditEnabled: true
       module: INDIVIDUAL-UPDATE
       objecIdJsonPath: $.id
       tenantIdJsonPath: $.tenantId
@@ -245,6 +246,7 @@ serviceMaps:
       description: Deletes Individual and related Entities
       fromTopic: delete-individual-topic
       isTransaction: true
+      isAuditEnabled: true
       module: INDIVIDUAL-DELETE
       objecIdJsonPath: $.id
       tenantIdJsonPath: $.tenantId
