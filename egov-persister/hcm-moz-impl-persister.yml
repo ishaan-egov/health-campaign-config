@@ -25,7 +25,7 @@ serviceMaps:
     - version: 1.0
       description: Updates DHIS2 records into the tables
       fromTopic: update-dhis2-record
-      isTransaction: true
+      isTransaction: true  
       queryMaps:
         - query: UPDATE eg_dhis2_record SET  dhis2Id= ?, dhis2EntityType=?, dhis2DataPayload=?, lastModifiedTime=?, lastModifiedBy=?  WHERE dhis2RecordInternalID=?;
           basePath: $.*
@@ -63,7 +63,7 @@ serviceMaps:
 
     - version: 1.0
       description: Updates DIGIT records into the tables
-      fromTopic: update-digit-record
+      fromTopic: update-digit-record    
       isTransaction: true
       queryMaps:
         - query: UPDATE eg_digit_record SET  digitId= ?,referenceId=? ,digitEntityType=?, digitDataPayload=?, lastModifiedTime=?, lastModifiedBy=? WHERE digitRecordInternalId=?;
@@ -203,7 +203,7 @@ serviceMaps:
       fromTopic: create-boundary-data
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO eg_dhis2_boundary(id, name, parent, path, children, boundaryLevel, boundary, source, campaignStartDate, campaignEndDate, totalHouseholds, targetedHouseholds, totalIndividuals, targetedIndividuals, bednetsEstimated, totalBednets, createdBy, lastModifiedBy, createdTime, lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET name=?, parent=?, path=?, children=?, boundaryLevel=?, boundary=?, source=?, lastModifiedBy=?, lastModifiedTime=?, totalHouseholds=?, targetedHouseholds=?, totalIndividuals=?, targetedIndividuals=?, bednetsEstimated=?, totalBednets=?;
+        - query: INSERT INTO eg_dhis2_boundary(id, name, parent, path, children, boundaryLevel, boundary, source, campaignStartDate, campaignEndDate, totalHouseholds, targetedHouseholds, totalIndividuals, targetedIndividuals, bednetsEstimated, totalBednets, createdBy, lastModifiedBy, createdTime, lastModifiedTime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET name=?, parent=?, path=?, children=?, boundaryLevel=?, boundary=?, source=?, lastModifiedBy=?, lastModifiedTime=?, campaignStartDate=?, campaignEndDate=?, totalHouseholds=?, targetedHouseholds=?, totalIndividuals=?, targetedIndividuals=?, bednetsEstimated=?, totalBednets=?;
           basePath: $.*
           jsonMaps:
             - jsonPath: $.*.id
@@ -263,6 +263,10 @@ serviceMaps:
             - jsonPath: $.*.auditDetails.lastModifiedBy
 
             - jsonPath: $.*.auditDetails.lastModifiedTime
+
+            - jsonPath: $.*.campaignStartDate
+
+            - jsonPath: $.*.campaignEndDate
 
             - jsonPath: $.*.totalHouseholds
 

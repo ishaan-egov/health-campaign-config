@@ -7,7 +7,7 @@ ServiceMaps:
       indexes:
         - name: household-index-v1
           type: household
-          id: $.id
+          id: $.clientReferenceId
           isBulk: true
           jsonPath: $.*
           timeStampField: $.auditDetails.createdTime
@@ -16,7 +16,7 @@ ServiceMaps:
       indexes:
         - name: household-index-v1
           type: household
-          id: $.id
+          id: $.clientReferenceId
           isBulk: true
           jsonPath: $.*
           timeStampField: $.auditDetails.lastModifiedTime
@@ -25,7 +25,7 @@ ServiceMaps:
       indexes:
         - name: household-index-v1
           type: household
-          id: $.id
+          id: $.clientReferenceId
           isBulk: true
           jsonPath: $.*
           timeStampField: $.auditDetails.lastModifiedTime

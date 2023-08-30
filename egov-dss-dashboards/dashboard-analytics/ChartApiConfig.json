@@ -238,7 +238,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.createdTime",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
         "indexName": "project-task-index-v1",
         "aggrQuery": "{\"aggs\":{\"Total visits\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":\"HOUSEHOLD\"}},{\"match_phrase\": {\"Data.productVariant\": \"PVAR\"}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}"
@@ -553,7 +553,7 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.createdTime",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
         "indexName": "project-task-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"Total Distributions Coverage\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\":[\n            {\n              \"term\":{\n                \"Data.deliveredTo.keyword\":\"HOUSEHOLD\"\n              }\n            },\n            {\n              \"match_phrase\":{\n                \"Data.productVariant\":\"PVAR\"\n              }\n            }]\n        }\n      },\n      \"aggs\": {\n        \"overallQuantity\": {\n          \"sum\": {\n            \"field\": \"Data.quantity\"\n          }\n        }\n      }\n    }\n  }\n}"
@@ -716,7 +716,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.createdTime",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
         "indexName": "project-task-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filters\": {\n        \"filters\": {\n          \"Household\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"term\": {\n                    \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n                  }\n                },\n                {\n                  \"match_phrase\": {\n                    \"Data.productVariant\": \"PVAR\"\n                  }\n                }\n              ]\n            }\n          }\n        }\n      },\n      \"aggs\": {\n        \"SUM\": {\n          \"sum\": {\n            \"field\": \"Data.quantity\"\n          }\n        },\n        \"Population Covered till Today\": {\n          \"bucket_script\": {\n            \"buckets_path\": {\n              \"sum\": \"SUM\"\n            },\n            \"script\": \"(params.sum) * 1.8\"\n          }\n        }\n      }\n    }\n  }\n}"
@@ -2452,6 +2452,13 @@
       {
         "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
+        "fields" : ["Household Target for Date Range"],
+        "newField" : "Households Targeted for Date Range",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
         "fields" : ["Households distributed count"],
         "newField" : "Households distributed",
         "_comments": ""
@@ -2459,8 +2466,22 @@
       {
         "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
+        "fields" : ["Population Target for Date Range"],
+        "newField" : "Population Targeted for Date Range",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
         "fields" : ["Population covered count"],
         "newField" : "Population covered",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : ["Bednets Target for Date Range"],
+        "newField" : "Bednets Targeted for date Range",
         "_comments": ""
       },
       {
@@ -2650,6 +2671,13 @@
       {
         "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
+        "fields" : ["Household Target for Date Range"],
+        "newField" : "Households Targeted for Date Range",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
         "fields" : ["Households distributed count"],
         "newField" : "Households distributed",
         "_comments": ""
@@ -2657,8 +2685,22 @@
       {
         "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
+        "fields" : ["Population Target for Date Range"],
+        "newField" : "Population Targeted for Date Range",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
         "fields" : ["Population covered count"],
         "newField" : "Population covered",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : ["Bednets Target for Date Range"],
+        "newField" : "Bednets Targeted for date Range",
         "_comments": ""
       },
       {
@@ -2848,6 +2890,13 @@
       {
         "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
+        "fields" : ["Household Target for Date Range"],
+        "newField" : "Households Targeted for Date Range",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
         "fields" : ["Households distributed count"],
         "newField" : "Households distributed",
         "_comments": ""
@@ -2855,8 +2904,22 @@
       {
         "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
+        "fields" : ["Population Target for Date Range"],
+        "newField" : "Population Targeted for Date Range",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
         "fields" : ["Population covered count"],
         "newField" : "Population covered",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : ["Bednets Target for Date Range"],
+        "newField" : "Bednets Targeted for date Range",
         "_comments": ""
       },
       {
@@ -3044,6 +3107,13 @@
       {
         "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
+        "fields" : ["Household Target for Date Range"],
+        "newField" : "Households Targeted for Date Range",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
         "fields" : ["Households distributed count"],
         "newField" : "Households distributed",
         "_comments": ""
@@ -3051,8 +3121,22 @@
       {
         "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
+        "fields" : ["Population Target for Date Range"],
+        "newField" : "Population Targeted for Date Range",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
         "fields" : ["Population covered count"],
         "newField" : "Population covered",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : ["Bednets Target for Date Range"],
+        "newField" : "Bednets Targeted for date Range",
         "_comments": ""
       },
       {
@@ -3712,16 +3796,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Target" ],
+        "fields" : ["Overall Target" ],
         "newField" : "Household Target",
         "_comments": ""
       },
@@ -3767,16 +3850,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Administrative Province",
-    "isCappedByCampaignPeriod": ["Overall Target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Target" ],
+        "fields" : [ "Overall Target" ],
         "newField" : "Household Target",
         "_comments": ""
       },
@@ -3822,16 +3904,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Administrative Province",
-    "isCappedByCampaignPeriod": ["Overall Target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Target" ],
+        "fields" : [ "Overall Target" ],
         "newField" : "Household Target",
         "_comments": ""
       },
@@ -3864,14 +3945,14 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.createdTime",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "project-task-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"AGGS\": {\n      \"filter\": {\n        \"bool\":{\n          \"must\": [\n              {\n                \"term\": {\n                    \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n                }\n              }\n            ]\n        }\n      },\n      \"aggs\": {\n        \"Household Total\": {\n          \"terms\": {\n            \"field\": \"Data.province.keyword\"\n          },\n          \"aggs\": {\n            \"Total Households Visited Cumulative\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.createdTime",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "project-task-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"AGGS\": {\n      \"filter\": {\n        \"bool\":{\n          \"must\": [\n              {\n                \"term\": {\n                    \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n                }\n              },\n              {\n                \"term\": {\n                    \"Data.isDelivered\": true\n                }\n              }\n              \n            ]\n        }\n      },\n      \"aggs\": {\n        \"Population Total\": {\n          \"terms\": {\n            \"field\": \"Data.province.keyword\"\n          },\n          \"aggs\": {\n            \"Quantity\": {\n              \"sum\": {\n                \"field\": \"Data.quantity\"\n              }\n            },\n            \"Total Population Covered\":{\n              \"bucket_script\": {\n                \"buckets_path\": {\n                  \"target\": \"Quantity\"\n                },\n                \"script\": \"params.target * 1.8\"\n              }\n            }\n          }\n          \n        }\n      }\n    }\n  }\n}"
@@ -3993,16 +4074,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Population target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Population target" ],
+        "fields" : [ "Overall Population target" ],
         "newField" : "Population Target",
         "_comments": ""
       },
@@ -4048,16 +4128,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Population target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Population target" ],
+        "fields" : [ "Overall Population target" ],
         "newField" : "Population Target",
         "_comments": ""
       },
@@ -4103,16 +4182,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Population target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Population target" ],
+        "fields" : [ "Overall Population target" ],
         "newField" : "Population Target",
         "_comments": ""
       },
@@ -4839,16 +4917,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Bednets target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Bednets target" ],
+        "fields" : [ "Overall Bednets target" ],
         "newField" : "Bednets Target",
         "_comments": ""
       },
@@ -4894,16 +4971,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Bednets target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Bednets target" ],
+        "fields" : [ "Overall Bednets target" ],
         "newField" : "Bednets Target",
         "_comments": ""
       },
@@ -4949,16 +5025,15 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
-    "isCappedByCampaignPeriod": ["Overall Bednets target"],
     "excludedColumns": [
       "S.N.",
       "Target for daterange"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for daterange", "Overall Bednets target" ],
+        "fields" : [ "Overall Bednets target" ],
         "newField" : "Bednets Target",
         "_comments": ""
       },
@@ -4987,18 +5062,18 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PRODUCT\"\n              }\n            },\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.district.keyword\"\n              }\n            }\n          ],\n          \"must_not\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.administrativeProvince.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Product Target\": {\n          \"terms\": {\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            },\n            \"field\": \"Data.district.keyword\"\n          },\n          \"aggs\": {\n            \"Target per day\": {\n              \"sum\": {\n                \"field\": \"Data.targetPerDay\"\n              }\n            },\n            \"Target for range\": {\n              \"bucket_script\": {\n                \"buckets_path\": {\n                  \"target\": \"Target per day\"\n                },\n                \"script\": \"(params.target)*365\"\n              }\n            },\n            \"Target for days to last\": {\n              \"bucket_script\": {\n                \"buckets_path\": {\n                  \"target\": \"Target per day\"\n                },\n                \"script\": \"(params.target)*100\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PRODUCT\"\n              }\n            },\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.district.keyword\"\n              }\n            }\n          ],\n          \"must_not\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.administrativeProvince.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Product Target\": {\n          \"terms\": {\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            },\n            \"field\": \"Data.district.keyword\"\n          },\n          \"aggs\": {\n            \"Target per day\": {\n              \"sum\": {\n                \"field\": \"Data.targetPerDay\"\n              }\n            },\n            \"Overall Target to Receive\": {\n              \"sum\": {\n                \"field\": \"Data.overallTarget\"\n              }\n            },\n            \"Target for range\": {\n              \"bucket_script\": {\n                \"buckets_path\": {\n                  \"target\": \"Target per day\"\n                },\n                \"script\": \"(params.target)*365\"\n              }\n            },\n            \"Target for days to last\": {\n              \"bucket_script\": {\n                \"buckets_path\": {\n                  \"target\": \"Target per day\"\n                },\n                \"script\": \"(params.target)*100\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.eventTimeStamp",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "stock-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"exists\": {\n                    \"field\": \"Data.district.keyword\"\n                  }\n                },\n                {\n                  \"match_phrase\": {\n                    \"Data.productVariant\": \"PVAR\"\n                  }\n                },\n                {\n                  \"term\": {\n                    \"Data.eventType.keyword\": \"RECEIVED\"\n                  }\n                }\n              ]\n            }\n          },\n      \"aggs\": {\n        \"Available Stock\": {\n          \"terms\": {\n            \"size\": 500,\n            \"field\": \"Data.district.keyword\",\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Incoming\": {\n              \"sum\": {\n                \"field\": \"Data.physicalCount\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.eventTimeStamp",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "stock-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"exists\": {\n                    \"field\": \"Data.district.keyword\"\n                  }\n                },\n                {\n                  \"match_phrase\": {\n                    \"Data.productVariant\": \"PVAR\"\n                  }\n                },\n                {\n                  \"term\": {\n                    \"Data.eventType.keyword\": \"DISPATCHED\"\n                  }\n                }\n              ]\n            }\n          },\n      \"aggs\": {\n        \"Available Stock\": {\n          \"terms\": {\n            \"size\": 500,\n            \"field\": \"Data.district.keyword\",\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Outgoing\": {\n              \"sum\": {\n                \"field\": \"Data.physicalCount\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -5024,12 +5099,12 @@
     "showFooter": false,
     "hideInsights": true,
     "hideHeaderDenomination": true,
-    "excludedColumns": ["SUM","Target for range","Target per day","Target for days to last","Incoming","Outgoing","Total Stock"],
+    "excludedColumns": ["SUM","Target for range","Target per day","Target for days to last","Incoming","Outgoing","Total Stock", "Nets Target"],
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Target for range" ],
+        "fields" : [ "Overall Target to Receive" ],
         "newField" : "Nets Target",
         "_comments": ""
       },
@@ -5072,14 +5147,14 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.eventTimeStamp",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "stock-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"exists\": {\n                    \"field\": \"Data.district.keyword\"\n                  }\n                },\n                {\n                  \"match_phrase\": {\n                    \"Data.productVariant\": \"PVAR\"\n                  }\n                },\n                {\n                  \"term\": {\n                    \"Data.eventType.keyword\": \"RECEIVED\"\n                  }\n                }\n              ]\n            }\n          },\n      \"aggs\": {\n        \"Available Stock\": {\n          \"terms\": {\n            \"size\": 500,\n            \"field\": \"Data.facilityName.keyword\",\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Incoming\": {\n              \"sum\": {\n                \"field\": \"Data.physicalCount\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.eventTimeStamp",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "stock-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"exists\": {\n                    \"field\": \"Data.district.keyword\"\n                  }\n                },\n                {\n                  \"match_phrase\": {\n                    \"Data.productVariant\": \"PVAR\"\n                  }\n                },\n                {\n                  \"term\": {\n                    \"Data.eventType.keyword\": \"DISPATCHED\"\n                  }\n                }\n              ]\n            }\n          },\n      \"aggs\": {\n        \"Available Stock\": {\n          \"terms\": {\n            \"size\": 500,\n            \"field\": \"Data.facilityName.keyword\",\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Outgoing\": {\n              \"sum\": {\n                \"field\": \"Data.physicalCount\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -5747,14 +5822,14 @@
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"province\": \"Data.province.keyword\"}",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
         "indexName": "user-sync-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"Sync Rate Percentage\": {\n      \"terms\": {\n        \"field\": \"Data.district.keyword\",\n        \"size\": 500\n      },\n      \"aggs\": {\n        \"Unique Users Synced\": {\n          \"scripted_metric\": {\n            \"params\": {\n              \"fieldName\": \"Data.userId.keyword\"\n            },\n            \"init_script\": \"state.list = []\",\n            \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n            \"combine_script\": \"return state.list;\",\n            \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"province\": \"Data.province.keyword\"}",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
         "indexName": "project-staff-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"AGGS\": {\n      \"terms\": {\n        \"field\": \"Data.district.keyword\",\n        \"size\": 500\n      },\n      \"aggs\": {\n        \"Total Users Created\": {\n          \"value_count\": {\n            \"field\": \"Data.userId.keyword\"\n          }\n        }\n      }\n    }\n  }\n}"
       }
@@ -6184,7 +6259,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
         "indexName": "stock-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filters\": {\n        \"filters\": {\n          \"FILTERS\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"exists\": {\n                    \"field\": \"Data.district.keyword\"\n                  }\n                },\n                {\n                  \"match_phrase\": {\n                    \"Data.productVariant\": \"PVAR\"\n                  }\n                }\n              ]\n            }\n          }\n        }\n      },\n      \"aggs\": {\n        \"No. of Warehouses\": {\n          \"terms\": {\n            \"size\": 50000,\n            \"field\": \"Data.district.keyword\",\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"CARDINALITY\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.facilityId.keyword\"\n                }, \n                \"init_script\": \"state.list=[]\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filters\": {\n        \"filters\": {\n          \"FILTERS\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"exists\": {\n                    \"field\": \"Data.district.keyword\"\n                  }\n                },\n                {\n                  \"match_phrase\": {\n                    \"Data.productVariant\": \"PVAR\"\n                  }\n                }\n              ],\n              \"must_not\": [\n                {\n                  \"match_phrase\": {\n                    \"Data.facilityType.keyword\": \"Monitor Local\"\n                  }\n                }\n              ]\n            }\n          }\n        }\n      },\n      \"aggs\": {\n        \"No. of Warehouses\": {\n          \"terms\": {\n            \"size\": 50000,\n            \"field\": \"Data.district.keyword\",\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"CARDINALITY\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.facilityId.keyword\"\n                }, \n                \"init_script\": \"state.list=[]\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
     "filterKeys": [],

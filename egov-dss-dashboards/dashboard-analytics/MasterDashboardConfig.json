@@ -96,7 +96,7 @@
           "name": "DSS_NATIONAL_HEALTH_HEATMAPS",
           "vizArray": [
             {
-              "id": 201,
+              "id": 104,
               "name": "DSS_HEALTH_HOUSEHOLDS_COVERAGE_HEATMAP",
               "label": "DSS_HEALTH_HOUSEHOLDS_COVERAGE_HEATMAP",
               "vizType": "heatmap",
@@ -114,7 +114,7 @@
               ]
             },
             {
-              "id": 202,
+              "id": 105,
               "name": "DSS_HEALTH_POPULATION_COVERAGE_HEATMAP",
               "label": "DSS_HEALTH_POPULATION_COVERAGE_HEATMAP",
               "vizType": "heatmap",
@@ -138,7 +138,7 @@
           "name": "DSS_COVERAGE_BY_PROVINCE",
           "vizArray": [
             {
-              "id": 301,
+              "id": 106,
               "name": "DSS_COVERAGE_BY_PROVINCE",
               "label": "DSS_COVERAGE_BY_PROVINCE",
               "vizType": "stacked-table",
@@ -536,7 +536,7 @@
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
-              "id": 217,
+              "id": 215,
               "name": "DSS_HEALTH_HOUSEHOLDS_COVERAGE_HEATMAP_PROVINCE",
               "label": "DSS_HEALTH_HOUSEHOLDS_COVERAGE_HEATMAP_PROVINCE",
               "vizType": "chart",
@@ -573,7 +573,7 @@
               ]
             },
             {
-              "id": 218,
+              "id": 216,
               "name": "DSS_HEALTH_RD_HH_VISITED_LATLONG",
               "label": "DSS_HEALTH_RD_HH_VISITED_LATLONG",
               "vizType": "latlong",
@@ -597,7 +597,7 @@
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
-              "id": 215,
+              "id": 217,
               "name": "DSS_HEALTH_ACTUAL_VS_PLANNED_LINE_GRAPH",
               "label": "DSS_HEALTH_ACTUAL_VS_PLANNED_LINE_GRAPH",
               "vizType": "chart",
@@ -640,7 +640,7 @@
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
-              "id": 217,
+              "id": 218,
               "name": "DSS_HEALTH_UNCOVERED_POPULATION",
               "label": "DSS_HEALTH_UNCOVERED_POPULATION",
               "vizType": "chart",
@@ -664,7 +664,7 @@
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
-              "id": 216,
+              "id": 219,
               "name": "DSS_HEALTH_DELIVERY_SUMMARY_BY_DISTRICT",
               "label": "DSS_HEALTH_DELIVERY_SUMMARY_BY_DISTRICT",
               "vizType": "chart",
@@ -782,7 +782,7 @@
           "name": "DSS_HEALTH_COMPLAINTS",
           "vizArray": [
             {
-              "id": 352,
+              "id": 225,
               "name": "DSS_HEALTH_COMPLAINTS_COMPLAINTS_BY_BOUNDARY",
               "label": "DSS_HEALTH_COMPLAINTS_COMPLAINTS_BY_BOUNDARY",
               "vizType": "chart",
@@ -800,7 +800,7 @@
               ]
             },
             {
-              "id": 351,
+              "id": 226,
               "name": "DSS_HEALTH_COMPLAINTS_AVG_TIME_BY_PROVINCE",
               "label": "DSS_HEALTH_COMPLAINTS_AVG_TIME_BY_PROVINCE",
               "vizType": "chart",
@@ -824,7 +824,7 @@
           "name": "DSS_HEALTH_COMPLAINTS",
           "vizArray": [
             {
-              "id": 226,
+              "id": 227,
               "name": "DSS_HEALTH_COMPLAINTS_SUMMARY",
               "label": "DSS_HEALTH_COMPLAINTS_SUMMARY",
               "vizType": "chart",
@@ -858,7 +858,7 @@
           "name": "DSS_HEALTH_COMPLAINTS",
           "vizArray": [
             {
-              "id": 227,
+              "id": 228,
               "name": "DSS_HEALTH_COMPLAINTS_OPEN_SUMMARY",
               "label": "DSS_HEALTH_COMPLAINTS_OPEN_SUMMARY",
               "vizType": "chart",
@@ -882,7 +882,7 @@
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
-              "id": 241,
+              "id": 231,
               "name": "DSS_HEALTH_DAYS_INVENTORY_CAN_LAST",
               "label": "DSS_HEALTH_DAYS_INVENTORY_CAN_LAST",
               "vizType": "chart",
@@ -900,7 +900,7 @@
               ]
             },
             {
-              "id": 242,
+              "id": 232,
               "name": "DSS_HEALTH_INVENTORY_STOCK_IN_HAND",
               "label": "DSS_HEALTH_INVENTORY_STOCK_IN_HAND",
               "vizType": "chart",
@@ -924,7 +924,7 @@
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
-              "id": 244,
+              "id": 233,
               "name": "DSS_HEALTH_WH_DISTRIBUTION_LATLONG",
               "label": "DSS_HEALTH_WH_DISTRIBUTION_LATLONG",
               "vizType": "latlong",
@@ -988,7 +988,7 @@
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
-              "id": 243,
+              "id": 234,
               "name": "DSS_HEALTH_INVENTORY_SUMMARY_BY_DISTRICT",
               "label": "DSS_HEALTH_INVENTORY_SUMMARY_BY_DISTRICT",
               "vizType": "chart",
@@ -1012,7 +1012,7 @@
           "name": "DSS_HEALTH_SUPERVISION",
           "vizArray": [
             {
-              "id": 261,
+              "id": 241,
               "name": "DSS_HEALTH_SUPERVISION_NATIONAL_SUPERVISORS_CHECKLISTS_COMPLETION_RATE",
               "label": "DSS_HEALTH_SUPERVISION_NATIONAL_SUPERVISORS_CHECKLISTS_COMPLETION_RATE",
               "vizType": "chart",
@@ -1030,7 +1030,7 @@
               ]
             },
             {
-              "id": 262,
+              "id": 242,
               "name": "DSS_HEALTH_SUPERVISION_USER_SYNC_RATE_BY_DISTRICT",
               "label": "DSS_HEALTH_SUPERVISION_USER_SYNC_RATE_BY_DISTRICT",
               "vizType": "chart",
@@ -1054,7 +1054,7 @@
           "name": "DSS_HEALTH_SUPERVISION",
           "vizArray": [
             {
-              "id": 263,
+              "id": 243,
               "name": "DSS_HEALTH_SUPERVISION_PROVINCIAL_SUPERVISORS_CHECKLISTS_COMPLETION_RATE",
               "label": "DSS_HEALTH_SUPERVISION_PROVINCIAL_SUPERVISORS_CHECKLISTS_COMPLETION_RATE",
               "vizType": "chart",
@@ -1072,7 +1072,7 @@
               ]
             },
             {
-              "id": 264,
+              "id": 244,
               "name": "DSS_HEALTH_SUPERVISION_DISTRICT_SUPERVISORS_CHECKLISTS_COMPLETION_RATE",
               "label": "DSS_HEALTH_SUPERVISION_DISTRICT_SUPERVISORS_CHECKLISTS_COMPLETION_RATE",
               "vizType": "chart",
@@ -1105,7 +1105,7 @@
           "name": "DSS_HEALTH_OVERVIEW",
           "vizArray": [
             {
-              "id": 200,
+              "id": 300,
               "name": "DSS_HEALTH_USER_SYNC_OVERVIEW",
               "label": "DSS_HEALTH_USER_SYNC_OVERVIEW",
               "vizType": "bannercard",
@@ -1465,7 +1465,7 @@
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
-              "id": 217,
+              "id": 315,
               "name": "DSS_HEALTH_HOUSEHOLDS_COVERAGE_HEATMAP_PROVINCE",
               "label": "DSS_HEALTH_HOUSEHOLDS_COVERAGE_HEATMAP_PROVINCE",
               "vizType": "chart",
@@ -1502,7 +1502,7 @@
               ]
             },
             {
-              "id": 318,
+              "id": 316,
               "name": "DSS_HEALTH_RD_HH_VISITED_LATLONG",
               "label": "DSS_HEALTH_RD_HH_VISITED_LATLONG",
               "vizType": "latlong",
@@ -1526,7 +1526,7 @@
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
-              "id": 315,
+              "id": 317,
               "name": "DSS_HEALTH_ACTUAL_VS_PLANNED_LINE_GRAPH",
               "label": "DSS_HEALTH_ACTUAL_VS_PLANNED_LINE_GRAPH",
               "vizType": "chart",
@@ -1569,7 +1569,7 @@
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
-              "id": 317,
+              "id": 318,
               "name": "DSS_HEALTH_UNCOVERED_POPULATION",
               "label": "DSS_HEALTH_UNCOVERED_POPULATION",
               "vizType": "chart",
@@ -1593,7 +1593,7 @@
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
-              "id": 316,
+              "id": 319,
               "name": "DSS_HEALTH_DELIVERY_SUMMARY_BY_ADMINISTRATIVE_PROVINCE",
               "label": "DSS_HEALTH_DELIVERY_SUMMARY_BY_ADMINISTRATIVE_PROVINCE",
               "vizType": "chart",
@@ -1645,7 +1645,7 @@
               ]
             },
             {
-              "id": 331,
+              "id": 322,
               "name": "DSS_HEALTH_OVERVIEW_TOTAL_COMPLAINTS_BY_TYPE",
               "label": "DSS_HEALTH_OVERVIEW_TOTAL_COMPLAINTS_BY_TYPE",
               "vizType": "chart",
@@ -1753,7 +1753,7 @@
           "name": "DSS_HEALTH_COMPLAINTS",
           "vizArray": [
             {
-              "id": 326,
+              "id": 327,
               "name": "DSS_HEALTH_COMPLAINTS_SUMMARY",
               "label": "DSS_HEALTH_COMPLAINTS_SUMMARY",
               "vizType": "chart",
@@ -1787,7 +1787,7 @@
           "name": "DSS_HEALTH_COMPLAINTS",
           "vizArray": [
             {
-              "id": 327,
+              "id": 328,
               "name": "DSS_HEALTH_COMPLAINTS_OPEN_SUMMARY",
               "label": "DSS_HEALTH_COMPLAINTS_OPEN_SUMMARY",
               "vizType": "chart",
@@ -1811,7 +1811,7 @@
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
-              "id": 341,
+              "id": 331,
               "name": "DSS_HEALTH_DAYS_INVENTORY_CAN_LAST",
               "label": "DSS_HEALTH_DAYS_INVENTORY_CAN_LAST",
               "vizType": "chart",
@@ -1829,7 +1829,7 @@
               ]
             },
             {
-              "id": 342,
+              "id": 332,
               "name": "DSS_HEALTH_INVENTORY_STOCK_IN_HAND",
               "label": "DSS_HEALTH_INVENTORY_STOCK_IN_HAND",
               "vizType": "chart",
@@ -1853,7 +1853,7 @@
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
-              "id": 344,
+              "id": 333,
               "name": "DSS_HEALTH_WH_DISTRIBUTION_LATLONG",
               "label": "DSS_HEALTH_WH_DISTRIBUTION_LATLONG",
               "vizType": "latlong",
@@ -1885,7 +1885,7 @@
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
-              "id": 343,
+              "id": 334,
               "name": "DSS_HEALTH_INVENTORY_SUMMARY_BY_AP",
               "label": "DSS_HEALTH_INVENTORY_SUMMARY_BY_AP",
               "vizType": "chart",
@@ -1909,7 +1909,7 @@
           "name": "DSS_HEALTH_SUPERVISION",
           "vizArray": [
             {
-              "id": 361,
+              "id": 341,
               "name": "DSS_HEALTH_SUPERVISION_NATIONAL_SUPERVISORS_CHECKLISTS_COMPLETION_RATE",
               "label": "DSS_HEALTH_SUPERVISION_NATIONAL_SUPERVISORS_CHECKLISTS_COMPLETION_RATE",
               "vizType": "chart",
@@ -1927,7 +1927,7 @@
               ]
             },
             {
-              "id": 362,
+              "id": 342,
               "name": "DSS_HEALTH_SUPERVISION_USER_SYNC_RATE_BY_DISTRICT",
               "label": "DSS_HEALTH_SUPERVISION_USER_SYNC_RATE_BY_DISTRICT",
               "vizType": "chart",
@@ -1951,7 +1951,7 @@
           "name": "DSS_HEALTH_SUPERVISION",
           "vizArray": [
             {
-              "id": 363,
+              "id": 343,
               "name": "DSS_HEALTH_SUPERVISION_PROVINCIAL_SUPERVISORS_CHECKLISTS_COMPLETION_RATE",
               "label": "DSS_HEALTH_SUPERVISION_PROVINCIAL_SUPERVISORS_CHECKLISTS_COMPLETION_RATE",
               "vizType": "chart",
@@ -1969,7 +1969,7 @@
               ]
             },
             {
-              "id": 364,
+              "id": 344,
               "name": "DSS_HEALTH_SUPERVISION_DISTRICT_SUPERVISORS_CHECKLISTS_COMPLETION_RATE",
               "label": "DSS_HEALTH_SUPERVISION_DISTRICT_SUPERVISORS_CHECKLISTS_COMPLETION_RATE",
               "vizType": "chart",
