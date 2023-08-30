@@ -23,7 +23,7 @@ serviceMaps:
             - jsonPath: $.*.tenantId
             - jsonPath: $.*.facilityId
             - jsonPath: $.*.productVariantId
-            - jsonPath: $.*.wayBillNumber
+            - jsonPath: $.*.waybillNumber
             - jsonPath: $.*.quantity
             - jsonPath: $.*.referenceId
             - jsonPath: $.*.referenceIdType
@@ -63,7 +63,7 @@ serviceMaps:
             - jsonPath: $.*.dateOfEntry
             - jsonPath: $.*.facilityId
             - jsonPath: $.*.productVariantId
-            - jsonPath: $.*.wayBillNumber
+            - jsonPath: $.*.waybillNumber
             - jsonPath: $.*.quantity
             - jsonPath: $.*.referenceId
             - jsonPath: $.*.referenceIdType
