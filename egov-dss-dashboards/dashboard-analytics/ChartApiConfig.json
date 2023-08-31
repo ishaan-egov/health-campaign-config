@@ -188,10 +188,10 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.targetDay",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
-        "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filters\": {\n        \"filters\": {\n          \"Campaign Filter\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"term\": {\n                    \"Data.targetType.keyword\": \"HOUSEHOLD\"\n                  }\n                },\n                {\n                  \"match_phrase\": {\n                    \"Data.productVariant\": \"PVAR\"\n                  }\n                },\n                {\n                  \"exists\": {\n                    \"field\":\"Data.province.keyword\"\n                  }\n                }\n              ],\n              \"must_not\": [\n                {\n                  \"exists\": {\n                    \"field\":\"Data.district.keyword\"\n                  }\n                }\n              ]\n            }\n          }\n        }\n      },\n      \"aggs\": {\n        \"Overall Target\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        },\n        \"Target per day\": {\n          \"sum\": {\n            \"field\": \"Data.targetPerDay\"\n          }\n        },\n        \"Target Households per Day\": {\n          \"bucket_script\": {\n            \"buckets_path\": {\n              \"tpd\": \"Target per day\"\n            },\n            \"script\": \"(params.tpd)*365\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "indexName": "project-index-v2",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"sum\": {\n        \"field\": \"Data.targetForTheDay\"\n      }\n    }\n  }\n}"
       }
     ],
     "chartType": "metric",
@@ -200,10 +200,9 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "Target Households per Day"
+      "NAME"
     ],
-    "postAggregationTheory": "repsonseToDifferenceOfDates",
-    "isCappedByCampaignPeriod": ["Overall Target"],
+    "postAggregationTheory": "",
     "insight": {
     },
     "_comment": " "
