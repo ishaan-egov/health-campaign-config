@@ -104,7 +104,7 @@ serviceMaps:
       userUuidJsonPath: $.[0].auditDetails.createdBy
       auditAttributeBasePath: $.*   
       queryMaps:
-        - query: INSERT INTO project_beneficiary (id, tenantId, projectId, beneficiaryId, clientReferenceId, beneficiaryClientReferenceId, dateOfRegistration, additionalDetails, createdBy, lastModifiedBy, createdTime, lastModifiedTime, rowVersion, isDeleted) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+        - query: INSERT INTO project_beneficiary (id, tenantId, projectId, beneficiaryId, clientReferenceId, beneficiaryClientReferenceId, dateOfRegistration, additionalDetails, createdBy, lastModifiedBy, createdTime, lastModifiedTime, rowVersion, isDeleted, clientCreatedTime, clientLastModifiedTime, clientCreatedBy, clientLastModifiedBy) VALUES (?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
           basePath: $.*
           jsonMaps:
             - jsonPath: $.*.id
@@ -123,6 +123,10 @@ serviceMaps:
             - jsonPath: $.*.auditDetails.lastModifiedTime
             - jsonPath: $.*.rowVersion
             - jsonPath: $.*.isDeleted
+            - jsonPath: $.*.clientAuditDetails.createdTime
+            - jsonPath: $.*.clientAuditDetails.lastModifiedTime
+            - jsonPath: $.*.clientAuditDetails.createdBy
+            - jsonPath: $.*.clientAuditDetails.lastModifiedBy
 
     - version: 1.0
       description: Update Project Beneficiary
@@ -138,7 +142,7 @@ serviceMaps:
       userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
       auditAttributeBasePath: $.*   
       queryMaps:
-        - query: UPDATE project_beneficiary SET projectId=?, beneficiaryId=?, clientReferenceId=?, beneficiaryClientReferenceId=?, dateOfRegistration=?, additionalDetails=?, lastModifiedBy=?, lastModifiedTime=?, rowVersion=?, isDeleted=?  WHERE id = ? AND isDeleted=false
+        - query: UPDATE project_beneficiary SET projectId=?, beneficiaryId=?, clientReferenceId=?, beneficiaryClientReferenceId=?, dateOfRegistration=?, additionalDetails=?, lastModifiedBy=?, lastModifiedTime=?, rowVersion=?, isDeleted=?, clientLastModifiedTime = ?, clientLastModifiedBy = ?  WHERE id = ? AND isDeleted=false
           basePath: $.*
           jsonMaps:
             - jsonPath: $.*.projectId
@@ -153,6 +157,8 @@ serviceMaps:
             - jsonPath: $.*.auditDetails.lastModifiedTime
             - jsonPath: $.*.rowVersion
             - jsonPath: $.*.isDeleted
+            - jsonPath: $.*.clientAuditDetails.lastModifiedTime
+            - jsonPath: $.*.clientAuditDetails.lastModifiedBy
             - jsonPath: $.*.id
 
     - version: 1.0
@@ -169,11 +175,13 @@ serviceMaps:
       userUuidJsonPath: $.[0].auditDetails.lastModifiedBy
       auditAttributeBasePath: $.*   
       queryMaps:
-        - query: UPDATE project_beneficiary SET lastModifiedBy=?, lastModifiedTime=?, rowVersion=?, isDeleted=?, additionalDetails=? WHERE id=?;
+        - query: UPDATE project_beneficiary SET lastModifiedBy=?, lastModifiedTime=?, clientLastModifiedTime = ?, clientLastModifiedBy = ?, rowVersion=?, isDeleted=?, additionalDetails=? WHERE id=?;
           basePath: $.*
           jsonMaps:
             - jsonPath: $.*.auditDetails.lastModifiedBy
             - jsonPath: $.*.auditDetails.lastModifiedTime
+            - jsonPath: $.*.clientAuditDetails.lastModifiedTime
+            - jsonPath: $.*.clientAuditDetails.lastModifiedBy
             - jsonPath: $.*.rowVersion
             - jsonPath: $.*.isDeleted
             - jsonPath: $.*.additionalFields
