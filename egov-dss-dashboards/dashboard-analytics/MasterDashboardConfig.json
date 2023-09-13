@@ -1853,38 +1853,6 @@
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
-              "id": 333,
-              "name": "DSS_HEALTH_WH_DISTRIBUTION_LATLONG",
-              "label": "DSS_HEALTH_WH_DISTRIBUTION_LATLONG",
-              "vizType": "latlong",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "warehouseDistributionLatLongPoints",
-                  "name": "DSS_HEALTH_WH_DISTRIBUTION_LATLONG",
-                  "code": "",
-                  "chartType": "points",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "warehouseDistributionLatLongTableAvlRcvdDispFacilities",
-                  "name": "DSS_HEALTH_WH_DISTRIBUTION_LATLONG",
-                  "code": "",
-                  "chartType": "table",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "row": 3,
-          "name": "DSS_HEALTH_INVENTORY",
-          "vizArray": [
-            {
               "id": 334,
               "name": "DSS_HEALTH_INVENTORY_SUMMARY_BY_AP",
               "label": "DSS_HEALTH_INVENTORY_SUMMARY_BY_AP",
