@@ -1935,7 +1935,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "userSyncRateByDistrict",
+                  "id": "userSyncRateByAP",
                   "name": "DSS_HEALTH_SUPERVISION_USER_SYNC_RATE_BY_AP",
                   "code": "",
                   "chartType": "bar",

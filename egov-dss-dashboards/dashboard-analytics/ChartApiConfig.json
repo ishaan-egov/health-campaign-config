@@ -385,7 +385,6 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "DATA SYNC",
-    "filterForCurrentDay": true,
     "excludedColumns": [
       "S.N.", "DATA SYNC", "Total Users Created","Unique Users Synced"
     ],
@@ -451,7 +450,6 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "DATA SYNC",
-    "filterForCurrentDay": true,
     "excludedColumns": [
       "S.N.", "DATA SYNC", "Total Users Created","Unique Users Synced"
     ],
@@ -891,9 +889,10 @@
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
         "indexName": "project-task-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"Households not Delivered\": {\n      \"terms\": {\n        \"field\": \"Data.district.keyword\",\n        \"size\": 500,\n        \"order\": {\n          \"_key\": \"asc\"\n        }\n      },\n      \"aggs\": {\n        \"Households not delivered\": {\n          \"filter\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"exists\": {\n                    \"field\": \"Data.deliveryComments.keyword\"\n                  }\n                }\n              ]\n            }\n          },\n          \"aggs\": {\n            \"NAME\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"Delivery Comment Filter\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.deliveryComments.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Program Mandate Comment\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Program Mandate\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Orientação nacional\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"Insufficient Comment\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Insufficent\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Insuficiência de redes\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"Member Count Comment\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Member Count\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Mais de 6 agregados familiares\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
+    "plotLabel": "none",
     "chartType": "line",
     "valueType": "number",
     "drillChart": "rdTotalHouseholdsNotDeliveredChartDistrict",
@@ -901,7 +900,7 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "Households not Delivered"
+      "Program Mandate Comment", "Insufficient Comment", "Member Count Comment"
     ],
     "filterKeys": [{"key": "district"}],
     "insight": {},
@@ -916,9 +915,10 @@
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
         "indexName": "project-task-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"Households not Delivered\": {\n      \"terms\": {\n        \"field\": \"Data.administrativeProvince.keyword\",\n        \"size\": 500,\n        \"order\": {\n          \"_key\": \"asc\"\n        }\n      },\n      \"aggs\": {\n        \"Households not delivered\": {\n          \"filter\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"exists\": {\n                    \"field\": \"Data.deliveryComments.keyword\"\n                  }\n                }\n              ]\n            }\n          },\n          \"aggs\": {\n            \"NAME\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"Delivery Comment Filter\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.deliveryComments.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Program Mandate Comment\": {\n          \"terms\": {\n            \"field\": \"Data.administrativeProvince.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Program Mandate\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Orientação nacional\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"Insufficient Comment\": {\n          \"terms\": {\n            \"field\": \"Data.administrativeProvince.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Insufficent\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Insuficiência de redes\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"Member Count Comment\": {\n          \"terms\": {\n            \"field\": \"Data.administrativeProvince.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Member Count\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Mais de 6 agregados familiares\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
+    "plotLabel": "none",
     "chartType": "line",
     "isCumulative": false,
     "valueType": "number",
@@ -926,7 +926,7 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "Households not Delivered"
+      "Program Mandate Comment", "Insufficient Comment", "Member Count Comment"
     ],
     "filterKeys": [{"key": "administrativeProvince"}],
     "insight": {},
@@ -941,9 +941,10 @@
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\",\"administrativeProvince\":\"Data.administrativeProvince.keyword\"}",
         "indexName": "project-task-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"Households not Delivered\": {\n      \"terms\": {\n        \"field\": \"Data.locality.keyword\",\n        \"size\": 500,\n        \"order\": {\n          \"_key\": \"asc\"\n        }\n      },\n      \"aggs\": {\n        \"Households not delivered\": {\n          \"filter\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"exists\": {\n                    \"field\": \"Data.deliveryComments.keyword\"\n                  }\n                }\n              ]\n            }\n          },\n          \"aggs\": {\n            \"NAME\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"Delivery Comment Filter\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.deliveryComments.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Program Mandate Comment\": {\n          \"terms\": {\n            \"field\": \"Data.locality.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Program Mandate\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Orientação nacional\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"Insufficient Comment\": {\n          \"terms\": {\n            \"field\": \"Data.locality.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Insufficent\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Insuficiência de redes\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"Member Count Comment\": {\n          \"terms\": {\n            \"field\": \"Data.locality.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Member Count\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Mais de 6 agregados familiares\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
+    "plotLabel": "none",
     "chartType": "line",
     "isCumulative": false,
     "valueType": "number",
@@ -951,7 +952,7 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "Households not Delivered"
+      "Program Mandate Comment", "Insufficient Comment", "Member Count Comment"
     ],
     "filterKeys": [{"key": "locality"}],
     "insight": {},
@@ -966,9 +967,10 @@
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\",\"administrativeProvince\":\"Data.administrativeProvince.keyword\",\"locality\":\"Data.locality.keyword\"}",
         "indexName": "project-task-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"Households not Delivered\": {\n      \"terms\": {\n        \"field\": \"Data.village.keyword\",\n        \"size\": 500,\n        \"order\": {\n          \"_key\": \"asc\"\n        }\n      },\n      \"aggs\": {\n        \"Households not delivered\": {\n          \"filter\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"exists\": {\n                    \"field\": \"Data.deliveryComments.keyword\"\n                  }\n                }\n              ]\n            }\n          },\n          \"aggs\": {\n            \"NAME\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"Delivery Comment Filter\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.deliveryComments.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Program Mandate Comment\": {\n          \"terms\": {\n            \"field\": \"Data.village.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Program Mandate\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Orientação nacional\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"Insufficient Comment\": {\n          \"terms\": {\n            \"field\": \"Data.village.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Insufficent\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Insuficiência de redes\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"Member Count Comment\": {\n          \"terms\": {\n            \"field\": \"Data.village.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Member Count\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Mais de 6 agregados familiares\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
+    "plotLabel": "none",
     "chartType": "line",
     "isCumulative": false,
     "valueType": "number",
@@ -976,7 +978,7 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "Households not Delivered"
+      "Program Mandate Comment", "Insufficient Comment", "Member Count Comment"
     ],
     "insight": {},
     "_comment": " "
