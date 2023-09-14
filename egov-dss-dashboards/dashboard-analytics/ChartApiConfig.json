@@ -385,7 +385,6 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "DATA SYNC",
-    "filterForCurrentDay": true,
     "excludedColumns": [
       "S.N.", "DATA SYNC", "Total Users Created","Unique Users Synced"
     ],
@@ -451,7 +450,6 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "DATA SYNC",
-    "filterForCurrentDay": true,
     "excludedColumns": [
       "S.N.", "DATA SYNC", "Total Users Created","Unique Users Synced"
     ],
@@ -889,11 +887,12 @@
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\", \"selectedStack\": \"Data.deliveryComments.keyword\"}",
         "indexName": "project-task-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"Households not Delivered\": {\n      \"terms\": {\n        \"field\": \"Data.district.keyword\",\n        \"size\": 500,\n        \"order\": {\n          \"_key\": \"asc\"\n        }\n      },\n      \"aggs\": {\n        \"Households not delivered\": {\n          \"filter\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"exists\": {\n                    \"field\": \"Data.deliveryComments.keyword\"\n                  }\n                }\n              ]\n            }\n          },\n          \"aggs\": {\n            \"NAME\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"Delivery Comment Filter\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.deliveryComments.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Orientação nacional\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Program Mandate\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Orientação nacional\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"Insuficiência de redes\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Insufficent\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Insuficiência de redes\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"Mais de 6 agregados familiares\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Member Count\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Mais de 6 agregados familiares\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
+    "plotLabel": "none",
     "chartType": "line",
     "valueType": "number",
     "drillChart": "rdTotalHouseholdsNotDeliveredChartDistrict",
@@ -901,7 +900,7 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "Households not Delivered"
+      "Orientação nacional", "Insuficiência de redes", "Mais de 6 agregados familiares"
     ],
     "filterKeys": [{"key": "district"}],
     "insight": {},
@@ -914,11 +913,12 @@
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\", \"selectedStack\": \"Data.deliveryComments.keyword\"}",
         "indexName": "project-task-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"Households not Delivered\": {\n      \"terms\": {\n        \"field\": \"Data.administrativeProvince.keyword\",\n        \"size\": 500,\n        \"order\": {\n          \"_key\": \"asc\"\n        }\n      },\n      \"aggs\": {\n        \"Households not delivered\": {\n          \"filter\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"exists\": {\n                    \"field\": \"Data.deliveryComments.keyword\"\n                  }\n                }\n              ]\n            }\n          },\n          \"aggs\": {\n            \"NAME\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"Delivery Comment Filter\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.deliveryComments.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Orientação nacional\": {\n          \"terms\": {\n            \"field\": \"Data.administrativeProvince.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Program Mandate\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Orientação nacional\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"Insuficiência de redes\": {\n          \"terms\": {\n            \"field\": \"Data.administrativeProvince.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Insufficent\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Insuficiência de redes\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"Mais de 6 agregados familiares\": {\n          \"terms\": {\n            \"field\": \"Data.administrativeProvince.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Member Count\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Mais de 6 agregados familiares\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
+    "plotLabel": "none",
     "chartType": "line",
     "isCumulative": false,
     "valueType": "number",
@@ -926,7 +926,7 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "Households not Delivered"
+      "Orientação nacional", "Insuficiência de redes", "Mais de 6 agregados familiares"
     ],
     "filterKeys": [{"key": "administrativeProvince"}],
     "insight": {},
@@ -939,11 +939,12 @@
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\",\"administrativeProvince\":\"Data.administrativeProvince.keyword\"}",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\",\"administrativeProvince\":\"Data.administrativeProvince.keyword\", \"selectedStack\": \"Data.deliveryComments.keyword\"}",
         "indexName": "project-task-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"Households not Delivered\": {\n      \"terms\": {\n        \"field\": \"Data.locality.keyword\",\n        \"size\": 500,\n        \"order\": {\n          \"_key\": \"asc\"\n        }\n      },\n      \"aggs\": {\n        \"Households not delivered\": {\n          \"filter\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"exists\": {\n                    \"field\": \"Data.deliveryComments.keyword\"\n                  }\n                }\n              ]\n            }\n          },\n          \"aggs\": {\n            \"NAME\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"Delivery Comment Filter\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.deliveryComments.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Orientação nacional\": {\n          \"terms\": {\n            \"field\": \"Data.locality.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Program Mandate\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Orientação nacional\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"Insuficiência de redes\": {\n          \"terms\": {\n            \"field\": \"Data.locality.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Insufficent\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Insuficiência de redes\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"Mais de 6 agregados familiares\": {\n          \"terms\": {\n            \"field\": \"Data.locality.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Member Count\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Mais de 6 agregados familiares\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
+    "plotLabel": "none",
     "chartType": "line",
     "isCumulative": false,
     "valueType": "number",
@@ -951,7 +952,7 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "Households not Delivered"
+      "Orientação nacional", "Insuficiência de redes", "Mais de 6 agregados familiares"
     ],
     "filterKeys": [{"key": "locality"}],
     "insight": {},
@@ -964,11 +965,12 @@
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
-        "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\",\"administrativeProvince\":\"Data.administrativeProvince.keyword\",\"locality\":\"Data.locality.keyword\"}",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\",\"administrativeProvince\":\"Data.administrativeProvince.keyword\",\"locality\":\"Data.locality.keyword\", \"selectedStack\": \"Data.deliveryComments.keyword\"}",
         "indexName": "project-task-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"Households not Delivered\": {\n      \"terms\": {\n        \"field\": \"Data.village.keyword\",\n        \"size\": 500,\n        \"order\": {\n          \"_key\": \"asc\"\n        }\n      },\n      \"aggs\": {\n        \"Households not delivered\": {\n          \"filter\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"exists\": {\n                    \"field\": \"Data.deliveryComments.keyword\"\n                  }\n                }\n              ]\n            }\n          },\n          \"aggs\": {\n            \"NAME\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"Delivery Comment Filter\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.deliveryComments.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Orientação nacional\": {\n          \"terms\": {\n            \"field\": \"Data.village.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Program Mandate\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Orientação nacional\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"Insuficiência de redes\": {\n          \"terms\": {\n            \"field\": \"Data.village.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Insufficent\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Insuficiência de redes\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        },\n        \"Mais de 6 agregados familiares\": {\n          \"terms\": {\n            \"field\": \"Data.village.keyword\",\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            }\n          },\n          \"aggs\": {\n            \"Member Count\": {\n              \"filter\": {\n                \"bool\": {\n                  \"must\": [\n                    {\n                      \"term\": {\n                        \"Data.deliveryComments.keyword\": {\n                          \"value\": \"Mais de 6 agregados familiares\"\n                        }\n                      }\n                    }\n                  ]\n                }\n              },\n              \"aggs\": {\n                \"NAME\": {\n                  \"value_count\": {\n                    \"field\": \"Data.id.keyword\"\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
+    "plotLabel": "none",
     "chartType": "line",
     "isCumulative": false,
     "valueType": "number",
@@ -976,7 +978,7 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "Households not Delivered"
+      "Orientação nacional", "Insuficiência de redes", "Mais de 6 agregados familiares"
     ],
     "insight": {},
     "_comment": " "
@@ -1921,14 +1923,14 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\",\"administrativeProvince\":\"Data.administrativeProvince.keyword\"}",
         "indexName": "project-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"AGGS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            },\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"INDIVIDUAL\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.locality.keyword\"\n              }\n            }\n          ],\n          \"must_not\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.village.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Overall Population target\": {\n          \"terms\": {\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            },\n            \"field\": \"Data.locality.keyword\"\n          },\n          \"aggs\": {\n            \"Population target\": {\n              \"sum\": {\n                \"field\": \"Data.overallTarget\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\",\"administrativeProvince\":\"Data.administrativeProvince.keyword\"}",
         "indexName": "project-task-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"AGGS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            },\n            {\n              \"term\": {\n                \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n              }\n            },\n            {\n              \"term\": {\n                \"Data.isDelivered\": true\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Total Population covered\": {\n          \"terms\": {\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            },\n            \"field\": \"Data.locality.keyword\"\n          },\n          \"aggs\": {\n            \"Quantity\": {\n              \"sum\": {\n                \"field\": \"Data.quantity\"\n              }\n            },\n            \"Population Total\": {\n              \"bucket_script\": {\n                \"buckets_path\": {\n                  \"target\": \"Quantity\"\n                },\n                \"script\": \"params.target * -1.8\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
@@ -2002,14 +2004,14 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\",\"administrativeProvince\":\"Data.administrativeProvince.keyword\", \"locality\":\"Data.locality.keyword\"}",
         "indexName": "project-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"AGGS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            },\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"INDIVIDUAL\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.village.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Overall Population target\": {\n          \"terms\": {\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            },\n            \"field\": \"Data.village.keyword\"\n          },\n          \"aggs\": {\n            \"Population target\": {\n              \"sum\": {\n                \"field\": \"Data.overallTarget\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\",\"administrativeProvince\":\"Data.administrativeProvince.keyword\", \"locality\":\"Data.locality.keyword\"}",
         "indexName": "project-task-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"AGGS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            },\n            {\n              \"term\": {\n                \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n              }\n            },\n            {\n              \"term\": {\n                \"Data.isDelivered\": true\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Total Population covered\": {\n          \"terms\": {\n            \"size\": 500,\n            \"order\": {\n              \"_key\": \"asc\"\n            },\n            \"field\": \"Data.village.keyword\"\n          },\n          \"aggs\": {\n            \"Quantity\": {\n              \"sum\": {\n                \"field\": \"Data.quantity\"\n              }\n            },\n            \"Population Total\": {\n              \"bucket_script\": {\n                \"buckets_path\": {\n                  \"target\": \"Quantity\"\n                },\n                \"script\": \"params.target * -1.8\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
@@ -2030,7 +2032,6 @@
     "drillChart": "none",
     "documentType": "_doc",
     "computeMultiPaths": true,
-    "filterKeys": [{"key": "village"}],
     "aggregationPaths": ["Overall Population target","Total Population covered"],
     "action": "",
     "insight": { },
@@ -3459,7 +3460,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"chartSpecificProperty\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"HOUSEHOLD\"\n              }\n            },\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.province.keyword\"\n              }\n            }\n          ],\n          \"must_not\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.district.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"startDate\": {\n          \"terms\": {\n            \"field\": \"Data.startDate\"\n          }\n        },\n        \"endDate\": {\n          \"terms\": {\n            \"field\": \"Data.endDate\"\n          }\n        },\n        \"Household Target\": {\n          \"date_histogram\": {\n            \"field\": \"Data.startDate\",\n            \"interval\": \"day\"\n          },\n          \"aggs\": {\n            \"Target Household\": {\n              \"sum\": {\n                \"field\": \"Data.targetPerDay\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"chartSpecificProperty\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"HOUSEHOLD\"\n              }\n            },\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.province.keyword\"\n              }\n            }\n          ],\n          \"must_not\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.district.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"startDate\": {\n          \"terms\": {\n            \"field\": \"Data.startDate\"\n          }\n        },\n        \"endDate\": {\n          \"terms\": {\n            \"field\": \"Data.endDate\"\n          }\n        },\n        \"Household Target\": {\n          \"date_histogram\": {\n            \"field\": \"Data.startDate\",\n            \"interval\": \"day\"\n          },\n          \"aggs\": {\n            \"Target Household\": {\n              \"sum\": {\n                \"field\": \"Data.targetPerDay\"\n              }\n            }\n          }\n        },\n        \"Overall Target\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
     "chartType": "line",
@@ -3469,6 +3470,8 @@
     "documentType": "_doc",
     "action": "",
     "predictionPath" : "Household Target",
+    "distributionPath": "Household Distribution",
+    "cappedTarget": "Overall Target",
     "aggregationPaths": [
       "Household Target","Household Distribution"
     ],
@@ -3490,7 +3493,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"chartSpecificProperty\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PRODUCT\"\n              }\n            },\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.province.keyword\"\n              }\n            }\n          ],\n          \"must_not\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.district.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"startDate\": {\n          \"terms\": {\n            \"field\": \"Data.startDate\"\n          }\n        },\n        \"endDate\": {\n          \"terms\": {\n            \"field\": \"Data.endDate\"\n          }\n        },\n        \"Bednets Target\": {\n          \"date_histogram\": {\n            \"field\": \"Data.startDate\",\n            \"interval\": \"day\"\n          },\n          \"aggs\": {\n            \"Target\": {\n              \"sum\": {\n                \"field\": \"Data.targetPerDay\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"chartSpecificProperty\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PRODUCT\"\n              }\n            },\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.province.keyword\"\n              }\n            }\n          ],\n          \"must_not\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.district.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"startDate\": {\n          \"terms\": {\n            \"field\": \"Data.startDate\"\n          }\n        },\n        \"endDate\": {\n          \"terms\": {\n            \"field\": \"Data.endDate\"\n          }\n        },\n        \"Bednets Target\": {\n          \"date_histogram\": {\n            \"field\": \"Data.startDate\",\n            \"interval\": \"day\"\n          },\n          \"aggs\": {\n            \"Target\": {\n              \"sum\": {\n                \"field\": \"Data.targetPerDay\"\n              }\n            }\n          }\n        },\n        \"Overall Target\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
     "chartType": "line",
@@ -3500,6 +3503,8 @@
     "documentType": "_doc",
     "action": "",
     "predictionPath" : "Bednets Target",
+    "distributionPath": "Bednets Distribution",
+    "cappedTarget": "Overall Target",
     "aggregationPaths": [
       "Bednets Target","Bednets Distribution"
     ],
@@ -3521,7 +3526,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"chartSpecificProperty\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"INDIVIDUAL\"\n              }\n            },\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.province.keyword\"\n              }\n            }\n          ],\n          \"must_not\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.district.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"startDate\": {\n          \"terms\": {\n            \"field\": \"Data.startDate\"\n          }\n        },\n        \"endDate\": {\n          \"terms\": {\n            \"field\": \"Data.endDate\"\n          }\n        },\n        \"Population Target\": {\n          \"date_histogram\": {\n            \"field\": \"Data.startDate\",\n            \"interval\": \"day\"\n          },\n          \"aggs\": {\n            \"Target\": {\n              \"sum\": {\n                \"field\": \"Data.targetPerDay\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"chartSpecificProperty\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"INDIVIDUAL\"\n              }\n            },\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.province.keyword\"\n              }\n            }\n          ],\n          \"must_not\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.district.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"startDate\": {\n          \"terms\": {\n            \"field\": \"Data.startDate\"\n          }\n        },\n        \"endDate\": {\n          \"terms\": {\n            \"field\": \"Data.endDate\"\n          }\n        },\n        \"Population Target\": {\n          \"date_histogram\": {\n            \"field\": \"Data.startDate\",\n            \"interval\": \"day\"\n          },\n          \"aggs\": {\n            \"Target\": {\n              \"sum\": {\n                \"field\": \"Data.targetPerDay\"\n              }\n            }\n          }\n        },\n        \"Overall Target\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
     "chartType": "line",
@@ -3531,6 +3536,8 @@
     "documentType": "_doc",
     "action": "",
     "predictionPath" : "Population Target",
+    "distributionPath": "Population Distribution",
+    "cappedTarget": "Overall Target",
     "aggregationPaths": [
       "Population Target","Population Distribution"
     ],
@@ -3538,7 +3545,7 @@
     "_comment": " "
   },
   "actualVsPlannedHouseholdLineGraphDistrict": {
-    "chartName": "DSS_HEALTH_ACTUAL_VS_PLANNED_HOUSEHOLD_LINE_GRAPH_DISTRICTactualVsPlannedHouseholdLineGraphProvince",
+    "chartName": "DSS_HEALTH_ACTUAL_VS_PLANNED_HOUSEHOLD_LINE_GRAPH_DISTRICT",
     "queries": [
       {
         "module": "COMMON",
@@ -3552,7 +3559,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"chartSpecificProperty\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"HOUSEHOLD\"\n              }\n            },\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.province.keyword\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.district.keyword\"\n              }\n            }\n          ],\n          \"must_not\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.administrativeProvince.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"startDate\": {\n          \"terms\": {\n            \"field\": \"Data.startDate\"\n          }\n        },\n        \"endDate\": {\n          \"terms\": {\n            \"field\": \"Data.endDate\"\n          }\n        },\n        \"Household Target\": {\n          \"date_histogram\": {\n            \"field\": \"Data.startDate\",\n            \"interval\": \"day\"\n          },\n          \"aggs\": {\n            \"Target Household\": {\n              \"sum\": {\n                \"field\": \"Data.targetPerDay\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"chartSpecificProperty\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"HOUSEHOLD\"\n              }\n            },\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.province.keyword\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.district.keyword\"\n              }\n            }\n          ],\n          \"must_not\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.administrativeProvince.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"startDate\": {\n          \"terms\": {\n            \"field\": \"Data.startDate\"\n          }\n        },\n        \"endDate\": {\n          \"terms\": {\n            \"field\": \"Data.endDate\"\n          }\n        },\n        \"Household Target\": {\n          \"date_histogram\": {\n            \"field\": \"Data.startDate\",\n            \"interval\": \"day\"\n          },\n          \"aggs\": {\n            \"Target Household\": {\n              \"sum\": {\n                \"field\": \"Data.targetPerDay\"\n              }\n            }\n          }\n        },\n        \"Overall Target\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
     "chartType": "line",
@@ -3562,8 +3569,10 @@
     "documentType": "_doc",
     "action": "",
     "predictionPath" : "Household Target",
+    "distributionPath": "Household Distribution",
+    "cappedTarget": "Overall Target",
     "aggregationPaths": [
-      "Household Target","Household Distribution"
+      "Household Target", "Household Distribution"
     ],
     "insight": { },
     "_comment": " "
@@ -3583,7 +3592,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"chartSpecificProperty\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PRODUCT\"\n              }\n            },\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.province.keyword\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.district.keyword\"\n              }\n            }\n          ],\n          \"must_not\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.administrativeProvince.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"startDate\": {\n          \"terms\": {\n            \"field\": \"Data.startDate\"\n          }\n        },\n        \"endDate\": {\n          \"terms\": {\n            \"field\": \"Data.endDate\"\n          }\n        },\n        \"Bednets Target\": {\n          \"date_histogram\": {\n            \"field\": \"Data.startDate\",\n            \"interval\": \"day\"\n          },\n          \"aggs\": {\n            \"Target\": {\n              \"sum\": {\n                \"field\": \"Data.targetPerDay\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"chartSpecificProperty\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PRODUCT\"\n              }\n            },\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.province.keyword\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.district.keyword\"\n              }\n            }\n          ],\n          \"must_not\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.administrativeProvince.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"startDate\": {\n          \"terms\": {\n            \"field\": \"Data.startDate\"\n          }\n        },\n        \"endDate\": {\n          \"terms\": {\n            \"field\": \"Data.endDate\"\n          }\n        },\n        \"Bednets Target\": {\n          \"date_histogram\": {\n            \"field\": \"Data.startDate\",\n            \"interval\": \"day\"\n          },\n          \"aggs\": {\n            \"Target\": {\n              \"sum\": {\n                \"field\": \"Data.targetPerDay\"\n              }\n            }\n          }\n        },\n        \"Overall Target\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
     "chartType": "line",
@@ -3593,6 +3602,8 @@
     "documentType": "_doc",
     "action": "",
     "predictionPath" : "Bednets Target",
+    "distributionPath": "Bednets Distribution",
+    "cappedTarget": "Overall Target",
     "aggregationPaths": [
       "Bednets Target","Bednets Distribution"
     ],
@@ -3614,7 +3625,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"chartSpecificProperty\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"INDIVIDUAL\"\n              }\n            },\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.province.keyword\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.district.keyword\"\n              }\n            }\n          ],\n          \"must_not\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.administrativeProvince.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"startDate\": {\n          \"terms\": {\n            \"field\": \"Data.startDate\"\n          }\n        },\n        \"endDate\": {\n          \"terms\": {\n            \"field\": \"Data.endDate\"\n          }\n        },\n        \"Population Target\": {\n          \"date_histogram\": {\n            \"field\": \"Data.startDate\",\n            \"interval\": \"day\"\n          },\n          \"aggs\": {\n            \"Target\": {\n              \"sum\": {\n                \"field\": \"Data.targetPerDay\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"chartSpecificProperty\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"INDIVIDUAL\"\n              }\n            },\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.province.keyword\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.district.keyword\"\n              }\n            }\n          ],\n          \"must_not\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.administrativeProvince.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"startDate\": {\n          \"terms\": {\n            \"field\": \"Data.startDate\"\n          }\n        },\n        \"endDate\": {\n          \"terms\": {\n            \"field\": \"Data.endDate\"\n          }\n        },\n        \"Population Target\": {\n          \"date_histogram\": {\n            \"field\": \"Data.startDate\",\n            \"interval\": \"day\"\n          },\n          \"aggs\": {\n            \"Target\": {\n              \"sum\": {\n                \"field\": \"Data.targetPerDay\"\n              }\n            }\n          }\n        },\n        \"Overall Target\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
     "chartType": "line",
@@ -3624,6 +3635,8 @@
     "documentType": "_doc",
     "action": "",
     "predictionPath" : "Population Target",
+    "distributionPath": "Population Distribution",
+    "cappedTarget": "Overall Target",
     "aggregationPaths": [
       "Population Target","Population Distribution"
     ],
@@ -5752,7 +5765,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.createdTime",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n\"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"terms\": {\n                \"Data.supervisorLevel.keyword\": [\n                  \"NATIONAL_SUPERVISOR\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Checklist name\": {\n          \"terms\": {\n            \"field\": \"Data.checklistName.keyword\"\n          },\n          \"aggs\": {\n            \"Checklist Count\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n"
@@ -5775,7 +5788,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.createdTime",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n\"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"terms\": {\n                \"Data.supervisorLevel.keyword\": [\n                  \"PROVINCIAL_SUPERVISOR\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Checklist name\": {\n          \"terms\": {\n            \"field\": \"Data.checklistName.keyword\"\n          },\n          \"aggs\": {\n            \"Checklist Count\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n"
@@ -5798,7 +5811,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.createdTime",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n\"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"terms\": {\n                \"Data.supervisorLevel.keyword\": [\n                  \"DISTRICT_SUPERVISOR\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Checklist name\": {\n          \"terms\": {\n            \"field\": \"Data.checklistName.keyword\"\n          },\n          \"aggs\": {\n            \"Checklist Count\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n"
@@ -5821,7 +5834,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.createdTime",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
         "indexName": "user-sync-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"Sync Rate Percentage\": {\n      \"terms\": {\n        \"field\": \"Data.district.keyword\",\n        \"size\": 500\n      },\n      \"aggs\": {\n        \"Unique Users Synced\": {\n          \"scripted_metric\": {\n            \"params\": {\n              \"fieldName\": \"Data.userId.keyword\"\n            },\n            \"init_script\": \"state.list = []\",\n            \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n            \"combine_script\": \"return state.list;\",\n            \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n          }\n        }\n      }\n    }\n  }\n}"
@@ -5852,7 +5865,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "Data.createdTime",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
         "indexName": "user-sync-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"Sync Rate Percentage\": {\n      \"terms\": {\n        \"field\": \"Data.administrativeProvince.keyword\",\n        \"size\": 500\n      },\n      \"aggs\": {\n        \"Unique Users Synced\": {\n          \"scripted_metric\": {\n            \"params\": {\n              \"fieldName\": \"Data.userId.keyword\"\n            },\n            \"init_script\": \"state.list = []\",\n            \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n            \"combine_script\": \"return state.list;\",\n            \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n          }\n        }\n      }\n    }\n  }\n}"
