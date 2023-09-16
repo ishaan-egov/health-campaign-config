@@ -461,7 +461,7 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.createdTime",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "user-sync-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"AGGS\": {\n      \"terms\": {\n        \"field\": \"Data.province.keyword\",\n        \"size\": 500\n      },\n      \"aggs\": {\n        \"Unique Users Synced\": {\n          \"scripted_metric\": {\n            \"params\": {\n              \"fieldName\": \"Data.userId.keyword\"\n            },\n            \"init_script\": \"state.list = []\",\n            \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n            \"combine_script\": \"return state.list;\",\n            \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n          }\n        }\n      }\n    }\n  }\n}"
@@ -526,7 +526,7 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.createdTime",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "user-sync-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"AGGS\": {\n      \"terms\": {\n        \"field\": \"Data.district.keyword\",\n        \"size\": 500\n      },\n      \"aggs\": {\n        \"Unique Users Synced\": {\n          \"scripted_metric\": {\n            \"params\": {\n              \"fieldName\": \"Data.userId.keyword\"\n            },\n            \"init_script\": \"state.list = []\",\n            \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n            \"combine_script\": \"return state.list;\",\n            \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n          }\n        }\n      }\n    }\n  }\n}"
@@ -3949,7 +3949,7 @@
     "filterKeys": [],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "householdsCoverageHeatMapAp",
+    "drillChart": "none",
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Administrative Province",
@@ -4234,7 +4234,7 @@
     "filterKeys": [],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "populationCoverageHeatMapAp",
+    "drillChart": "none",
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
@@ -5077,7 +5077,7 @@
     "filterKeys": [],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "bednetsCoverageHeatMapAp",
+    "drillChart": "none",
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Districts",
@@ -5994,7 +5994,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
         "indexName": "project-task-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"POINTS\": {\n          \"terms\": {\n            \"field\": \"Data.village.keyword\",\n            \"size\": 10000000\n          },\n          \"aggs\": {\n            \"LATITUDE\": {\n              \"avg\": {\n                \"field\": \"Data.latitude\"\n              }\n            },\n            \"LONGITUDE\": {\n              \"avg\": {\n                \"field\": \"Data.longitude\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"POINTS\": {\n          \"terms\": {\n            \"field\": \"Data.village.keyword\",\n            \"size\": 10000\n          },\n          \"aggs\": {\n            \"LATITUDE\": {\n              \"avg\": {\n                \"field\": \"Data.latitude\"\n              }\n            },\n            \"LONGITUDE\": {\n              \"avg\": {\n                \"field\": \"Data.longitude\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
@@ -6052,20 +6052,20 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
         "indexName": "project-task-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"POINTS\": {\n          \"terms\": {\n            \"field\": \"Data.id.keyword\",\n            \"size\": 10000000\n          },\n          \"aggs\": {\n            \"LATITUDE\": {\n              \"avg\": {\n                \"field\": \"Data.latitude\"\n              }\n            },\n            \"LONGITUDE\": {\n              \"avg\": {\n                \"field\": \"Data.longitude\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"POINTS\": {\n          \"terms\": {\n            \"field\": \"Data.village.keyword\",\n            \"size\": 10000\n          },\n          \"aggs\": {\n            \"LATITUDE\": {\n              \"avg\": {\n                \"field\": \"Data.latitude\"\n              }\n            },\n            \"LONGITUDE\": {\n              \"avg\": {\n                \"field\": \"Data.longitude\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
         "indexName": "project-task-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Total Households\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 1000\n          },\n          \"aggs\": {\n            \"Household Covered Count\" : {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Total Households\": {\n          \"terms\": {\n            \"field\": \"Data.administrativeProvince.keyword\",\n            \"size\": 1000\n          },\n          \"aggs\": {\n            \"Household Covered Count\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
     "filterKeys": [],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "householdsVisitedLatLongPointsAp",
+    "drillChart": "none",
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Households",
