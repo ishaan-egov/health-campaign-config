@@ -4106,20 +4106,6 @@
         "fields" : ["Total Population Covered","Overall Population Target"],
         "newField" : "Population Coverage",
         "_comments": ""
-      },
-      {
-        "postAggregationTheory" : "",
-        "actionName": "AdditiveComputedField",
-        "fields" : ["Start Date"],
-        "newField" : "startDate",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory" : "",
-        "actionName": "AdditiveComputedField",
-        "fields" : ["End Date"],
-        "newField" : "endDate",
-        "_comments": ""
       }
     ],
     "insight": {
