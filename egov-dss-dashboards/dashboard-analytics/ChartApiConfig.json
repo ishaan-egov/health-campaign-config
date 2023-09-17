@@ -4096,7 +4096,7 @@
         "dateRefField": "",
         "requestQueryMap": "",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"HOUSEHOLD\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.province.keyword\"\n              }\n            }\n          ],\n          \"must_not\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.district.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Project Start and End Dates\": {\n          \"terms\": {\n            \"field\": \"Data.province.keyword\"\n          },\n          \"aggs\": {\n            \"Start Date\": {\n              \"sum\": {\n                \"field\": \"Data.startDate\"\n              }\n            },\n            \"End Date\": {\n              \"sum\": {\n                \"field\": \"Data.startDate\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"HOUSEHOLD\"\n              }\n            },\n            {\n              \"exists\": {\n                \"field\": \"Data.province.keyword\"\n              }\n            }\n          ],\n          \"must_not\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.district.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Project Start and End Dates\": {\n          \"terms\": {\n            \"field\": \"Data.province.keyword\"\n          },\n          \"aggs\": {\n            \"Start Date\": {\n              \"sum\": {\n                \"field\": \"Data.startDate\"\n              }\n            },\n            \"End Date\": {\n              \"sum\": {\n                \"field\": \"Data.endDate\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
 
@@ -4122,6 +4122,20 @@
         "actionName": "PercentageComputedField",
         "fields" : ["Total Population Covered","Overall Population Target"],
         "newField" : "Population Coverage",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : ["Start Date"],
+        "newField" : "startDate",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : ["End Date"],
+        "newField" : "endDate",
         "_comments": ""
       }
     ],
@@ -5969,6 +5983,7 @@
     "documentType": "_doc",
     "action": "percentage",
     "filterKeys": [{"key": "district"}],
+    "sort": "sortKeyAsc",
     "aggregationPaths": ["Sync Rate Percentage","AGGS"],
     "insight": { },
     "_comment": " "
@@ -5982,7 +5997,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
         "indexName": "user-sync-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"Sync Rate Percentage\": {\n      \"terms\": {\n        \"field\": \"Data.administrativeProvince.keyword\",\n        \"size\": 500\n      },\n      \"aggs\": {\n        \"Unique Users Synced\": {\n          \"scripted_metric\": {\n            \"params\": {\n              \"fieldName\": \"Data.userId.keyword\"\n            },\n            \"init_script\": \"state.list = []\",\n            \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n            \"combine_script\": \"return state.list;\",\n            \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"Synced Number\": {\n      \"terms\": {\n        \"field\": \"Data.administrativeProvince.keyword\",\n        \"size\": 500\n      },\n      \"aggs\": {\n        \"Unique Users Synced\": {\n          \"scripted_metric\": {\n            \"params\": {\n              \"fieldName\": \"Data.userId.keyword\"\n            },\n            \"init_script\": \"state.list = []\",\n            \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n            \"combine_script\": \"return state.list;\",\n            \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
@@ -5994,12 +6009,13 @@
     ],
     "chartType": "line",
     "isCumulative": false,
-    "valueType": "percentage",
+    "valueType": "number",
     "plotLabel": "none",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "percentage",
-    "aggregationPaths": ["Sync Rate Percentage","AGGS"],
+    "action": "",
+    "sort": "sortKeyAsc",
+    "aggregationPaths": ["Synced Number"],
     "insight": { },
     "_comment": " "
   },
