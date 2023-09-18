@@ -34,6 +34,14 @@
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
+                },
+                {
+                  "id": "nationalHouseholdCoverage",
+                  "name": "DSS_HEALTH_NATIONAL_TOTAL_HOUSEHOLD_COVERAGE",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
                 }
               ]
             },
@@ -60,6 +68,14 @@
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
+                },
+                {
+                  "id": "nationalPopulationCoverage",
+                  "name": "DSS_HEALTH_NATIONAL_TOTAL_POPULATION_COVERAGE",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
                 }
               ]
             },
@@ -82,6 +98,14 @@
                 {
                   "id": "totalDistributions",
                   "name": "DSS_HEALTH_NATIONAL_BED_NETS_DISTRIBUTED_TOTAL",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "nationalBednetsDistributedCoverage",
+                  "name": "DSS_HEALTH_NATIONAL_BED_NETS_DISTRIBUTED_COVERAGE",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -1853,38 +1877,6 @@
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
-              "id": 333,
-              "name": "DSS_HEALTH_WH_DISTRIBUTION_LATLONG",
-              "label": "DSS_HEALTH_WH_DISTRIBUTION_LATLONG",
-              "vizType": "latlong",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "warehouseDistributionLatLongPoints",
-                  "name": "DSS_HEALTH_WH_DISTRIBUTION_LATLONG",
-                  "code": "",
-                  "chartType": "points",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "warehouseDistributionLatLongTableAvlRcvdDispFacilities",
-                  "name": "DSS_HEALTH_WH_DISTRIBUTION_LATLONG",
-                  "code": "",
-                  "chartType": "table",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "row": 3,
-          "name": "DSS_HEALTH_INVENTORY",
-          "vizArray": [
-            {
               "id": 334,
               "name": "DSS_HEALTH_INVENTORY_SUMMARY_BY_AP",
               "label": "DSS_HEALTH_INVENTORY_SUMMARY_BY_AP",
@@ -1935,7 +1927,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "userSyncRateByDistrict",
+                  "id": "userSyncRateByAP",
                   "name": "DSS_HEALTH_SUPERVISION_USER_SYNC_RATE_BY_AP",
                   "code": "",
                   "chartType": "bar",
