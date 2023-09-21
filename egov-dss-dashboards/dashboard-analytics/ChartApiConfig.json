@@ -14,7 +14,6 @@
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
-    "filterForCurrentDay": true,
     "action": "",
     "aggregationPaths": [
       "Todays visits"
@@ -98,7 +97,6 @@
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
-    "filterForCurrentDay": true,
     "action": "",
     "aggregationPaths": [
       "Population Covered Today"
@@ -181,7 +179,6 @@
     "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
-    "filterForCurrentDay": true,
     "action": "",
     "aggregationPaths": [
       "Today Distributions"
@@ -4061,14 +4058,14 @@
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "",
         "indexName": "project-task-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"Todays visits\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n              }\n            },\n            {\n              \"range\": {\n                \"Data.@timestamp\": {\n                  \"gte\": \"now/d\",\n                  \"lte\": \"now\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Household Total Today\": {\n          \"terms\": {\n            \"field\": \"Data.province.keyword\",\n            \"min_doc_count\":0\n          },\n          \"aggs\": {\n            \"Total Households Visited Today\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"Todays Total visits\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Household Total Today\": {\n          \"terms\": {\n            \"field\": \"Data.province.keyword\",\n            \"min_doc_count\":0\n          },\n          \"aggs\": {\n            \"Total Count Households Visited Today\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "project-task-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGS\": {\n      \"filter\": {\n        \"bool\":{\n          \"must\": [\n              {\n                \"term\": {\n                    \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n                }\n              }\n            ]\n        }\n      },\n      \"aggs\": {\n        \"Household Total\": {\n          \"terms\": {\n            \"field\": \"Data.province.keyword\"\n          },\n          \"aggs\": {\n            \"Total Households Visited Cumulative\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGS\": {\n      \"filter\": {\n        \"bool\":{\n          \"must\": [\n              {\n                \"term\": {\n                    \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n                }\n              }\n            ]\n        }\n      },\n      \"aggs\": {\n        \"Household Total\": {\n          \"terms\": {\n            \"field\": \"Data.province.keyword\"\n          },\n          \"aggs\": {\n            \"Total Count Households Visited Cumulative\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
@@ -4106,10 +4103,24 @@
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Provinces",
-    "excludedColumns": ["Overall Population Target","Overall Household Target","Quantity","Total Population Covered", "End Date", "Start Date"],
+    "excludedColumns": ["Total Count Households Visited Cumulative","Total Count Households Visited Today","Overall Population Target","Overall Household Target","Quantity","Total Population Covered", "End Date", "Start Date"],
     "hideInsights": true,
     "hideHeaderDenomination": true,
     "computedFields": [
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : ["Total Count Households Visited Today"],
+        "newField" : "Total Households Visited Today",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : ["Total Count Households Visited Cumulative"],
+        "newField" : "Total Households Visited Cumulative",
+        "_comments": ""
+      },
       {
         "postAggregationTheory" : "",
         "actionName": "PercentageComputedField",
