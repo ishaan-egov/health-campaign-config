@@ -882,7 +882,7 @@
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
         "indexName": "project-task-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filters\": {\n        \"filters\": {\n          \"Total household not delivered\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"term\": {\n                    \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n                  }\n                },\n                {\n                  \"match_phrase\": {\n                    \"Data.productVariant\": \"PVAR\"\n                  }\n                }\n              ],\n              \"must_not\": [\n                {\n                  \"term\": {\n                    \"Data.deliveryComments.keyword\": \"Entrega com sucesso\"\n                  }\n                }\n              ]\n            }\n          }\n        }\n      },\n      \"aggs\": {\n        \"Not Delivered\": {\n          \"terms\": {\n            \"field\": \"Data.deliveryComments.keyword\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filters\": {\n        \"filters\": {\n          \"Total household not delivered\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"term\": {\n                    \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n                  }\n                },\n                {\n                  \"match_phrase\": {\n                    \"Data.productVariant\": \"PVAR\"\n                  }\n                }\n              ],\n              \"must_not\": [\n                {\n                  \"term\": {\n                    \"Data.deliveryComments.keyword\": \"Mais de 6 agregados familiares\"\n                  }\n                }\n              ]\n            }\n          }\n        }\n      },\n      \"aggs\": {\n        \"Not Delivered\": {\n          \"terms\": {\n            \"field\": \"Data.deliveryComments.keyword\"\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
     "chartType": "pie",
@@ -929,7 +929,7 @@
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\",\"district\":\"Data.district.keyword\"}",
         "indexName": "project-task-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filters\": {\n        \"filters\": {\n          \"Total household not delivered\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"term\": {\n                    \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n                  }\n                },\n                {\n                  \"match_phrase\": {\n                    \"Data.productVariant\": \"PVAR\"\n                  }\n                }\n              ],\n              \"must_not\": [\n                {\n                  \"term\": {\n                    \"Data.deliveryComments.keyword\": \"Entrega com sucesso\"\n                  }\n                }\n              ]\n            }\n          }\n        }\n      },\n      \"aggs\": {\n        \"Not Delivered\": {\n          \"terms\": {\n            \"field\": \"Data.deliveryComments.keyword\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filters\": {\n        \"filters\": {\n          \"Total household not delivered\": {\n            \"bool\": {\n              \"must\": [\n                {\n                  \"term\": {\n                    \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n                  }\n                },\n                {\n                  \"match_phrase\": {\n                    \"Data.productVariant\": \"PVAR\"\n                  }\n                }\n              ],\n              \"must_not\": [\n                {\n                  \"term\": {\n                    \"Data.deliveryComments.keyword\": \"Mais de 6 agregados familiares\"\n                  }\n                }\n              ]\n            }\n          }\n        }\n      },\n      \"aggs\": {\n        \"Not Delivered\": {\n          \"terms\": {\n            \"field\": \"Data.deliveryComments.keyword\"\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
     "chartType": "pie",
@@ -987,7 +987,7 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "Orientação nacional", "Insuficiência de redes", "Mais de 6 agregados familiares"
+      "Orientação nacional", "Insuficiência de redes"
     ],
     "filterKeys": [{"key": "district"}],
     "insight": {},
@@ -1013,7 +1013,7 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "Orientação nacional", "Insuficiência de redes", "Mais de 6 agregados familiares"
+      "Orientação nacional", "Insuficiência de redes"
     ],
     "filterKeys": [{"key": "administrativeProvince"}],
     "insight": {},
@@ -1039,7 +1039,7 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "Orientação nacional", "Insuficiência de redes", "Mais de 6 agregados familiares"
+      "Orientação nacional", "Insuficiência de redes"
     ],
     "filterKeys": [{"key": "locality"}],
     "insight": {},
@@ -1065,7 +1065,7 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "Orientação nacional", "Insuficiência de redes", "Mais de 6 agregados familiares"
+      "Orientação nacional", "Insuficiência de redes"
     ],
     "insight": {},
     "_comment": " "
