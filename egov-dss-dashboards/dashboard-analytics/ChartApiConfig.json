@@ -454,7 +454,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "project-staff-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGS\": {\n      \"terms\": {\n        \"field\": \"Data.province.keyword\",\n        \"size\": 500\n      },\n      \"aggs\": {\n        \"Total Users Created\": {\n          \"value_count\": {\n            \"field\": \"Data.userId.keyword\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"filter\": {\n        \"bool\": {\n          \"must_not\": [\n            {\n              \"terms\": {\n                \"Data.district.keyword\": [\n                  \"chifunde\",\n                  \"zumbo\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.province.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Total Users Created\": {\n              \"value_count\": {\n                \"field\": \"Data.userId.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
