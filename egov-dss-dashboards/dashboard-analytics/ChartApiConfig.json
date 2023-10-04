@@ -5520,6 +5520,29 @@
     "sort": "sortKeyAsc",
     "_comment": " "
   },
+  "twentyFourDistricts": {
+    "chartName": "DSS_HEALTH_TWENTY_FOUR_DISTRICTS",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\", \"selectedStack\": \"Data.service.serviceCode.keyword\"}",
+        "indexName": "test-districts",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"terms\": {\n        \"field\": \"Data.district.keyword\",\n        \"size\": 100,\n        \"order\": {\n          \"_key\": \"asc\"\n        }\n      },\n      \"aggs\": {\n        \"NAME\": {\n          \"value_count\": {\n            \"field\": \"Data.id.keyword\"\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "plotLabel": "none",
+    "drillChart": "",
+    "filterKeys": [{"key": "district"}],
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": ["NAME"],
+    "insight": { },
+    "_comment": " "
+  },
   "InventorySummaryByWarehouse": {
     "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_WAREHOUSE",
     "queries": [

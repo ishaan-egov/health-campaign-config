@@ -216,6 +216,24 @@
                   "headers": []
                 }
               ]
+            },
+            {
+              "id": 234,
+              "name": "DSS_HEALTH_TWENTY_FOUR_DISTRICTS",
+              "label": "DSS_HEALTH_TWENTY_FOUR_DISTRICTS",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "twentyFourDistricts",
+                  "name": "DSS_HEALTH_TWENTY_FOUR_DISTRICTS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
             }
           ]
         }
