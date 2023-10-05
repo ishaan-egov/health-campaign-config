@@ -234,6 +234,24 @@
                   "headers": []
                 }
               ]
+            },
+            {
+              "id": 235,
+              "name": "DSS_HEALTH_SUPERVISION_SUMMARY_BY",
+              "label": "DSS_HEALTH_SUPERVISION_SUMMARY_BY",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "supervisionSummary",
+                  "name": "DSS_HEALTH_SUPERVISION_SUMMARY_BY",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
             }
           ]
         }

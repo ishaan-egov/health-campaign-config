@@ -5543,6 +5543,101 @@
     "insight": { },
     "_comment": " "
   },
+  "supervisionSummary": {
+    "chartName": "DSS_HEALTH_SUPERVISION_SUMMARY_BY",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "test-cl-index",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*AS_MONITOR_TRAINING*\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled AS\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "project-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"AS_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.createdBy.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Targeted AS\": {\n              \"sum\": {\n                \"field\": \"Data.overallTarget\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "test-cl-index",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*LM_TRAINING*\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled LM\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "project-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"LM_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.createdBy.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Targeted LM\": {\n              \"sum\": {\n                \"field\": \"Data.overallTarget\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "UserName",
+    "filterKeys": [
+      {"key": "district", "column": "Inventory summary By District"}
+    ],
+    "divisorFields": [],
+    "showFooter": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "excludedColumns": ["CLs Filled AS","CLs Targeted AS","CLs Filled LM","CLs Targeted LM"],
+    "computedFields": [
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Filled AS" ],
+        "newField" : "Checklists Filled Count AS",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Targeted AS" ],
+        "newField" : "Checklists Targeted AS",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "PercentageComputedField",
+        "fields" : [ "Checklists Filled Count AS",  "Checklists Targeted AS"],
+        "newField" : "Checklists Filled Percentage AS",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Filled LM" ],
+        "newField" : "Checklists Filled Count LM",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Targeted LM" ],
+        "newField" : "Checklists Targeted LM",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "PercentageComputedField",
+        "fields" : [ "Checklists Filled Count LM",  "Checklists Targeted LM"],
+        "newField" : "Checklists Filled Percentage LM",
+        "_comments": ""
+      }
+    ],
+    "insight": {
+    },
+    "sort": "sortKeyAsc",
+    "_comment": " "
+  },
   "InventorySummaryByWarehouse": {
     "chartName": "DSS_HEALTH_INVENTORY_SUMMARY_BY_WAREHOUSE",
     "queries": [
