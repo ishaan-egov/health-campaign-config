@@ -38,8 +38,8 @@ ServiceMaps:
                 outJsonPath: $.Data.locality
               - inJsonPath: $.village
                 outJsonPath: $.Data.village
-              - inJsonPath: $.clientAuditDetails
-                outJsonPath: $.Data.clientAuditDetails
+              - inJsonPath: $.createdTime
+                outJsonPath: $.Data.clientCreatedTime
               - inJsonPath: $.syncedTime
                 outJsonPath: $.Data.syncedTime
           timeStampField: $.clientAuditDetails.createdTime
