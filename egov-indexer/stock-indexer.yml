@@ -42,4 +42,8 @@ ServiceMaps:
                 outJsonPath: $.Data.latitude
               - inJsonPath: $.longitude
                 outJsonPath: $.Data.longitude
+              - inJsonPath: $.clientAuditDetails
+                outJsonPath: $.Data.clientAuditDetails
+              - inJsonPath: $.syncedTime
+                outJsonPath: $.Data.syncedTime
           timeStampField: $.clientAuditDetails.createdTime
