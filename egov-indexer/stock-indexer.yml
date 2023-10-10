@@ -5,6 +5,17 @@ ServiceMaps:
     - topic: transformer-producer-bulk-stock-index-v1-topic
       configKey: INDEX
       indexes:
+        - name: stock-index-v1
+          type: stock
+          id: $.clientReferenceId,$.tenantId
+          isBulk: true
+          jsonPath: $
+          customJsonMapping:
+            indexMapping: { "Data": { } }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+          timeStampField: $.clientAuditDetails.createdTime
         - name: user-sync-index-v1
           type: users
           id: $.id
