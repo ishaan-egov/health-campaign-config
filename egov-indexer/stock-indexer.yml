@@ -40,17 +40,6 @@ ServiceMaps:
               - inJsonPath: $.syncedTime
                 outJsonPath: $.Data.syncedTime
           timeStampField: $.clientAuditDetails.createdTime
-        - name: stock-index-v1
-          type: stock
-          id: $.clientReferenceId,$.tenantId
-          isBulk: true
-          jsonPath: $
-          customJsonMapping:
-            indexMapping: { "Data": { } }
-            fieldMapping:
-              - inJsonPath: $
-                outJsonPath: $.Data
-          timeStampField: $.clientAuditDetails.createdTime
 
     - topic: save-stock-reconciliation-topic
       configKey: INDEX
