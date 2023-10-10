@@ -50,7 +50,7 @@ ServiceMaps:
                 outJsonPath: $.Data.clientCreatedTime
               - inJsonPath: $.syncedTime
                 outJsonPath: $.Data.syncedTime
-          timeStampField: $.clientAuditDetails.createdTime
+          timeStampField: $.Data.clientAuditDetails.createdTime
 
     - topic: save-stock-reconciliation-topic
       configKey: INDEX
