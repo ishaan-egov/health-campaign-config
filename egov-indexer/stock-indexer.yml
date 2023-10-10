@@ -51,3 +51,14 @@ ServiceMaps:
               - inJsonPath: $.syncedTime
                 outJsonPath: $.Data.syncedTime
           timeStampField: $.clientAuditDetails.createdTime
+
+    - topic: save-stock-reconciliation-topic
+      configKey: INDEX
+      indexes:
+        - name: stock-reconciliation-index-v1
+          type: reconciliation
+          id: $.id
+          isBulk: true
+          jsonPath: $.*
+          timeStampField: $.auditDetails.createdTime
+
