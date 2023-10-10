@@ -26,6 +26,10 @@ ServiceMaps:
             fieldMapping:
               - inJsonPath: $.createdBy
                 outJsonPath: $.Data.userId
+              - inJsonPath: $.userName
+                outJsonPath: $.Data.userName
+              - inJsonPath: $.role
+                outJsonPath: $.Data.role
               - inJsonPath: $.createdTime
                 outJsonPath: $.Data.createdTime
               - inJsonPath: $.province

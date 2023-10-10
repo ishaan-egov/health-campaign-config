@@ -26,6 +26,10 @@ ServiceMaps:
             fieldMapping:
               - inJsonPath: $.lastModifiedBy
                 outJsonPath: $.Data.userId
+              - inJsonPath: $.userName
+                outJsonPath: $.Data.userName
+              - inJsonPath: $.role
+                outJsonPath: $.Data.role
               - inJsonPath: $.lastModifiedTime
                 outJsonPath: $.Data.createdTime
               - inJsonPath: $.province
