@@ -446,6 +446,54 @@
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
+              "id": 210,
+              "name": "DSS_HEALTH_USER_SYNC_BY_DISTRIBUTORS",
+              "label": "DSS_HEALTH_USER_SYNC_BY_DISTRIBUTORS",
+              "vizType": "bannercard",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "userSyncByDistributorsProvince",
+                  "name": "DSS_HEALTH_USER_SYNC_BY_DISTRIBUTORS",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
+          "vizArray": [
+            {
+              "id": 2100,
+              "name": "DSS_HEALTH_USER_SYNC_BY_DISTRIBUTORS_BAR_CHART",
+              "label": "DSS_HEALTH_USER_SYNC_BY_DISTRIBUTORS_BAR_CHART",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "userSyncByDistributorsProvinceBarChart",
+                  "name": "DSS_HEALTH_USER_SYNC_BY_DISTRIBUTORS_BAR_CHART",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
+          "vizArray": [
+            {
               "id": 211,
               "name": "DSS_HEALTH_HOUSEHOLDS_COVERED_RD",
               "label": "DSS_HEALTH_HOUSEHOLDS_COVERED_RD",
@@ -504,7 +552,7 @@
           ]
         },
         {
-          "row": 2,
+          "row": 4,
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
@@ -556,7 +604,7 @@
           ]
         },
         {
-          "row": 3,
+          "row": 5,
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
@@ -617,7 +665,7 @@
           ]
         },
         {
-          "row": 4,
+          "row": 6,
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
@@ -660,7 +708,7 @@
           ]
         },
         {
-          "row": 5,
+          "row": 7,
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
@@ -684,7 +732,7 @@
           ]
         },
         {
-          "row": 6,
+          "row": 8,
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
@@ -906,6 +954,102 @@
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
+              "id": 2300,
+              "name": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS",
+              "label": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS",
+              "vizType": "bannercard",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "userSyncByWmsProvince",
+                  "name": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_HEALTH_INVENTORY",
+          "vizArray": [
+            {
+              "id": 2301,
+              "name": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS_BAR_CHART",
+              "label": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS_BAR_CHART",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "userSyncByWmsProvinceBarChart",
+                  "name": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS_BAR_CHART",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "name": "DSS_HEALTH_INVENTORY",
+          "vizArray": [
+            {
+              "id": 2302,
+              "name": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS",
+              "label": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS",
+              "vizType": "bannercard",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "userSyncByLmsProvince",
+                  "name": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "name": "DSS_HEALTH_INVENTORY",
+          "vizArray": [
+            {
+              "id": 2303,
+              "name": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS_BAR_CHART",
+              "label": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS_BAR_CHART",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "userSyncByLmsProvinceBarChart",
+                  "name": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS_BAR_CHART",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 5,
+          "name": "DSS_HEALTH_INVENTORY",
+          "vizArray": [
+            {
               "id": 231,
               "name": "DSS_HEALTH_DAYS_INVENTORY_CAN_LAST",
               "label": "DSS_HEALTH_DAYS_INVENTORY_CAN_LAST",
@@ -944,7 +1088,7 @@
           ]
         },
         {
-          "row": 2,
+          "row": 6,
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
@@ -1008,7 +1152,7 @@
           ]
         },
         {
-          "row": 3,
+          "row": 7,
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
@@ -1032,7 +1176,55 @@
           ]
         },
         {
-          "row" : 1,
+          "row": 1,
+          "name": "DSS_HEALTH_SUPERVISION",
+          "vizArray": [
+            {
+              "id": 2400,
+              "name": "DSS_HEALTH_USER_SYNC_BY_SUPERVISORS",
+              "label": "DSS_HEALTH_USER_SYNC_BY_SUPERVISORS",
+              "vizType": "bannercard",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "userSyncBySupervisorsProvince",
+                  "name": "DSS_HEALTH_USER_SYNC_BY_SUPERVISORS",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_HEALTH_SUPERVISION",
+          "vizArray": [
+            {
+              "id": 2401,
+              "name": "DSS_HEALTH_USER_SYNC_BY_SUPERVISORS_BAR_CHART",
+              "label": "DSS_HEALTH_USER_SYNC_BY_SUPERVISORS_BAR_CHART",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "userSyncBySupervisorsProvinceBarChart",
+                  "name": "DSS_HEALTH_USER_SYNC_BY_SUPERVISORS_BAR_CHART",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row" : 3,
           "name": "DSS_HEALTH_SUPERVISION",
           "vizArray": [
             {
@@ -1074,7 +1266,7 @@
           ]
         },
         {
-          "row": 2,
+          "row": 4,
           "name": "DSS_HEALTH_SUPERVISION",
           "vizArray": [
             {
@@ -1375,6 +1567,54 @@
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
+              "id": 310,
+              "name": "DSS_HEALTH_USER_SYNC_BY_DISTRIBUTORS",
+              "label": "DSS_HEALTH_USER_SYNC_BY_DISTRIBUTORS",
+              "vizType": "bannercard",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "userSyncByDistributorsDistrict",
+                  "name": "DSS_HEALTH_USER_SYNC_BY_DISTRIBUTORS",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
+          "vizArray": [
+            {
+              "id": 3100,
+              "name": "DSS_HEALTH_USER_SYNC_BY_DISTRIBUTORS_BAR_CHART",
+              "label": "DSS_HEALTH_USER_SYNC_BY_DISTRIBUTORS_BAR_CHART",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "userSyncByDistributorsDistrictBarChart",
+                  "name": "DSS_HEALTH_USER_SYNC_BY_DISTRIBUTORS_BAR_CHART",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
+          "vizArray": [
+            {
               "id": 311,
               "name": "DSS_HEALTH_HOUSEHOLDS_COVERED_RD",
               "label": "DSS_HEALTH_HOUSEHOLDS_COVERED_RD",
@@ -1433,7 +1673,7 @@
           ]
         },
         {
-          "row": 2,
+          "row": 4,
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
@@ -1485,7 +1725,7 @@
           ]
         },
         {
-          "row": 3,
+          "row": 5,
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
@@ -1546,7 +1786,7 @@
           ]
         },
         {
-          "row": 3,
+          "row": 6,
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
@@ -1589,7 +1829,7 @@
           ]
         },
         {
-          "row": 4,
+          "row": 7,
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
@@ -1613,7 +1853,7 @@
           ]
         },
         {
-          "row": 5,
+          "row": 8,
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
@@ -1835,6 +2075,102 @@
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
+              "id": 3300,
+              "name": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS",
+              "label": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS",
+              "vizType": "bannercard",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "userSyncByWmsDistrict",
+                  "name": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_HEALTH_INVENTORY",
+          "vizArray": [
+            {
+              "id": 3301,
+              "name": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS_BAR_CHART",
+              "label": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS_BAR_CHART",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "userSyncByWmsDistrictBarChart",
+                  "name": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS_BAR_CHART",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "name": "DSS_HEALTH_INVENTORY",
+          "vizArray": [
+            {
+              "id": 3302,
+              "name": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS",
+              "label": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS",
+              "vizType": "bannercard",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "userSyncByLmsDistrict",
+                  "name": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "name": "DSS_HEALTH_INVENTORY",
+          "vizArray": [
+            {
+              "id": 3303,
+              "name": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS_BAR_CHART",
+              "label": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS_BAR_CHART",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "userSyncByLmsDistrictBarChart",
+                  "name": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS_BAR_CHART",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 5,
+          "name": "DSS_HEALTH_INVENTORY",
+          "vizArray": [
+            {
               "id": 331,
               "name": "DSS_HEALTH_DAYS_INVENTORY_CAN_LAST",
               "label": "DSS_HEALTH_DAYS_INVENTORY_CAN_LAST",
@@ -1873,7 +2209,7 @@
           ]
         },
         {
-          "row": 2,
+          "row": 6,
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
@@ -1897,7 +2233,55 @@
           ]
         },
         {
-          "row" : 1,
+          "row": 1,
+          "name": "DSS_HEALTH_SUPERVISION",
+          "vizArray": [
+            {
+              "id": 3400,
+              "name": "DSS_HEALTH_USER_SYNC_BY_SUPERVISORS",
+              "label": "DSS_HEALTH_USER_SYNC_BY_SUPERVISORS",
+              "vizType": "bannercard",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "userSyncBySupervisorsDistrict",
+                  "name": "DSS_HEALTH_USER_SYNC_BY_SUPERVISORS",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_HEALTH_SUPERVISION",
+          "vizArray": [
+            {
+              "id": 3401,
+              "name": "DSS_HEALTH_USER_SYNC_BY_SUPERVISORS_BAR_CHART",
+              "label": "DSS_HEALTH_USER_SYNC_BY_SUPERVISORS_BAR_CHART",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "userSyncBySupervisorsDistrictBarChart",
+                  "name": "DSS_HEALTH_USER_SYNC_BY_SUPERVISORS_BAR_CHART",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row" : 3,
           "name": "DSS_HEALTH_SUPERVISION",
           "vizArray": [
             {
@@ -1939,7 +2323,7 @@
           ]
         },
         {
-          "row": 2,
+          "row": 4,
           "name": "DSS_HEALTH_SUPERVISION",
           "vizArray": [
             {
