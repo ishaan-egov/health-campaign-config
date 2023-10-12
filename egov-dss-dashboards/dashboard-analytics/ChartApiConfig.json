@@ -454,14 +454,14 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "project-staff-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGS\": {\n      \"terms\": {\n        \"field\": \"Data.province.keyword\",\n        \"size\": 500\n      },\n      \"aggs\": {\n        \"Total Users Created\": {\n          \"value_count\": {\n            \"field\": \"Data.userId.keyword\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"terms\": {\n                \"Data.role.keyword\": [\n                  \"DISTRIBUTOR\",\n                  \"WAREHOUSE_MANAGER\",\n                  \"LOCAL_MONITOR\",\n                  \"NATIONAL_SUPERVISOR\",\n                  \"DISTRICT_SUPERVISOR\",\n                  \"PROVINCIAL_SUPERVISOR\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.province.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Total Users Created\": {\n              \"value_count\": {\n                \"field\": \"Data.userId.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "user-sync-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGS\": {\n      \"terms\": {\n        \"field\": \"Data.province.keyword\",\n        \"size\": 500\n      },\n      \"aggs\": {\n        \"Unique Users Synced\": {\n          \"scripted_metric\": {\n            \"params\": {\n              \"fieldName\": \"Data.userId.keyword\"\n            },\n            \"init_script\": \"state.list = []\",\n            \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n            \"combine_script\": \"return state.list;\",\n            \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"terms\": {\n                \"Data.role.keyword\": [\n                  \"DISTRIBUTOR\",\n                  \"WAREHOUSE_MANAGER\",\n                  \"LOCAL_MONITOR\",\n                  \"NATIONAL_SUPERVISOR\",\n                  \"DISTRICT_SUPERVISOR\",\n                  \"PROVINCIAL_SUPERVISOR\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.province.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
     "filterKeys": [
@@ -509,6 +509,397 @@
     },
     "hideInsights": true,
     "hideHeaderDenomination": true,
+    "_comment": " "
+  },
+  "userSyncByDistributorsProvince": {
+    "chartName": "DSS_HEALTH_USER_SYNC_BY_DISTRIBUTORS",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "project-staff-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"DISTRIBUTOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.province.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Total Users Created\": {\n              \"value_count\": {\n                \"field\": \"Data.userId.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"DISTRIBUTOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.province.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      } \n    }\n  }\n}"
+      }
+    ],
+    "filterKeys": [
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "DATA SYNC",
+    "excludedColumns": [
+      "S.N.", "DATA SYNC", "Total Users Created","Unique Users Synced"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Users Created"
+        ],
+        "newField": "Total_Users_Created",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Unique Users Synced"
+        ],
+        "newField": "Unique_Users_Synced",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Unique_Users_Synced",
+          "Total_Users_Created"
+        ],
+        "newField": "User_Sync_Rate",
+        "_comments": ""
+      }
+    ],
+    "insight": {
+    },
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": " "
+  },
+  "userSyncByDistributorsProvinceBarChart": {
+    "chartName": "DSS_HEALTH_USER_SYNC_BY_DISTRIBUTORS_BAR_CHART",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"DISTRIBUTOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Sync Rate Percentage\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "project-staff-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"DISTRIBUTOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Total Users Created\": {\n              \"value_count\": {\n                \"field\": \"Data.userId.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "percentage",
+    "plotLabel": "none",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "filterKeys": [{"key": "district"}],
+    "sort": "sortKeyAsc",
+    "aggregationPaths": ["Sync Rate Percentage","AGGS"],
+    "insight": { },
+    "_comment": " "
+  },
+  "userSyncByWmsProvince": {
+    "chartName": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "project-staff-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"WAREHOUSE_MANAGER\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.province.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Total Users Created\": {\n              \"value_count\": {\n                \"field\": \"Data.userId.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"WAREHOUSE_MANAGER\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.province.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      } \n    }\n  }\n}"
+      }
+    ],
+    "filterKeys": [
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "DATA SYNC",
+    "excludedColumns": [
+      "S.N.", "DATA SYNC", "Total Users Created","Unique Users Synced"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Users Created"
+        ],
+        "newField": "Total_Users_Created",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Unique Users Synced"
+        ],
+        "newField": "Unique_Users_Synced",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Unique_Users_Synced",
+          "Total_Users_Created"
+        ],
+        "newField": "User_Sync_Rate",
+        "_comments": ""
+      }
+    ],
+    "insight": {
+    },
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": " "
+  },
+  "userSyncByWmsProvinceBarChart": {
+    "chartName": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS_BAR_CHART",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"WAREHOUSE_MANAGER\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Sync Rate Percentage\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "project-staff-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"WAREHOUSE_MANAGER\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Total Users Created\": {\n              \"value_count\": {\n                \"field\": \"Data.userId.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "percentage",
+    "plotLabel": "none",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "filterKeys": [{"key": "district"}],
+    "sort": "sortKeyAsc",
+    "aggregationPaths": ["Sync Rate Percentage","AGGS"],
+    "insight": { },
+    "_comment": " "
+  },
+  "userSyncByLmsProvince": {
+    "chartName": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "project-staff-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"LOCAL_MONITOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.province.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Total Users Created\": {\n              \"value_count\": {\n                \"field\": \"Data.userId.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"LOCAL_MONITOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.province.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      } \n    }\n  }\n}"
+      }
+    ],
+    "filterKeys": [
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "DATA SYNC",
+    "excludedColumns": [
+      "S.N.", "DATA SYNC", "Total Users Created","Unique Users Synced"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Users Created"
+        ],
+        "newField": "Total_Users_Created",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Unique Users Synced"
+        ],
+        "newField": "Unique_Users_Synced",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Unique_Users_Synced",
+          "Total_Users_Created"
+        ],
+        "newField": "User_Sync_Rate",
+        "_comments": ""
+      }
+    ],
+    "insight": {
+    },
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": " "
+  },
+  "userSyncByLmsProvinceBarChart": {
+    "chartName": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS_BAR_CHART",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"LOCAL_MONITOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Sync Rate Percentage\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "project-staff-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"LOCAL_MONITOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Total Users Created\": {\n              \"value_count\": {\n                \"field\": \"Data.userId.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "percentage",
+    "plotLabel": "none",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "filterKeys": [{"key": "district"}],
+    "sort": "sortKeyAsc",
+    "aggregationPaths": ["Sync Rate Percentage","AGGS"],
+    "insight": { },
+    "_comment": " "
+  },
+  "userSyncBySupervisorsProvince": {
+    "chartName": "DSS_HEALTH_USER_SYNC_BY_SUPERVISORS",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "project-staff-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"terms\": {\n                \"Data.role.keyword\": [\n                  \"NATIONAL_SUPERVISOR\",\n                  \"PROVINCIAL_SUPERVISOR\",\n                  \"DISTRICT_SUPERVISOR\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.province.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Total Users Created\": {\n              \"value_count\": {\n                \"field\": \"Data.userId.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"terms\": {\n                \"Data.role.keyword\": [\n                  \"NATIONAL_SUPERVISOR\",\n                  \"PROVINCIAL_SUPERVISOR\",\n                  \"DISTRICT_SUPERVISOR\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.province.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      } \n    }\n  }\n}"
+      }
+    ],
+    "filterKeys": [
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "DATA SYNC",
+    "excludedColumns": [
+      "S.N.", "DATA SYNC", "Total Users Created","Unique Users Synced"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Users Created"
+        ],
+        "newField": "Total_Users_Created",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Unique Users Synced"
+        ],
+        "newField": "Unique_Users_Synced",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Unique_Users_Synced",
+          "Total_Users_Created"
+        ],
+        "newField": "User_Sync_Rate",
+        "_comments": ""
+      }
+    ],
+    "insight": {
+    },
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": " "
+  },
+  "userSyncBySupervisorsProvinceBarChart": {
+    "chartName": "DSS_HEALTH_USER_SYNC_BY_SUPERVISORS_BAR_CHART",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"NATIONAL_SUPERVISOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"National Supervisors Synced\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"PROVINCIAL_SUPERVISOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Provincial Supervisors Synced\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"DISTRICT_SUPERVISOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"District Supervisors Synced\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "action": "",
+    "plotLabel": "none",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "filterKeys": [{"key": "district"}],
+    "sort": "sortKeyAsc",
+    "aggregationPaths": ["National Supervisors Synced", "Provincial Supervisors Synced" ,"District Supervisors Synced"],
+    "insight": { },
     "_comment": " "
   },
   "userSyncSummaryDistrict": {
@@ -574,6 +965,376 @@
     },
     "hideInsights": true,
     "hideHeaderDenomination": true,
+    "_comment": " "
+  },
+  "userSyncByDistributorsDistrict": {
+    "chartName": "DSS_HEALTH_USER_SYNC_BY_DISTRIBUTORS",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "project-staff-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"DISTRIBUTOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Total Users Created\": {\n              \"value_count\": {\n                \"field\": \"Data.userId.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"DISTRIBUTOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      } \n    }\n  }\n}"
+      }
+    ],
+    "filterKeys": [
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "DATA SYNC",
+    "excludedColumns": [
+      "S.N.", "DATA SYNC", "Total Users Created","Unique Users Synced"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Users Created"
+        ],
+        "newField": "Total_Users_Created",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Unique Users Synced"
+        ],
+        "newField": "Unique_Users_Synced",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Unique_Users_Synced",
+          "Total_Users_Created"
+        ],
+        "newField": "User_Sync_Rate",
+        "_comments": ""
+      }
+    ],
+    "insight": {
+    },
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": " "
+  },
+  "userSyncByDistributorsDistrictBarChart": {
+    "chartName": "DSS_HEALTH_USER_SYNC_BY_DISTRIBUTORS_BAR_CHART",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"DISTRIBUTOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Users Synced Count\": {\n          \"terms\": {\n            \"field\": \"Data.administrativeProvince.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "plotLabel": "none",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "filterKeys": [{"key": "district"}],
+    "sort": "sortKeyAsc",
+    "aggregationPaths": ["Users Synced Count"],
+    "insight": { },
+    "_comment": " "
+  },
+  "userSyncByWmsDistrict": {
+    "chartName": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "project-staff-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"WAREHOUSE_MANAGER\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Total Users Created\": {\n              \"value_count\": {\n                \"field\": \"Data.userId.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"WAREHOUSE_MANAGER\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      } \n    }\n  }\n}"
+      }
+    ],
+    "filterKeys": [
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "DATA SYNC",
+    "excludedColumns": [
+      "S.N.", "DATA SYNC", "Total Users Created","Unique Users Synced"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Users Created"
+        ],
+        "newField": "Total_Users_Created",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Unique Users Synced"
+        ],
+        "newField": "Unique_Users_Synced",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Unique_Users_Synced",
+          "Total_Users_Created"
+        ],
+        "newField": "User_Sync_Rate",
+        "_comments": ""
+      }
+    ],
+    "insight": {
+    },
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": " "
+  },
+  "userSyncByWmsDistrictBarChart": {
+    "chartName": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS_BAR_CHART",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"WAREHOUSE_MANAGER\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Synced Users Count\": {\n          \"terms\": {\n            \"field\": \"Data.administrativeProvince.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "plotLabel": "none",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "filterKeys": [{"key": "district"}],
+    "sort": "sortKeyAsc",
+    "aggregationPaths": ["Synced Users Count"],
+    "insight": { },
+    "_comment": " "
+  },
+  "userSyncByLmsDistrict": {
+    "chartName": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "project-staff-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"LOCAL_MONITOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Total Users Created\": {\n              \"value_count\": {\n                \"field\": \"Data.userId.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"LOCAL_MONITOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      } \n    }\n  }\n}"
+      }
+    ],
+    "filterKeys": [
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "DATA SYNC",
+    "excludedColumns": [
+      "S.N.", "DATA SYNC", "Total Users Created","Unique Users Synced"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Users Created"
+        ],
+        "newField": "Total_Users_Created",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Unique Users Synced"
+        ],
+        "newField": "Unique_Users_Synced",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Unique_Users_Synced",
+          "Total_Users_Created"
+        ],
+        "newField": "User_Sync_Rate",
+        "_comments": ""
+      }
+    ],
+    "insight": {
+    },
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": " "
+  },
+  "userSyncByLmsDistrictBarChart": {
+    "chartName": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS_BAR_CHART",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"LOCAL_MONITOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Synced Users Count\": {\n          \"terms\": {\n            \"field\": \"Data.administrativeProvince.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "plotLabel": "none",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "filterKeys": [{"key": "district"}],
+    "sort": "sortKeyAsc",
+    "aggregationPaths": ["Synced Users Count"],
+    "insight": { },
+    "_comment": " "
+  },
+  "userSyncBySupervisorsDistrict": {
+    "chartName": "DSS_HEALTH_USER_SYNC_BY_SUPERVISORS",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "project-staff-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"terms\": {\n                \"Data.role.keyword\": [\n                  \"NATIONAL_SUPERVISOR\",\n                  \"PROVINCIAL_SUPERVISOR\",\n                  \"DISTRICT_SUPERVISOR\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Total Users Created\": {\n              \"value_count\": {\n                \"field\": \"Data.userId.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"terms\": {\n                \"Data.role.keyword\": [\n                  \"NATIONAL_SUPERVISOR\",\n                  \"PROVINCIAL_SUPERVISOR\",\n                  \"DISTRICT_SUPERVISOR\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      } \n    }\n  }\n}"
+      }
+    ],
+    "filterKeys": [
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "DATA SYNC",
+    "excludedColumns": [
+      "S.N.", "DATA SYNC", "Total Users Created","Unique Users Synced"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Total Users Created"
+        ],
+        "newField": "Total_Users_Created",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [
+          "Unique Users Synced"
+        ],
+        "newField": "Unique_Users_Synced",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": [
+          "Unique_Users_Synced",
+          "Total_Users_Created"
+        ],
+        "newField": "User_Sync_Rate",
+        "_comments": ""
+      }
+    ],
+    "insight": {
+    },
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": " "
+  },
+  "userSyncBySupervisorsDistrictBarChart": {
+    "chartName": "DSS_HEALTH_USER_SYNC_BY_SUPERVISORS_BAR_CHART",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"NATIONAL_SUPERVISOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"National Supervisors Synced\": {\n          \"terms\": {\n            \"field\": \"Data.administrativeProvince.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"PROVINCIAL_SUPERVISOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Provincial Supervisors Synced\": {\n          \"terms\": {\n            \"field\": \"Data.administrativeProvince.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": \"DISTRICT_SUPERVISOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"District Supervisors Synced\": {\n          \"terms\": {\n            \"field\": \"Data.administrativeProvince.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Unique Users Synced\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+    "chartType": "line",
+    "isCumulative": false,
+    "valueType": "number",
+    "action": "",
+    "plotLabel": "none",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "filterKeys": [{"key": "district"}],
+    "sort": "sortKeyAsc",
+    "aggregationPaths": ["National Supervisors Synced", "Provincial Supervisors Synced" ,"District Supervisors Synced"],
+    "insight": { },
     "_comment": " "
   },
   "bednetsTargetProvince": {
