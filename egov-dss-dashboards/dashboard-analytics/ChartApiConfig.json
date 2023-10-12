@@ -5644,8 +5644,23 @@
     "showFooter": false,
     "hideInsights": true,
     "hideHeaderDenomination": true,
-    "excludedColumns": ["CLs Filled AS","CLs Targeted AS","CLs Filled LM","CLs Targeted LM"],
-    "includeConstantColumns": ["CLs Targeted AS", "CLs Targeted LM"],
+    "excludedColumns": [
+      "CLs Filled AS",
+      "CLs Targeted AS",
+      "CLs Targeted LM",
+      "CLs Targeted DMT",
+      "CLs Targeted RB",
+      "CLs Targeted RTT",
+      "CLs Targeted SM"
+    ],
+    "includeConstantColumns": [
+      "CLs Targeted AS",
+      "CLs Targeted LM",
+      "CLs Targeted DMT",
+      "CLs Targeted RB",
+      "CLs Targeted RTT",
+      "CLs Targeted SM"
+    ],
     "computedFields": [
       {
         "postAggregationTheory" : "",
@@ -5771,6 +5786,580 @@
         "actionName": "PercentageComputedField",
         "fields" : [ "Checklists Filled Count SM",  "Checklists Targeted SM"],
         "newField" : "Checklists Filled Percentage SM",
+        "_comments": ""
+      }
+    ],
+    "insight": {
+    },
+    "sort": "sortKeyAsc",
+    "_comment": " "
+  },
+  "supervisionSummaryProvincialSupervisor": {
+    "chartName": "DSS_HEALTH_SUPERVISION_SUMMARY_PROVINCIAL_SUPERVISOR",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "test-cl-index",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"District Wise Filled Count\": {\n      \"terms\": {\n        \"field\": \"Data.district.keyword\",\n        \"size\": 10\n      },\n      \"aggs\": {\n        \"AS Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*AS_MONITORING.PROVINCIAL_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"AS Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        },\n        \"LM Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*LOCAL_MONITOR_TRAINING.PROVINCIAL_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"LM Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        },\n        \"DMT Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*DISTRICT_MONITOR_TRAINING.PROVINCIAL_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"DMT Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        },\n        \"RTT Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*REGISTRATION_TEAM_TRAINING.PROVINCIAL_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"RTT Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        },\n        \"RB Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*REGISTRATION_BASIC.PROVINCIAL_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"RB Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "supervisionSummaryProvincialSupervisorDrill",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "District",
+    "filterKeys": [
+      {"key": "district", "column": "District"}
+    ],
+    "divisorFields": [],
+    "showFooter": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "excludedColumns": [
+      "AS Count Entries", "RB Count Entries", "RTT Count Entries", "DMT Count Entries", "LM Count Entries"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "AS Count Entries" ],
+        "newField" : "Checklists Filled Count AS",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "RB Count Entries" ],
+        "newField" : "Checklists Filled Count RB",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "RTT Count Entries" ],
+        "newField" : "Checklists Filled Count RTT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "DMT Count Entries" ],
+        "newField" : "Checklists Filled Count DMT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [ "LM Count Entries" ],
+        "newField": "Checklists Filled Count LM",
+        "_comments": ""
+      }
+    ],
+    "insight": {
+    },
+    "sort": "sortKeyAsc",
+    "_comment": " "
+  },
+  "supervisionSummaryProvincialSupervisorDrill": {
+    "chartName": "DSS_HEALTH_SUPERVISION_SUMMARY_PROVINCIAL_SUPERVISOR",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "test-cl-index",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*AS_MONITORING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"PROVINCIAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled AS\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "project-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PROVINCIAL_SUPERVISOR.AS_MONITORING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted AS\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "test-cl-index",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*LOCAL_MONITOR_TRAINING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"PROVINCIAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled LM\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "project-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PROVINCIAL_SUPERVISOR.LOCAL_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted LM\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "test-cl-index",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*DISTRICT_MONITOR_TRAINING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"PROVINCIAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled DMT\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "project-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PROVINCIAL_SUPERVISOR.DISTRICT_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted DMT\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "test-cl-index",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*REGISTRATION_BASIC*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"PROVINCIAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled RB\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "project-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PROVINCIAL_SUPERVISOR.REGISTRATION_BASIC\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted RB\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "test-cl-index",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*REGISTRATION_TEAM_TRAINING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"PROVINCIAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled RTT\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "project-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PROVINCIAL_SUPERVISOR.REGISTRATION_TEAM_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted RTT\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "UserName",
+    "filterKeys": [
+      {"key": "district", "column": "Inventory summary By District"}
+    ],
+    "divisorFields": [],
+    "showFooter": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "excludedColumns": [
+      "CLs Filled AS",
+      "CLs Filled LM",
+      "CLs Filled DMT",
+      "CLs Filled RB",
+      "CLs Filled RTT",
+      "CLs Targeted AS",
+      "CLs Targeted LM",
+      "CLs Targeted DMT",
+      "CLs Targeted RB",
+      "CLs Targeted RTT"
+    ],
+    "includeConstantColumns": [
+      "CLs Targeted AS",
+      "CLs Targeted LM",
+      "CLs Targeted DMT",
+      "CLs Targeted RB",
+      "CLs Targeted RTT"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Filled AS" ],
+        "newField" : "Checklists Filled Count AS",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Targeted AS" ],
+        "newField" : "Checklists Targeted AS",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "PercentageComputedField",
+        "fields" : [ "Checklists Filled Count AS",  "Checklists Targeted AS"],
+        "newField" : "Checklists Filled Percentage AS",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Filled LM" ],
+        "newField" : "Checklists Filled Count LM",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Targeted LM" ],
+        "newField" : "Checklists Targeted LM",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "PercentageComputedField",
+        "fields" : [ "Checklists Filled Count LM",  "Checklists Targeted LM"],
+        "newField" : "Checklists Filled Percentage LM",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Filled DMT  " ],
+        "newField" : "Checklists Filled Count DMT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Targeted DMT" ],
+        "newField" : "Checklists Targeted DMT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "PercentageComputedField",
+        "fields" : [ "Checklists Filled Count DMT",  "Checklists Targeted DMT"],
+        "newField" : "Checklists Filled Percentage DMT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Filled RB" ],
+        "newField" : "Checklists Filled Count RB",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Targeted RB" ],
+        "newField" : "Checklists Targeted RB",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "PercentageComputedField",
+        "fields" : [ "Checklists Filled Count RB",  "Checklists Targeted RB"],
+        "newField" : "Checklists Filled Percentage RB",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Filled RTT" ],
+        "newField" : "Checklists Filled Count RTT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Targeted RTT" ],
+        "newField" : "Checklists Targeted RTT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "PercentageComputedField",
+        "fields" : [ "Checklists Filled Count RTT",  "Checklists Targeted RTT"],
+        "newField" : "Checklists Filled Percentage RTT",
+        "_comments": ""
+      }
+    ],
+    "insight": {
+    },
+    "sort": "sortKeyAsc",
+    "_comment": " "
+  },
+  "supervisionSummaryDistrictSupervisor": {
+    "chartName": "DSS_HEALTH_SUPERVISION_SUMMARY_DISTRICT_SUPERVISOR",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "test-cl-index",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"District Wise Filled Count\": {\n      \"terms\": {\n        \"field\": \"Data.district.keyword\",\n        \"size\": 10\n      },\n      \"aggs\": {\n        \"AS Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*AS_MONITORING.DISTRICT_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"AS Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        },\n        \"LM Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*LOCAL_MONITOR_TRAINING.DISTRICT_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"LM Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        },\n        \"DMT Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*DISTRICT_MONITOR_TRAINING.DISTRICT_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"DMT Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        },\n        \"RTT Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*REGISTRATION_TEAM_TRAINING.DISTRICT_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"RTT Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        },\n        \"RB Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*REGISTRATION_BASIC.DISTRICT_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"RB Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "supervisionSummaryProvincialSupervisorDrill",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "District",
+    "filterKeys": [
+      {"key": "district", "column": "District"}
+    ],
+    "divisorFields": [],
+    "showFooter": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "excludedColumns": [
+      "AS Count Entries", "RB Count Entries", "RTT Count Entries", "DMT Count Entries", "LM Count Entries"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "AS Count Entries" ],
+        "newField" : "Checklists Filled Count AS",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "RB Count Entries" ],
+        "newField" : "Checklists Filled Count RB",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "RTT Count Entries" ],
+        "newField" : "Checklists Filled Count RTT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "DMT Count Entries" ],
+        "newField" : "Checklists Filled Count DMT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": [ "LM Count Entries" ],
+        "newField": "Checklists Filled Count LM",
+        "_comments": ""
+      }
+    ],
+    "insight": {
+    },
+    "sort": "sortKeyAsc",
+    "_comment": " "
+  },
+  "supervisionSummaryDistrictSupervisorDrill": {
+    "chartName": "DSS_HEALTH_SUPERVISION_SUMMARY_DISTRICT_SUPERVISOR",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "test-cl-index",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*AS_MONITORING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"DISTRICT_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled AS\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "project-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"DISTRICT_SUPERVISOR.AS_MONITORING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted AS\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "test-cl-index",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*LOCAL_MONITOR_TRAINING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"DISTRICT_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled LM\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "project-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"DISTRICT_SUPERVISOR.LOCAL_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted LM\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "test-cl-index",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*DISTRICT_MONITOR_TRAINING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"DISTRICT_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled DMT\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "project-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"DISTRICT_SUPERVISOR.DISTRICT_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted DMT\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "test-cl-index",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*REGISTRATION_BASIC*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"DISTRICT_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled RB\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "project-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"DISTRICT_SUPERVISOR.REGISTRATION_BASIC\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted RB\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "test-cl-index",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*REGISTRATION_TEAM_TRAINING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"DISTRICT_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled RTT\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
+        "indexName": "project-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"DISTRICT_SUPERVISOR.REGISTRATION_TEAM_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted RTT\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "UserName",
+    "filterKeys": [
+      {"key": "district", "column": "Inventory summary By District"}
+    ],
+    "divisorFields": [],
+    "showFooter": false,
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "excludedColumns": [
+      "CLs Filled AS",
+      "CLs Filled LM",
+      "CLs Filled DMT",
+      "CLs Filled RB",
+      "CLs Filled RTT",
+      "CLs Targeted AS",
+      "CLs Targeted LM",
+      "CLs Targeted DMT",
+      "CLs Targeted RB",
+      "CLs Targeted RTT"
+    ],
+    "includeConstantColumns": [
+      "CLs Targeted AS",
+      "CLs Targeted LM",
+      "CLs Targeted DMT",
+      "CLs Targeted RB",
+      "CLs Targeted RTT"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Filled AS" ],
+        "newField" : "Checklists Filled Count AS",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Targeted AS" ],
+        "newField" : "Checklists Targeted AS",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "PercentageComputedField",
+        "fields" : [ "Checklists Filled Count AS",  "Checklists Targeted AS"],
+        "newField" : "Checklists Filled Percentage AS",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Filled LM" ],
+        "newField" : "Checklists Filled Count LM",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Targeted LM" ],
+        "newField" : "Checklists Targeted LM",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "PercentageComputedField",
+        "fields" : [ "Checklists Filled Count LM",  "Checklists Targeted LM"],
+        "newField" : "Checklists Filled Percentage LM",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Filled DMT  " ],
+        "newField" : "Checklists Filled Count DMT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Targeted DMT" ],
+        "newField" : "Checklists Targeted DMT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "PercentageComputedField",
+        "fields" : [ "Checklists Filled Count DMT",  "Checklists Targeted DMT"],
+        "newField" : "Checklists Filled Percentage DMT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Filled RB" ],
+        "newField" : "Checklists Filled Count RB",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Targeted RB" ],
+        "newField" : "Checklists Targeted RB",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "PercentageComputedField",
+        "fields" : [ "Checklists Filled Count RB",  "Checklists Targeted RB"],
+        "newField" : "Checklists Filled Percentage RB",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Filled RTT" ],
+        "newField" : "Checklists Filled Count RTT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Targeted RTT" ],
+        "newField" : "Checklists Targeted RTT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "PercentageComputedField",
+        "fields" : [ "Checklists Filled Count RTT",  "Checklists Targeted RTT"],
+        "newField" : "Checklists Filled Percentage RTT",
         "_comments": ""
       }
     ],

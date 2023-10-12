@@ -249,7 +249,26 @@
                   "code": "",
                   "chartType": "table",
                   "filter": "",
-                  "headers": []
+                  "headers": [],
+                  "tabName": "National"
+                },
+                {
+                  "id": "supervisionSummaryProvincialSupervisor",
+                  "name": "DSS_HEALTH_SUPERVISION_SUMMARY_PROVINCIAL_SUPERVISOR",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "Provincial"
+                },
+                {
+                  "id": "supervisionSummaryDistrictSupervisor",
+                  "name": "DSS_HEALTH_SUPERVISION_SUMMARY_DISTRICT_SUPERVISOR",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "District"
                 }
               ]
             }
