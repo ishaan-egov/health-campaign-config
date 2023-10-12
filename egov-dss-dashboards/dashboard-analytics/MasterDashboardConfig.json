@@ -237,15 +237,15 @@
             },
             {
               "id": 235,
-              "name": "DSS_HEALTH_SUPERVISION_SUMMARY_BY",
-              "label": "DSS_HEALTH_SUPERVISION_SUMMARY_BY",
+              "name": "DSS_HEALTH_SUPERVISION_SUMMARY",
+              "label": "DSS_HEALTH_SUPERVISION_SUMMARY",
               "vizType": "chart",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "supervisionSummary",
-                  "name": "DSS_HEALTH_SUPERVISION_SUMMARY_BY",
+                  "id": "supervisionSummaryNationalSupervisor",
+                  "name": "DSS_HEALTH_SUPERVISION_SUMMARY_NATIONAL_SUPERVISOR",
                   "code": "",
                   "chartType": "table",
                   "filter": "",

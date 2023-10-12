@@ -5543,36 +5543,92 @@
     "insight": { },
     "_comment": " "
   },
-  "supervisionSummary": {
-    "chartName": "DSS_HEALTH_SUPERVISION_SUMMARY_BY",
+  "supervisionSummaryNationalSupervisor": {
+    "chartName": "DSS_HEALTH_SUPERVISION_SUMMARY_NATIONAL_SUPERVISOR",
     "queries": [
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "test-cl-index",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*AS_MONITOR_TRAINING*\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled AS\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*AS_MONITORING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"NATIONAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled AS\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"AS_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.createdBy.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Targeted AS\": {\n              \"sum\": {\n                \"field\": \"Data.overallTarget\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.AS_MONITORING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted AS\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "test-cl-index",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*LM_TRAINING*\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled LM\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*LOCAL_MONITOR_TRAINING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"NATIONAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled LM\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"LM_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.createdBy.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Targeted LM\": {\n              \"sum\": {\n                \"field\": \"Data.overallTarget\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.LOCAL_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted LM\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "test-cl-index",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*DISTRICT_MONITOR_TRAINING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"NATIONAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled DMT\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "project-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.DISTRICT_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted DMT\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "test-cl-index",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*REGISTRATION_BASIC*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"NATIONAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled RB\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "project-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.REGISTRATION_BASIC\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted RB\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "test-cl-index",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*REGISTRATION_TEAM_TRAINING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"NATIONAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled RTT\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "project-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.REGISTRATION_TEAM_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted RTT\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "test-cl-index",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*SOCIAL_MOBILIZATION*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"NATIONAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.supervisorName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled SM\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "project-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.SOCIAL_MOBILIZATION\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted SM\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
     "chartType": "xtable",
@@ -5589,6 +5645,7 @@
     "hideInsights": true,
     "hideHeaderDenomination": true,
     "excludedColumns": ["CLs Filled AS","CLs Targeted AS","CLs Filled LM","CLs Targeted LM"],
+    "includeConstantColumns": ["CLs Targeted AS", "CLs Targeted LM"],
     "computedFields": [
       {
         "postAggregationTheory" : "",
@@ -5630,6 +5687,90 @@
         "actionName": "PercentageComputedField",
         "fields" : [ "Checklists Filled Count LM",  "Checklists Targeted LM"],
         "newField" : "Checklists Filled Percentage LM",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Filled DMT  " ],
+        "newField" : "Checklists Filled Count DMT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Targeted DMT" ],
+        "newField" : "Checklists Targeted DMT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "PercentageComputedField",
+        "fields" : [ "Checklists Filled Count DMT",  "Checklists Targeted DMT"],
+        "newField" : "Checklists Filled Percentage DMT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Filled RB" ],
+        "newField" : "Checklists Filled Count RB",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Targeted RB" ],
+        "newField" : "Checklists Targeted RB",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "PercentageComputedField",
+        "fields" : [ "Checklists Filled Count RB",  "Checklists Targeted RB"],
+        "newField" : "Checklists Filled Percentage RB",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Filled RTT" ],
+        "newField" : "Checklists Filled Count RTT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Targeted RTT" ],
+        "newField" : "Checklists Targeted RTT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "PercentageComputedField",
+        "fields" : [ "Checklists Filled Count RTT",  "Checklists Targeted RTT"],
+        "newField" : "Checklists Filled Percentage RTT",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Filled SM" ],
+        "newField" : "Checklists Filled Count SM",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "AdditiveComputedField",
+        "fields" : [ "CLs Targeted SM" ],
+        "newField" : "Checklists Targeted SM",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "PercentageComputedField",
+        "fields" : [ "Checklists Filled Count SM",  "Checklists Targeted SM"],
+        "newField" : "Checklists Filled Percentage SM",
         "_comments": ""
       }
     ],
