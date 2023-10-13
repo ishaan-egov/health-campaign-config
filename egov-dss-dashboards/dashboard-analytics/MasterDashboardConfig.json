@@ -1306,6 +1306,49 @@
               ]
             }
           ]
+        },
+        {
+          "row": 5,
+          "name": "DSS_HEALTH_SUPERVISION",
+          "vizArray": [
+            {
+              "id": 245,
+              "name": "DSS_HEALTH_SUPERVISION_SUMMARY",
+              "label": "DSS_HEALTH_SUPERVISION_SUMMARY",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "supervisionSummaryNationalSupervisor",
+                  "name": "DSS_HEALTH_SUPERVISION_SUMMARY_NATIONAL_SUPERVISOR",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "National"
+                },
+                {
+                  "id": "supervisionSummaryProvincialSupervisor",
+                  "name": "DSS_HEALTH_SUPERVISION_SUMMARY_PROVINCIAL_SUPERVISOR",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "Provincial"
+                },
+                {
+                  "id": "supervisionSummaryDistrictSupervisor",
+                  "name": "DSS_HEALTH_SUPERVISION_SUMMARY_DISTRICT_SUPERVISOR",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "District"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
