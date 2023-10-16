@@ -7163,7 +7163,7 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.createdTime",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"PROVINCIAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled Total\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7197,7 +7197,8 @@
       "CLs Targeted LM",
       "CLs Targeted DMT",
       "CLs Targeted RB",
-      "CLs Targeted RTT"
+      "CLs Targeted RTT",
+      "CLs Targeted Total"
     ],
     "includeConstantColumns": [
       "CLs Targeted AS",
@@ -7353,7 +7354,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "supervisionSummaryProvincialSupervisorDrill",
+    "drillChart": "supervisionSummaryDistrictSupervisorDrill",
     "documentType": "_doc",
     "action": "",
     "plotLabel": "District",
@@ -7484,7 +7485,7 @@
       },
       {
         "module": "COMMON",
-        "dateRefField": "Data.createdTime",
+        "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"DISTRICT_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled Total\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7518,7 +7519,8 @@
       "CLs Targeted LM",
       "CLs Targeted DMT",
       "CLs Targeted RB",
-      "CLs Targeted RTT"
+      "CLs Targeted RTT",
+      "CLs Targeted Total"
     ],
     "includeConstantColumns": [
       "CLs Targeted AS",
