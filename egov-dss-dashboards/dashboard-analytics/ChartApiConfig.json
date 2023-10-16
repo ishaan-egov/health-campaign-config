@@ -7486,14 +7486,14 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"DISTRICT_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled Total\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "project-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.targetType.keyword\": \"DISTRICT_SUPERVISOR.*\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted Total\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
       }
