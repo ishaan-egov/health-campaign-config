@@ -8125,5 +8125,102 @@
     "hideInsights": false,
     "hideHeaderDenomination": true,
     "_comment": " "
+  },
+  "aggregatesSummaryReport": {
+    "chartName": "DSS_HEALTH_NATIONAL_AGGREGATES_SUMMARY",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "",
+        "indexName": "project-staff-index-v1",
+        "aggrQuery": "{\"aggs\":{\"NAME\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":{\"value\":\"LOCAL_MONITOR\"}}}]}},\"aggs\":{\"No of ML's in District\":{\"terms\":{\"field\":\"Data.district.keyword\",\"size\":20},\"aggs\":{\"NAME\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "",
+        "indexName": "service-task-v1",
+        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":{\"value\":\"LOCAL_MONITOR\"}}}],\"should\":[{\"query_string\":{\"default_field\":\"Data.checklistName.keyword\",\"query\":\"MATERIAL_ISSUED AND MATERIAL_RECEIVED\"}}]}},\"aggs\":{\"ML's who worked yesterday\":{\"terms\":{\"field\":\"Data.district.keyword\"},\"aggs\":{\"NAME\":{\"cardinality\":{\"field\":\"Data.userId.keyword\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "",
+        "indexName": "project-staff-index-v1",
+        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.role.keyword\":{\"value\":\"DISTRIBUTOR\"}}}]}},\"aggs\":{\"Teams in the District\":{\"terms\":{\"field\":\"Data.district.keyword\"}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\"aggs\":{\"FILTERS\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.role.keyword\":[\"DISTRIBUTOR\"]}}]}},\"aggs\":{\"AGGS\":{\"terms\":{\"field\":\"Data.district.keyword\",\"size\":500},\"aggs\":{\"Teams that worked yesterday\":{\"scripted_metric\":{\"params\":{\"fieldName\":\"Data.userId.keyword\"},\"init_script\":\"state.list = []\",\"map_script\":\"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\"combine_script\":\"return state.list;\",\"reduce_script\":\"Map uniqueValueMap = new HashMap(); \\n        int count = 0;\\n        for(shardList in states) {\\n          if(shardList != null) { \\n            for(key in shardList) {\\n              if(!uniqueValueMap.containsKey(key)) {\\n                count +=1;\\n                uniqueValueMap.put(key, key);\\n              }\\n            }\\n          }\\n        } \\n        return count;\"}}}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "",
+        "indexName": "project-task-index-v1",
+        "aggrQuery": "{\"size\":10000,\"query\":{\"bool\":{\"must\":[{\"term\":{\"Data.deliveredTo.keyword\":{\"value\":\"HOUSEHOLD\"}}}]}},\"aggs\":{\"Completed Daily Records\":{\"terms\":{\"field\":\"Data.district.keyword\"}}}}"
+      }
+    ],
+    "filterKeys": [],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "",
+    "excludedColumns": [
+      "",
+      "",
+      ""
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "newField": "ML that worked yesterday",
+        "fields": [
+          "ML's who worked yesterday",
+          "No of ML's in District"
+        ],
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "newField": "Teams that worked yesterday (%)",
+        "fields": [
+          "Teams that worked yesterday",
+          "Teams in the District"
+        ],
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "newField": "Average performance per team that worked",
+        "fields": [
+          "Completed Daily Records",
+          "Teams that worked yesterday"
+        ],
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "newField": "Expected Daily records",
+        "fields": [
+          "Teams in the District"
+        ],
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": false,
+    "hideHeaderDenomination": true,
+    "_comment": " "
   }
 }

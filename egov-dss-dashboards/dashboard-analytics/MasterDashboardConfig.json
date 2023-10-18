@@ -766,6 +766,30 @@
           ]
         },
         {
+          "row": 9,
+          "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
+          "vizArray": [
+            {
+              "id": 220,
+              "name": "DSS_HEALTH_NATIONAL_AGGREGATES_SUMMARY",
+              "label": "DSS_HEALTH_NATIONAL_AGGREGATES_SUMMARY",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "aggregatesSummaryReport",
+                  "name": "DSS_HEALTH_NATIONAL_AGGREGATES_SUMMARY",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
           "row": 1,
           "name": "DSS_HEALTH_COMPLAINTS",
           "vizArray": [
