@@ -1002,30 +1002,6 @@
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
-              "id": 2301,
-              "name": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS_BAR_CHART",
-              "label": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS_BAR_CHART",
-              "vizType": "chart",
-              "noUnit": true,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "userSyncByWmsProvinceBarChart",
-                  "name": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS_BAR_CHART",
-                  "code": "",
-                  "chartType": "bar",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "row": 3,
-          "name": "DSS_HEALTH_INVENTORY",
-          "vizArray": [
-            {
               "id": 2302,
               "name": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS",
               "label": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS",
@@ -1046,24 +1022,34 @@
           ]
         },
         {
-          "row": 4,
+          "row": 3,
           "name": "DSS_HEALTH_INVENTORY",
           "vizArray": [
             {
-              "id": 2303,
-              "name": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS_BAR_CHART",
-              "label": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS_BAR_CHART",
+              "id": 2301,
+              "name": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS_BAR_CHART",
+              "label": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS_BAR_CHART",
               "vizType": "chart",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
+                {
+                  "id": "userSyncByWmsProvinceBarChart",
+                  "name": "DSS_HEALTH_USER_SYNC_BY_WAREHOUSE_MANAGERS_BAR_CHART",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "WM"
+                },
                 {
                   "id": "userSyncByLmsProvinceBarChart",
                   "name": "DSS_HEALTH_USER_SYNC_BY_LOCAL_MONITORS_BAR_CHART",
                   "code": "",
                   "chartType": "bar",
                   "filter": "",
-                  "headers": []
+                  "headers": [],
+                  "tabName": "LM"
                 }
               ]
             }
@@ -1188,7 +1174,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "InventorySummaryByDistrict",
+                  "id": "uInventorySummaryByDistrict",
                   "name": "DSS_HEALTH_INVENTORY_SUMMARY_BY_DISTRICT",
                   "code": "",
                   "chartType": "table",
