@@ -30,8 +30,6 @@ ServiceMaps:
                 outJsonPath: $.Data.userName
               - inJsonPath: $.role
                 outJsonPath: $.Data.role
-              - inJsonPath: $.lastModifiedTime
-                outJsonPath: $.Data.createdTime
               - inJsonPath: $.province
                 outJsonPath: $.Data.province
               - inJsonPath: $.district
@@ -42,15 +40,13 @@ ServiceMaps:
                 outJsonPath: $.Data.locality
               - inJsonPath: $.village
                 outJsonPath: $.Data.village
-              - inJsonPath: $.latitude
-                outJsonPath: $.Data.latitude
-              - inJsonPath: $.longitude
-                outJsonPath: $.Data.longitude
               - inJsonPath: $.createdTime
                 outJsonPath: $.Data.clientCreatedTime
               - inJsonPath: $.syncedTime
-                outJsonPath: $.Data.syncedTime
-          timeStampField: $.clientAuditDetails.createdTime
+                outJsonPath: $.Data.createdTime
+              - inJsonPath: $.syncedTimeStamp
+                outJsonPath: $.Data.syncedTimeStamp
+          timeStampField: $.createdTime
 
     - topic: save-stock-reconciliation-topic
       configKey: INDEX
