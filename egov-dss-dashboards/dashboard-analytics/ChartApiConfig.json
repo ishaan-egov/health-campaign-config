@@ -6073,6 +6073,13 @@
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "project-index-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"NAME\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PRODUCT\"\n              }\n            }\n          ],\n          \"must_not\": [\n            {\n              \"exists\": {\n                \"field\": \"Data.administrativeProvince.keyword\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Target By District\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"Overall Target\": {\n              \"sum\": {\n                \"field\": \"Data.overallTarget\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
+        "indexName": "project-task-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Total Households\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 1000\n          },\n          \"aggs\": {\n            \"Household Covered Count\" : {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            },\n            \"Negative Delivered Count\" : {\n              \"bucket_script\": {\n                \"buckets_path\": {\n                  \"DC\": \"Household Covered Count\"\n                },\n                \"script\": \"params.DC * (-1)\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
     "chartType": "xtable",
@@ -6088,22 +6095,8 @@
     "showFooter": false,
     "hideInsights": true,
     "hideHeaderDenomination": true,
-    "excludedColumns": ["Incoming","Outgoing","Total Stock", "SUM", "Overall Target"],
+    "excludedColumns": ["Total Stock", "SUM", "Overall Target", "Negative Delivered Count"],
     "computedFields": [
-      {
-        "postAggregationTheory" : "",
-        "actionName": "AdditiveComputedField",
-        "fields" : [ "Incoming" ],
-        "newField" : "Incoming Stock",
-        "_comments": ""
-      },
-      {
-        "postAggregationTheory" : "",
-        "actionName": "AdditiveComputedField",
-        "fields" : [ "Outgoing" ],
-        "newField" : "Outgoing Stock",
-        "_comments": ""
-      },
       {
         "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
@@ -6114,8 +6107,8 @@
       {
         "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
-        "fields" : [ "Overall Target" ],
-        "newField" : "Overall Target For District",
+        "fields" : [ "Overall Target", "Negative Delivered Count" ],
+        "newField" : "Target Left For District",
         "_comments": ""
       }
     ],
