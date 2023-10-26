@@ -458,6 +458,13 @@
       },
       {
         "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "",
+        "indexName": "project-staff-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"terms\": {\n                \"Data.role.keyword\": [\n                  \"NATIONAL_SUPERVISOR\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Total National Users Created\": {\n          \"value_count\": {\n            \"field\": \"Data.userId.keyword\"\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
         "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "user-sync-index-v1",
@@ -475,12 +482,15 @@
     "excludedColumns": [
       "S.N.", "DATA SYNC", "Total Users Created","Unique Users Synced"
     ],
+    "includeConstantColumns" : [
+      "Total National Users Created"
+    ],
     "computedFields": [
       {
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "Total Users Created"
+          "Total Users Created","Total National Users Created"
         ],
         "newField": "Total_Users_Created",
         "_comments": ""
@@ -836,7 +846,7 @@
       "S.N.", "DATA SYNC", "Total Users Created","Unique Users Synced"
     ],
     "includeConstantColumns" : [
-
+      "Total National Users Created"
     ],
     "computedFields": [
       {
