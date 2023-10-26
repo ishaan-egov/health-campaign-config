@@ -8479,5 +8479,327 @@
     "hideInsights": false,
     "hideHeaderDenomination": true,
     "_comment": " "
+  },
+  "aggregatesTeamsSummaryReport": {
+    "chartName": "DSS_HEALTH_NATIONAL_AGGREGATES_SUMMARY",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "project-staff-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"Distributor Filter\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": {\n                  \"value\": \"DISTRIBUTOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Districts\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\"\n          },\n          \"aggs\": {\n            \"Teams in the District\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            },\n            \"Target For all Teams\": {\n              \"bucket_script\": {\n                \"buckets_path\": {\n                  \"Teams\": \"Teams in the District\"\n                },\n                \"script\": \"(params.Teams) * 40\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"terms\": {\n                \"Data.role.keyword\": [\n                  \"DISTRIBUTOR\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Teams Worked\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key);}}}}return count;\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "user-sync-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"terms\": {\n                \"Data.role.keyword\": [\n                  \"DISTRIBUTOR\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"Teams Worked Hundred\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.userId.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key);}}}}return count*100 ;\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "project-task-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Districts\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"Delivered Households\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+    "filterKeys": [{"key": "district", "column": "District"}],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "teamsSummaryReport",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "District",
+    "excludedColumns": [
+      "Teams in the District", "Teams Worked", "Delivered Households", "Teams Worked Hundred", "Target For all Teams"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": ["Teams in the District"],
+        "newField": "Total Teams in District",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": ["Teams Worked"],
+        "newField": "Total Teams Worked",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": ["Total Teams Worked", "Total Teams in District"],
+        "newField": "Total Teams Worked Percentage",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": ["Delivered Households", "Teams Worked Hundred"],
+        "newField": "Distribution Average By Team",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": ["Target For all Teams"],
+        "newField": "Total Target For all Teams",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": ["Delivered Households"],
+        "newField": "Total Delivered Households",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": " "
+  },
+  "teamsSummaryReport": {
+    "chartName": "DSS_HEALTH_TEAMS_SUMMARY_REPORT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "project-task-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Teams\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"Delivered Households\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "project-task-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Teams\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"DayWise Delivered Households\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "project-task-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Teams\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"Teams Target Per Day\": {\n              \"bucket_script\": {\n                \"buckets_path\": {\n                  \"count\": \"_count\"  \n                },\n                \"script\": \"40 * 365\" \n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "project-task-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"UserNames\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 10000\n          },\n          \"aggs\": {\n            \"distinct_timestamps\": {\n              \"cardinality\": {\n                \"script\": {\n                  \"source\": \"def timestamp = doc['Data.@timestamp'].value.toString(); return timestamp.length() >= 10 ? timestamp.substring(0, 10) : timestamp\",\n                  \"lang\": \"painless\"\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+    "filterKeys": [],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Team Name",
+    "excludedColumns": [
+      "Delivered Households", "Teams Worked Hundred", "Target For all Teams", "Teams Target Per Day", "DayWise Delivered Households", "distinct_timestamps"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": ["distinct_timestamps"],
+        "newField": "Days Worked",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": ["DayWise Delivered Households"],
+        "newField": "Total DayWise Delivered Households",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": ["Delivered Households"],
+        "newField": "Total Delivered Households",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "repsonseToDifferenceOfDates",
+        "actionName": "AdditiveComputedField",
+        "fields": ["Teams Target Per Day"],
+        "newField": "Teams Target For DateRange",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": " "
+  },
+  "aggregatesLmSummaryReport": {
+    "chartName": "DSS_HEALTH_NATIONAL_AGGREGATES_SUMMARY",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "project-staff-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"LM Filter\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.role.keyword\": {\n                  \"value\": \"LOCAL_MONITOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Districts\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\"\n          },\n          \"aggs\": {\n            \"LM in the District\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            },\n            \"Target For all LM\": {\n              \"bucket_script\": {\n                \"buckets_path\": {\n                  \"LM\": \"LM in the District\"\n                },\n                \"script\": \"(params.LM) * 40 * 5\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "service-task-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"terms\": {\n                \"Data.role.keyword\": [\n                  \"LOCAL_MONITOR\"\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"AGGS\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 500\n          },\n          \"aggs\": {\n            \"LM Worked\": {\n              \"scripted_metric\": {\n                \"params\": {\n                  \"fieldName\": \"Data.createdBy.keyword\"\n                },\n                \"init_script\": \"state.list = []\",\n                \"map_script\": \"if(doc[params.fieldName] != null) \\nstate.list.add(doc[params.fieldName].value);\",\n                \"combine_script\": \"return state.list;\",\n                \"reduce_script\": \"Map uniqueValueMap = new HashMap(); int count = 0; for(shardList in states) { if(shardList != null) {for(key in shardList) { if(!uniqueValueMap.containsKey(key)) { count +=1; uniqueValueMap.put(key, key);}}}}return count;\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "project-task-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.deliveredTo.keyword\": \"HOUSEHOLD\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Districts\": {\n          \"terms\": {\n            \"field\": \"Data.district.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"Delivered Households\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+    "filterKeys": [{"key": "district", "column": "District"}],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "lmsSummaryReport",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "District",
+    "excludedColumns": [
+      "LM in the District", "LM Worked", "Target For all LM"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": ["LM in the District"],
+        "newField": "Total LM in District",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": ["LM Worked"],
+        "newField": "Total LM Worked",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "PercentageComputedField",
+        "fields": ["Total LM Worked", "Total LM in District"],
+        "newField": "Total LM Worked Percentage",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": " "
+  },
+  "lmsSummaryReport": {
+    "chartName": "DSS_HEALTH_TEAMS_SUMMARY_REPORT",
+    "queries": [
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "service-task-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": \"LOCAL_MONITOR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"UserNames\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 10000\n          },\n          \"aggs\": {\n            \"distinct_timestamps\": {\n              \"cardinality\": {\n                \"script\": {\n                  \"source\": \"def timestamp = doc['Data.@timestamp'].value.toString(); return timestamp.length() >= 10 ? timestamp.substring(0, 10) : timestamp\",\n                  \"lang\": \"painless\"\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "project-task-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"LM from Teams\": {\n          \"terms\": {\n            \"script\": {\n              \"source\": \"def userName = doc['Data.userName.keyword'].value; if (userName != null) { int lastIndex = userName.lastIndexOf('-'); return lastIndex >= 0 ? userName.substring(0, lastIndex) : userName; } else { return null; }\",\n              \"lang\": \"painless\"\n            },\n            \"size\": 10000\n          },\n          \"aggs\": {\n            \"Delivered Households\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "project-task-index-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"match_phrase\": {\n                \"Data.productVariant\": \"PVAR\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"LM from Teams\": {\n          \"terms\": {\n            \"script\": {\n              \"source\": \"def userName = doc['Data.userName.keyword'].value; if (userName != null) { int lastIndex = userName.lastIndexOf('-'); return lastIndex >= 0 ? userName.substring(0, lastIndex) : userName; } else { return null; }\",\n              \"lang\": \"painless\"\n            },\n            \"size\": 10000\n          },\n          \"aggs\": {\n            \"Total Delivered Households\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "service-task-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": \"LOCAL_MONITOR\"\n              }\n            },\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": \"*MATERIAL_ISSUED*\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"UserNames\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 10000\n          },\n          \"aggs\": {\n            \"FEM Issued\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "Data.createdTime",
+        "requestQueryMap": "{\"province\": \"Data.province.keyword\", \"district\": \"Data.district.keyword\"}",
+        "indexName": "service-task-v1",
+        "aggrQuery": "{\n  \"aggs\": {\n    \"AGGR\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": \"LOCAL_MONITOR\"\n              }\n            },\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": \"*MATERIAL_RECEIVED*\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"UserNames\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 10000\n          },\n          \"aggs\": {\n            \"FEM Received\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+      }
+    ],
+    "filterKeys": [],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "Team Name",
+    "excludedColumns": [
+      "distinct_timestamps","Delivered Households","Total Delivered Households"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": ["distinct_timestamps"],
+        "newField": "Days Worked",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": ["Delivered Households"],
+        "newField": "Total DayWise Delivered Households",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": ["Total Delivered Households"],
+        "newField": "Total Delivered Households by LM",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": ["FEM Issued"],
+        "newField": "FEMs Issued",
+        "_comments": ""
+      },
+      {
+        "postAggregationTheory": "",
+        "actionName": "AdditiveComputedField",
+        "fields": ["FEM Received"],
+        "newField": "FEMs Received",
+        "_comments": ""
+      }
+    ],
+    "insight": {},
+    "hideInsights": true,
+    "hideHeaderDenomination": true,
+    "_comment": " "
   }
 }
