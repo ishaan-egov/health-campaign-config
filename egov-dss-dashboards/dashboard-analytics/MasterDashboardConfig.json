@@ -1335,6 +1335,40 @@
               ]
             }
           ]
+        },
+        {
+          "row": 6,
+          "name": "DSS_HEALTH_SUPERVISION",
+          "vizArray": [
+            {
+              "id": 246,
+              "name": "DSS_HEALTH_LM_TEAMS_SUMMARY",
+              "label": "DSS_HEALTH_LM_TEAMS_SUMMARY",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "aggregatesTeamsSummaryReport",
+                  "name": "DSS_HEALTH_TEAMS_SUMMARY_REPORT",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "TEAMS"
+                },
+                {
+                  "id": "aggregatesLmSummaryReport",
+                  "name": "DSS_HEALTH_LMS_SUMMARY_REPORT",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "LMS"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
