@@ -843,7 +843,7 @@
     "action": "",
     "plotLabel": "DATA SYNC",
     "excludedColumns": [
-      "S.N.", "DATA SYNC", "Total Users Created","Unique Users Synced"
+      "S.N.", "DATA SYNC", "Total Users Created","Unique Users Synced", "Total National Users Created"
     ],
     "includeConstantColumns" : [
       "Total National Users Created"
