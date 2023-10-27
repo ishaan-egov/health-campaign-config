@@ -712,6 +712,49 @@
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
+              "id": 220,
+              "name": "DSS_HEALTH_OVERALL_COVERAGE_PROVINCE",
+              "label": "DSS_HEALTH_OVERALL_COVERAGE_PROVINCE",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "overallCoverageHouseholdProvince",
+                  "name": "DSS_HEALTH_OVERALL_COVERAGE_HOUSEHOLD_PROVINCE",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "tabName": "Household",
+                  "headers": []
+                },
+                {
+                  "id": "overallCoverageBednetsProvince",
+                  "name": "DSS_HEALTH_OVERALL_COVERAGE_BEDNETS_PROVINCE",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "tabName": "Bednets",
+                  "headers": []
+                },
+                {
+                  "id": "overallCoveragePopulationProvince",
+                  "name": "DSS_HEALTH_OVERALL_COVERAGE_POPULATION_PROVINCE",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "tabName": "Population",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 8,
+          "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
+          "vizArray": [
+            {
               "id": 218,
               "name": "DSS_HEALTH_UNCOVERED_POPULATION",
               "label": "DSS_HEALTH_UNCOVERED_POPULATION",
@@ -732,7 +775,7 @@
           ]
         },
         {
-          "row": 8,
+          "row": 9,
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
@@ -1896,6 +1939,49 @@
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
+              "id": 320,
+              "name": "DSS_HEALTH_OVERALL_COVERAGE_DISTRICT",
+              "label": "DSS_HEALTH_OVERALL_COVERAGE_DISTRICT",
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "overallCoverageHouseholdDistrict",
+                  "name": "DSS_HEALTH_OVERALL_COVERAGE_HOUSEHOLD_DISTRICT",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "tabName": "Household",
+                  "headers": []
+                },
+                {
+                  "id": "overallCoverageBednetsDistrict",
+                  "name": "DSS_HEALTH_OVERALL_COVERAGE_BEDNETS_DISTRICT",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "tabName": "Bednets",
+                  "headers": []
+                },
+                {
+                  "id": "overallCoveragePopulationDistrict",
+                  "name": "DSS_HEALTH_OVERALL_COVERAGE_POPULATION_DISTRICT",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "tabName": "Population",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 8,
+          "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
+          "vizArray": [
+            {
               "id": 318,
               "name": "DSS_HEALTH_UNCOVERED_POPULATION",
               "label": "DSS_HEALTH_UNCOVERED_POPULATION",
@@ -1916,7 +2002,7 @@
           ]
         },
         {
-          "row": 8,
+          "row": 9,
           "name": "DSS_HEALTH_REGISTRATION_DELIVERY",
           "vizArray": [
             {
