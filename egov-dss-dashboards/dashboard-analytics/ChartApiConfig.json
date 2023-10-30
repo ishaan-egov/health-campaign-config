@@ -6116,7 +6116,7 @@
     "showFooter": false,
     "hideInsights": true,
     "hideHeaderDenomination": true,
-    "excludedColumns": ["Total Stock", "SUM", "Overall Target", "Negative Delivered Count"],
+    "excludedColumns": ["Total Stock", "SUM", "Overall Target", "Negative Delivered Count", "Household Covered Count"],
     "computedFields": [
       {
         "postAggregationTheory" : "",
