@@ -6369,7 +6369,7 @@
     "drillChart": "",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "Stock Event Id",
+    "plotLabel": "Local Monitor Names",
     "aggregationPaths": [
       "Stock Event Id",
       "Local Monitor Names",
@@ -8756,9 +8756,9 @@
     "drillChart": "",
     "documentType": "_doc",
     "action": "",
-    "plotLabel": "Team Name",
+    "plotLabel": "LM Name",
     "excludedColumns": [
-      "distinct_timestamps","Delivered Households","Total Delivered Households"
+      "distinct_timestamps","Delivered Households","Total Delivered Households", "FEM Issued", "FEM Received"
     ],
     "computedFields": [
       {
