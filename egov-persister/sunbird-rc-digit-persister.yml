@@ -1,5 +1,5 @@
 serviceMaps:
-  serviceName: project
+  serviceName: vc-service-delivery
   mappings:
     - version: 1.0
       description: Saves VC mapping data
