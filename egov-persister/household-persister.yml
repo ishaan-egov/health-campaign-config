@@ -155,11 +155,12 @@ serviceMaps:
       transactionCodeJsonPath: $.householdClientReferenceId
       auditAttributeBasePath: $.*
       queryMaps:
-        - query: INSERT INTO HOUSEHOLD_MEMBER(id, tenantId, individualId, individualClientReferenceId, householdId, householdClientReferenceId, isHeadOfHousehold, additionalDetails, createdBy, lastModifiedBy, createdTime, lastModifiedTime, rowVersion, isDeleted, clientCreatedTime, clientLastModifiedTime, clientCreatedBy, clientLastModifiedBy) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO HOUSEHOLD_MEMBER(id, tenantId, clientReferenceId, individualId, individualClientReferenceId, householdId, householdClientReferenceId, isHeadOfHousehold, additionalDetails, createdBy, lastModifiedBy, createdTime, lastModifiedTime, rowVersion, isDeleted, clientCreatedTime, clientLastModifiedTime, clientCreatedBy, clientLastModifiedBy) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.*
           jsonMaps:
             - jsonPath: $.*.id
             - jsonPath: $.*.tenantId
+            - jsonPath: $.*.clientReferenceId
             - jsonPath: $.*.individualId
             - jsonPath: $.*.individualClientReferenceId
             - jsonPath: $.*.householdId
