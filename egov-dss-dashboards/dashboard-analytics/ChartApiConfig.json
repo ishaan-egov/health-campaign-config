@@ -7084,7 +7084,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*AS_MONITORING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"NATIONAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled AS\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7094,11 +7094,11 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.AS_MONITORING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted AS\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.AS_MONITORING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted AS\": {\n          \"sum\": {\n            \"script\": {\n              \"source\": \"doc['Data.overallTarget'].value * 365\"\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*LOCAL_MONITOR_TRAINING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"NATIONAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled LM\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7108,11 +7108,11 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.LOCAL_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted LM\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.LOCAL_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted LM\": {\n          \"sum\": {\n            \"script\": {\n              \"source\": \"doc['Data.overallTarget'].value * 365\"\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*DISTRICT_MONITOR_TRAINING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"NATIONAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled DMT\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7122,11 +7122,11 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.DISTRICT_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted DMT\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.DISTRICT_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted DMT\": {\n          \"sum\": {\n            \"script\": {\n              \"source\": \"doc['Data.overallTarget'].value * 365\"\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*REGISTRATION_BASIC*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"NATIONAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled RB\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7136,11 +7136,11 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.REGISTRATION_BASIC\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted RB\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.REGISTRATION_BASIC\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted RB\": {\n          \"sum\": {\n            \"script\": {\n              \"source\": \"doc['Data.overallTarget'].value * 365\"\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*REGISTRATION_TEAM_TRAINING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"NATIONAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled RTT\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7150,11 +7150,11 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.REGISTRATION_TEAM_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted RTT\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.REGISTRATION_TEAM_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted RTT\": {\n          \"sum\": {\n            \"script\": {\n              \"source\": \"doc['Data.overallTarget'].value * 365\"\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*SOCIAL_MOBILIZATION*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"NATIONAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled SM\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7164,11 +7164,11 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.SOCIAL_MOBILIZATION\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted SM\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.SOCIAL_MOBILIZATION\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted SM\": {\n          \"sum\": {\n            \"script\": {\n              \"source\": \"doc['Data.overallTarget'].value * 365\"\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"NATIONAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled Total\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7178,7 +7178,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.*\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted Total\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.targetType.keyword\": \"NATIONAL_SUPERVISOR.*\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted Total\": {\n          \"sum\": {\n            \"script\": {\n              \"source\": \"doc['Data.overallTarget'].value * 365\"\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
     "chartType": "xtable",
@@ -7228,7 +7228,7 @@
         "_comments": ""
       },
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "AdditiveComputedField",
         "fields" : [ "CLs Targeted RB" ],
         "newField" : "Checklists Targeted RB",
@@ -7249,7 +7249,7 @@
         "_comments": ""
       },
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "AdditiveComputedField",
         "fields" : [ "CLs Targeted DMT" ],
         "newField" : "Checklists Targeted DMT",
@@ -7270,7 +7270,7 @@
         "_comments": ""
       },
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "AdditiveComputedField",
         "fields" : [ "CLs Targeted AS" ],
         "newField" : "Checklists Targeted AS",
@@ -7291,7 +7291,7 @@
         "_comments": ""
       },
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "AdditiveComputedField",
         "fields" : [ "CLs Targeted LM" ],
         "newField" : "Checklists Targeted LM",
@@ -7312,7 +7312,7 @@
         "_comments": ""
       },
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "AdditiveComputedField",
         "fields" : [ "CLs Targeted RTT" ],
         "newField" : "Checklists Targeted RTT",
@@ -7333,7 +7333,7 @@
         "_comments": ""
       },
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "AdditiveComputedField",
         "fields" : [ "CLs Targeted SM" ],
         "newField" : "Checklists Targeted SM",
@@ -7354,7 +7354,7 @@
         "_comments": ""
       },
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "AdditiveComputedField",
         "fields" : [ "CLs Targeted Total" ],
         "newField" : "Checklists Targeted Total",
@@ -7378,7 +7378,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"District Wise Filled Count\": {\n      \"terms\": {\n        \"field\": \"Data.district.keyword\",\n        \"size\": 10\n      },\n      \"aggs\": {\n        \"AS Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*AS_MONITORING.PROVINCIAL_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"AS Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        },\n        \"LM Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*LOCAL_MONITOR_TRAINING.PROVINCIAL_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"LM Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        },\n        \"DMT Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*DISTRICT_MONITOR_TRAINING.PROVINCIAL_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"DMT Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        },\n        \"RTT Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*REGISTRATION_TEAM_TRAINING.PROVINCIAL_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"RTT Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        },\n        \"RB Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*REGISTRATION_BASIC.PROVINCIAL_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"RB Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7447,7 +7447,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*AS_MONITORING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"PROVINCIAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled AS\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7457,11 +7457,11 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PROVINCIAL_SUPERVISOR.AS_MONITORING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted AS\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PROVINCIAL_SUPERVISOR.AS_MONITORING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted AS\": {\n          \"sum\": {\n            \"script\": {\n              \"source\": \"doc['Data.overallTarget'].value * 365\"\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*LOCAL_MONITOR_TRAINING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"PROVINCIAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled LM\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7471,11 +7471,11 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PROVINCIAL_SUPERVISOR.LOCAL_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted LM\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PROVINCIAL_SUPERVISOR.LOCAL_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted LM\": {\n          \"sum\": {\n            \"script\": {\n              \"source\": \"doc['Data.overallTarget'].value * 365\"\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*DISTRICT_MONITOR_TRAINING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"PROVINCIAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled DMT\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7485,11 +7485,11 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PROVINCIAL_SUPERVISOR.DISTRICT_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted DMT\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PROVINCIAL_SUPERVISOR.DISTRICT_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted DMT\": {\n          \"sum\": {\n            \"script\": {\n              \"source\": \"doc['Data.overallTarget'].value * 365\"\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*REGISTRATION_BASIC*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"PROVINCIAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled RB\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7499,11 +7499,11 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PROVINCIAL_SUPERVISOR.REGISTRATION_BASIC\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted RB\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PROVINCIAL_SUPERVISOR.REGISTRATION_BASIC\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted RB\": {\n          \"sum\": {\n            \"script\": {\n              \"source\": \"doc['Data.overallTarget'].value * 365\"\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*REGISTRATION_TEAM_TRAINING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"PROVINCIAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled RTT\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7513,11 +7513,11 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PROVINCIAL_SUPERVISOR.REGISTRATION_TEAM_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted RTT\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"PROVINCIAL_SUPERVISOR.REGISTRATION_TEAM_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted RTT\": {\n          \"sum\": {\n            \"script\": {\n              \"source\": \"doc['Data.overallTarget'].value * 365\"\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"PROVINCIAL_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled Total\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7527,7 +7527,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.targetType.keyword\": \"PROVINCIAL_SUPERVISOR.*\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted Total\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.targetType.keyword\": \"PROVINCIAL_SUPERVISOR.*\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted Total\": {\n          \"sum\": {\n            \"script\": {\n              \"source\": \"doc['Data.overallTarget'].value * 365\"\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
     "chartType": "xtable",
@@ -7571,7 +7571,7 @@
         "_comments": ""
       },
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "AdditiveComputedField",
         "fields" : [ "CLs Targeted RB" ],
         "newField" : "Checklists Targeted RB",
@@ -7592,7 +7592,7 @@
         "_comments": ""
       },
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "AdditiveComputedField",
         "fields" : [ "CLs Targeted DMT" ],
         "newField" : "Checklists Targeted DMT",
@@ -7613,7 +7613,7 @@
         "_comments": ""
       },
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "AdditiveComputedField",
         "fields" : [ "CLs Targeted AS" ],
         "newField" : "Checklists Targeted AS",
@@ -7634,7 +7634,7 @@
         "_comments": ""
       },
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "AdditiveComputedField",
         "fields" : [ "CLs Targeted LM" ],
         "newField" : "Checklists Targeted LM",
@@ -7655,7 +7655,7 @@
         "_comments": ""
       },
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "AdditiveComputedField",
         "fields" : [ "CLs Targeted RTT" ],
         "newField" : "Checklists Targeted RTT",
@@ -7676,7 +7676,7 @@
         "_comments": ""
       },
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "AdditiveComputedField",
         "fields" : [ "CLs Targeted Total" ],
         "newField" : "Checklists Targeted Total",
@@ -7700,7 +7700,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"District Wise Filled Count\": {\n      \"terms\": {\n        \"field\": \"Data.district.keyword\",\n        \"size\": 10\n      },\n      \"aggs\": {\n        \"AS Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*AS_MONITORING.DISTRICT_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"AS Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        },\n        \"LM Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*LOCAL_MONITOR_TRAINING.DISTRICT_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"LM Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        },\n        \"DMT Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*DISTRICT_MONITOR_TRAINING.DISTRICT_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"DMT Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        },\n        \"RTT Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*REGISTRATION_TEAM_TRAINING.DISTRICT_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"RTT Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        },\n        \"RB Filter\": {\n          \"filter\": {\n            \"wildcard\": {\n              \"Data.checklistName.keyword\": {\n                \"value\": \"*REGISTRATION_BASIC.DISTRICT_SUPERVISOR*\"\n              }\n            }\n          },\n          \"aggs\": {\n            \"RB Count Entries\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7769,7 +7769,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*AS_MONITORING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"DISTRICT_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled AS\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7779,11 +7779,11 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"DISTRICT_SUPERVISOR.AS_MONITORING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted AS\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"DISTRICT_SUPERVISOR.AS_MONITORING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted AS\": {\n          \"sum\": {\n            \"script\": {\n              \"source\": \"doc['Data.overallTarget'].value * 365\"\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*LOCAL_MONITOR_TRAINING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"DISTRICT_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled LM\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7793,11 +7793,11 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"DISTRICT_SUPERVISOR.LOCAL_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted LM\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"DISTRICT_SUPERVISOR.LOCAL_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted LM\": {\n          \"sum\": {\n            \"script\": {\n              \"source\": \"doc['Data.overallTarget'].value * 365\"\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*DISTRICT_MONITOR_TRAINING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"DISTRICT_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled DMT\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7807,11 +7807,11 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"DISTRICT_SUPERVISOR.DISTRICT_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted DMT\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"DISTRICT_SUPERVISOR.DISTRICT_MONITOR_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted DMT\": {\n          \"sum\": {\n            \"script\": {\n              \"source\": \"doc['Data.overallTarget'].value * 365\"\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*REGISTRATION_BASIC*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"DISTRICT_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled RB\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7821,11 +7821,11 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"DISTRICT_SUPERVISOR.REGISTRATION_BASIC\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted RB\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"DISTRICT_SUPERVISOR.REGISTRATION_BASIC\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted RB\": {\n          \"sum\": {\n            \"script\": {\n              \"source\": \"doc['Data.overallTarget'].value * 365\"\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.checklistName.keyword\": {\n                  \"value\": \"*REGISTRATION_TEAM_TRAINING*\"\n                }\n              }\n            },\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"DISTRICT_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled RTT\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7835,11 +7835,11 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"DISTRICT_SUPERVISOR.REGISTRATION_TEAM_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted RTT\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.targetType.keyword\": \"DISTRICT_SUPERVISOR.REGISTRATION_TEAM_TRAINING\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted RTT\": {\n          \"sum\": {\n            \"script\": {\n              \"source\": \"doc['Data.overallTarget'].value * 365\"\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       },
       {
         "module": "COMMON",
-        "dateRefField": "",
+        "dateRefField": "Data.createdTime",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "service-task-v1",
         "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"Data.supervisorLevel.keyword\": {\n                  \"value\": \"DISTRICT_SUPERVISOR\"\n                }\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"Supervisor Names\": {\n          \"terms\": {\n            \"field\": \"Data.userName.keyword\",\n            \"size\": 100\n          },\n          \"aggs\": {\n            \"CLs Filled Total\": {\n              \"value_count\": {\n                \"field\": \"Data.id.keyword\"\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
@@ -7849,7 +7849,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"province\":\"Data.province.keyword\", \"district\":\"Data.district.keyword\"}",
         "indexName": "project-index-v1",
-        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.targetType.keyword\": \"DISTRICT_SUPERVISOR.*\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted Total\": {\n          \"sum\": {\n            \"field\": \"Data.overallTarget\"\n          }\n        }\n      }\n    }\n  }\n}"
+        "aggrQuery": "{\n  \"aggs\": {\n    \"FILTERS\": {\n      \"filter\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"wildcard\": {\n                \"Data.targetType.keyword\": \"DISTRICT_SUPERVISOR.*\"\n              }\n            }\n          ]\n        }\n      },\n      \"aggs\": {\n        \"CLs Targeted Total\": {\n          \"sum\": {\n            \"script\": {\n              \"source\": \"doc['Data.overallTarget'].value * 365\"\n            }\n          }\n        }\n      }\n    }\n  }\n}"
       }
     ],
     "chartType": "xtable",
@@ -7893,7 +7893,7 @@
         "_comments": ""
       },
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "AdditiveComputedField",
         "fields" : [ "CLs Targeted RB" ],
         "newField" : "Checklists Targeted RB",
@@ -7914,7 +7914,7 @@
         "_comments": ""
       },
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "AdditiveComputedField",
         "fields" : [ "CLs Targeted DMT" ],
         "newField" : "Checklists Targeted DMT",
@@ -7935,7 +7935,7 @@
         "_comments": ""
       },
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "AdditiveComputedField",
         "fields" : [ "CLs Targeted AS" ],
         "newField" : "Checklists Targeted AS",
@@ -7956,7 +7956,7 @@
         "_comments": ""
       },
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "AdditiveComputedField",
         "fields" : [ "CLs Targeted LM" ],
         "newField" : "Checklists Targeted LM",
@@ -7977,7 +7977,7 @@
         "_comments": ""
       },
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "AdditiveComputedField",
         "fields" : [ "CLs Targeted RTT" ],
         "newField" : "Checklists Targeted RTT",
@@ -7998,7 +7998,7 @@
         "_comments": ""
       },
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "AdditiveComputedField",
         "fields" : [ "CLs Targeted Total" ],
         "newField" : "Checklists Targeted Total",
