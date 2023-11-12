@@ -11,3 +11,12 @@ ServiceMaps:
           isBulk: true
           jsonPath: $.*
           timeStampField: $.auditDetails.createdTime
+    - topic: update-facility-topic
+      configKey: INDEX
+      indexes:
+        - name: facility-index-v1
+          type: facility
+          id: $.clientReferenceId
+          isBulk: true
+          jsonPath: $.*
+          timeStampField: $.auditDetails.lastModifiedTime
