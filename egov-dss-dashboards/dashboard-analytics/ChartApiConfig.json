@@ -6319,7 +6319,7 @@
     "plotLabel": "Inventory summary By LMs",
     "filterKeys": [
       {"key": "lmName", "column": "Inventory summary By LMs"},
-      {"key": "satelliteWarehouse", "column": "satelliteWarehouse"}
+      {"key": "satelliteWarehouse", "column": ""}
     ],
     "divisorFields": [],
     "showFooter": false,
