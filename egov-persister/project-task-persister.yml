@@ -141,7 +141,7 @@ serviceMaps:
             - jsonPath: $.*.address.locality.code
             - jsonPath: $.*.address.id
 
-        - query: INSERT INTO TASK_RESOURCE(id, clientReferenceId, tenantid, productvariantid, taskid, quantity, isDelivered, reasonIfNotDelivered, , additionalDetails, createdBy, createdTime, lastModifiedBy, lastModifiedTime, isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET tenantid = ?, taskid = ?, productvariantid = ?, quantity = ?, isDelivered = ?, reasonIfNotDelivered = ?, , additionalDetails = ?, lastModifiedBy = ?, lastModifiedTime = ?;
+        - query: INSERT INTO TASK_RESOURCE(id, clientReferenceId, tenantid, productvariantid, taskid, quantity, isDelivered, reasonIfNotDelivered, , additionalDetails, createdBy, createdTime, lastModifiedBy, lastModifiedTime, isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET tenantid = ?, taskid = ?, productvariantid = ?, quantity = ?, isDelivered = ?, reasonIfNotDelivered = ?, additionalDetails = ?, lastModifiedBy = ?, lastModifiedTime = ?;
           basePath: $.*.resources.*
           jsonMaps:
             - jsonPath: $.*.resources.*.id
