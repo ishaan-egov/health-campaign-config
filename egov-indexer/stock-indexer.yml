@@ -30,16 +30,8 @@ ServiceMaps:
                 outJsonPath: $.Data.userName
               - inJsonPath: $.role
                 outJsonPath: $.Data.role
-              - inJsonPath: $.province
-                outJsonPath: $.Data.province
-              - inJsonPath: $.district
-                outJsonPath: $.Data.district
-              - inJsonPath: $.administrativeProvince
-                outJsonPath: $.Data.administrativeProvince
-              - inJsonPath: $.locality
-                outJsonPath: $.Data.locality
-              - inJsonPath: $.village
-                outJsonPath: $.Data.village
+              - inJsonPath: $.boundaryHierarchy
+                outJsonPath: $.Data.boundaryHierarchy
               - inJsonPath: $.createdTime
                 outJsonPath: $.Data.clientCreatedTime
               - inJsonPath: $.syncedTime
