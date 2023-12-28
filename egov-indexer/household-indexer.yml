@@ -20,15 +20,15 @@ ServiceMaps:
           isBulk: true
           jsonPath: $.*
           timeStampField: $.auditDetails.lastModifiedTime
-    - topic: save-household-member-topic
+    - topic: transformer-producer-household-member-index-v1-topic
       configKey: INDEX
       indexes:
         - name: household-member-index-v1
           type: member
-          id: $.id
+          id: $.householdMember.id
           isBulk: true
           jsonPath: $.*
-          timeStampField: $.auditDetails.createdTime
+          timeStampField: $.householdMember.auditDetails.createdTime
     - topic: update-household-member-topic
       configKey: INDEX
       indexes:
