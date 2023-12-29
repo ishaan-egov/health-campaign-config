@@ -39,3 +39,40 @@ ServiceMaps:
               - inJsonPath: $.syncedTimeStamp
                 outJsonPath: $.Data.syncedTimeStamp
           timeStampField: $.createdTime
+    - topic: transformer-producer-service-index-v2-topic
+      configKey: INDEX
+      indexes:
+        - name: referral-service-task-v1
+          type: service
+          id: $.clientReferenceId,$.tenantId
+          isBulk: true
+          jsonPath: $
+          customJsonMapping:
+            indexMapping: { "Data": {} }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
+          timeStampField: $.createdTime
+        - name: user-sync-index-v1
+          type: users
+          id: $.id
+          isBulk: true
+          jsonPath: $
+          customJsonMapping:
+            indexMapping: { "Data": { } }
+            fieldMapping:
+              - inJsonPath: $.createdBy
+                outJsonPath: $.Data.userId
+              - inJsonPath: $.userName
+                outJsonPath: $.Data.userName
+              - inJsonPath: $.role
+                outJsonPath: $.Data.role
+              - inJsonPath: $.createdTime
+                outJsonPath: $.Data.clientCreatedTime
+              - inJsonPath: $.boundaryHierarchy
+                outJsonPath: $.Data.boundaryHierarchy
+              - inJsonPath: $.syncedTime
+                outJsonPath: $.Data.createdTime
+              - inJsonPath: $.syncedTimeStamp
+                outJsonPath: $.Data.syncedTimeStamp
+          timeStampField: $.createdTime
