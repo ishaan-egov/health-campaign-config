@@ -44,7 +44,7 @@ ServiceMaps:
       indexes:
         - name: referral-service-task-v1
           type: service
-          id: $.clientReferenceId,$.tenantId
+          id: $.id
           isBulk: true
           jsonPath: $
           customJsonMapping:
@@ -71,8 +71,6 @@ ServiceMaps:
                 outJsonPath: $.Data.clientCreatedTime
               - inJsonPath: $.boundaryHierarchy
                 outJsonPath: $.Data.boundaryHierarchy
-              - inJsonPath: $.syncedTime
-                outJsonPath: $.Data.createdTime
-              - inJsonPath: $.syncedTimeStamp
-                outJsonPath: $.Data.syncedTimeStamp
+              - inJsonPath: $.@timestamp
+                outJsonPath: $.Data.@timestamp
           timeStampField: $.createdTime
