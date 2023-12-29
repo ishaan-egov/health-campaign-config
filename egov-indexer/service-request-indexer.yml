@@ -39,7 +39,7 @@ ServiceMaps:
               - inJsonPath: $.syncedTimeStamp
                 outJsonPath: $.Data.syncedTimeStamp
           timeStampField: $.createdTime
-    - topic: transformer.producer.service.index.v2.topic
+    - topic: transformer-producer-service-index-v2-topic
       configKey: INDEX
       indexes:
         - name: referral-service-task-v1
