@@ -42,7 +42,7 @@ ServiceMaps:
     - topic: transformer.producer.service.index.v2.topic
       configKey: INDEX
       indexes:
-        - name: service-task-v2
+        - name: referral-service-task-v1
           type: service
           id: $.clientReferenceId,$.tenantId
           isBulk: true
