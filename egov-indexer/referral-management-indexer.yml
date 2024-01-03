@@ -75,7 +75,7 @@ ServiceMaps:
       indexes:
         - name: side-effect-index-v1
           type: side-effect
-          id: $.id
+          id: $.sideEffect.id
           isBulk: true
           jsonPath: $.*
           timeStampField: $.sideEffect.auditDetails.createdTime
