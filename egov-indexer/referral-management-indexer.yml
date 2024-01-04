@@ -32,7 +32,7 @@ ServiceMaps:
                 outJsonPath: $.Data.boundaryHierarchy
               - inJsonPath: $.@timestamp
                 outJsonPath: $.Data.@timestamp
-          timeStampField: $.auditDetails.createdTime
+          timeStampField: $.referral.auditDetails.createdTime
 
     - topic: delete-referral-topic
       configKey: INDEX
