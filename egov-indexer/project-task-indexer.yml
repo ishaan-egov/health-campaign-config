@@ -15,7 +15,7 @@ ServiceMaps:
             fieldMapping:
               - inJsonPath: $
                 outJsonPath: $.Data
-          timeStampField: $.clientAuditDetails.createdTime
+          timeStampField: $.createdTime
         - name: user-sync-index-v1
           type: users
           id: $.id
