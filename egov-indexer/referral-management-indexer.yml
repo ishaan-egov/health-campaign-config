@@ -34,7 +34,12 @@ ServiceMaps:
           type: side-effect
           id: $.sideEffect.id
           isBulk: true
-          jsonPath: $.*
+          jsonPath: $
+          customJsonMapping:
+            indexMapping: { "Data": { } }
+            fieldMapping:
+              - inJsonPath: $
+                outJsonPath: $.Data
           timeStampField: $.sideEffect.auditDetails.createdTime
 
     - topic: delete-side-effect-topic
