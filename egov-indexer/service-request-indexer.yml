@@ -38,6 +38,8 @@ ServiceMaps:
                 outJsonPath: $.Data.createdTime
               - inJsonPath: $.syncedTimeStamp
                 outJsonPath: $.Data.syncedTimeStamp
+              - inJsonPath: $.@timestamp
+                outJsonPath: $.Data.@timestamp
           timeStampField: $.createdTime
     - topic: transformer-producer-service-index-v2-topic
       configKey: INDEX
@@ -67,10 +69,14 @@ ServiceMaps:
                 outJsonPath: $.Data.userName
               - inJsonPath: $.role
                 outJsonPath: $.Data.role
-              - inJsonPath: $.createdTime
-                outJsonPath: $.Data.clientCreatedTime
               - inJsonPath: $.boundaryHierarchy
                 outJsonPath: $.Data.boundaryHierarchy
+              - inJsonPath: $.createdTime
+                outJsonPath: $.Data.clientCreatedTime
+              - inJsonPath: $.syncedTime
+                outJsonPath: $.Data.createdTime
+              - inJsonPath: $.syncedTimeStamp
+                outJsonPath: $.Data.syncedTimeStamp
               - inJsonPath: $.@timestamp
                 outJsonPath: $.Data.@timestamp
           timeStampField: $.createdTime

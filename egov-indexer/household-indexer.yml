@@ -29,15 +29,6 @@ ServiceMaps:
           isBulk: true
           jsonPath: $.*
           timeStampField: $.householdMember.auditDetails.createdTime
-    - topic: update-household-member-topic
-      configKey: INDEX
-      indexes:
-        - name: household--member-index-v1
-          type: member
-          id: $.id
-          isBulk: true
-          jsonPath: $.*
-          timeStampField: $.auditDetails.lastModifiedTime
     - topic: delete-household-member-topic
       configKey: INDEX
       indexes:
