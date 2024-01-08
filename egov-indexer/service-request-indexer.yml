@@ -46,7 +46,7 @@ ServiceMaps:
       indexes:
         - name: referral-service-task-v1
           type: service
-          id: $.id
+          id: $.id,$.ageGroup
           isBulk: true
           jsonPath: $
           customJsonMapping:
@@ -57,7 +57,7 @@ ServiceMaps:
           timeStampField: $.createdTime
         - name: user-sync-index-v1
           type: users
-          id: $.id
+          id: $.id,$.ageGroup
           isBulk: true
           jsonPath: $
           customJsonMapping:
