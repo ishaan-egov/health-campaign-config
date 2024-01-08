@@ -38,6 +38,8 @@ ServiceMaps:
                 outJsonPath: $.Data.createdTime
               - inJsonPath: $.syncedTimeStamp
                 outJsonPath: $.Data.syncedTimeStamp
+              - inJsonPath: $.@timestamp
+                outJsonPath: $.Data.@timestamp
           timeStampField: $.createdTime
 
     - topic: save-stock-reconciliation-topic
