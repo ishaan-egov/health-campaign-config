@@ -8,7 +8,12 @@ ServiceMaps:
       - name: transformer-pgr-services
         type: general
         id: $.service.serviceRequestId
-        jsonPath: $.*
+        jsonPath: $
         isBulk: true
+        customJsonMapping:
+          indexMapping: { "Data": {} }
+          fieldMapping:
+            - inJsonPath: $
+              outJsonPath: $.Data
         timeStampField: $.service.auditDetails.lastModifiedTime
 
