@@ -5,7 +5,7 @@ ServiceMaps:
   - topic: transformer-save-pgr-request
     configKey: INDEX
     indexes:
-      - name: pgr-services
+      - name: transformer-pgr-services
         type: general
         id: $.service.serviceRequestId
         jsonPath: $
