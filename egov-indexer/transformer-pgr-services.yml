@@ -9,6 +9,7 @@ ServiceMaps:
         type: general
         id: $.service.serviceRequestId
         jsonPath: $
+        isBulk: true
         customJsonMapping:
           indexMapping: { "Data": {} }
           fieldMapping:
