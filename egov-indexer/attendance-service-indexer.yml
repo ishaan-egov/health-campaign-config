@@ -67,7 +67,7 @@ ServiceMaps:
       indexes:
         - name: attendance-log-index-v1
           type: attendance-log
-          id: $.id
+          id: $.attendance.id
           isBulk: true
           jsonPath: $.*
           timeStampField: $.auditDetails.createdTime
@@ -77,7 +77,7 @@ ServiceMaps:
       indexes:
         - name: attendance-log-index-v1
           type: attendance-log
-          id: $.id
+          id: $.attendance.id
           isBulk: true
           jsonPath: $.*
           timeStampField: $.auditDetails.lastModifiedTime
