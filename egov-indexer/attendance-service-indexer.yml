@@ -67,15 +67,17 @@ ServiceMaps:
       indexes:
         - name: attendance-log-index-v1
           type: attendance-log
-          id: $.attendance.id
+          id: $.id
           isBulk: true
           jsonPath: $.*
+          timeStampField: $.time
 
     - topic: update-attendance-log
       configKey: INDEX
       indexes:
         - name: attendance-log-index-v1
           type: attendance-log
-          id: $.attendance.id
+          id: $.id
           isBulk: true
           jsonPath: $.*
+          timeStampField: $.time
