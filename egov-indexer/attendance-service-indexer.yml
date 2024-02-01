@@ -70,7 +70,6 @@ ServiceMaps:
           id: $.attendance.id
           isBulk: true
           jsonPath: $.*
-          timeStampField: $.auditDetails.createdTime
 
     - topic: update-attendance-log
       configKey: INDEX
@@ -80,4 +79,3 @@ ServiceMaps:
           id: $.attendance.id
           isBulk: true
           jsonPath: $.*
-          timeStampField: $.auditDetails.lastModifiedTime
