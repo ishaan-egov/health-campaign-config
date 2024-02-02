@@ -62,15 +62,15 @@ ServiceMaps:
           jsonPath: $.*
           timeStampField: $.auditDetails.lastModifiedTime
 
-    - topic: save-attendance-log
+    - topic: transformer-save-attendance-log
       configKey: INDEX
       indexes:
         - name: attendance-log-index-v1
           type: attendance-log
-          id: $.id
+          id: $.attendanceLog.id
           isBulk: true
           jsonPath: $.*
-          timeStampField: $.time
+          timeStampField: $.attendanceLog.auditDetails.lastModifiedTime
 
     - topic: update-attendance-log
       configKey: INDEX
