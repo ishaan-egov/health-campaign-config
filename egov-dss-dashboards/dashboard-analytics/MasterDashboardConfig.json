@@ -2517,7 +2517,7 @@
     },
     {
       "name": "DSS_HEALTH_OVERVIEW_DASHBOARD_SMC_HEADING",
-      "id": "provincial-health-dashboard",
+      "id": "provincial-health-dashboard-smc",
       "isActive": "",
       "style": "linear",
       "hideFilterFields": ["DDR", "Ulb", "Denomination", "ModuleFilter"],
@@ -4123,7 +4123,7 @@
     },
     {
       "name": "DSS_HEALTH_OVERVIEW_DASHBOARD_SMC_HEADING",
-      "id": "district-health-dashboard",
+      "id": "district-health-dashboard-smc",
       "isActive": "",
       "hideFilterFields": ["DDR", "Ulb", "Denomination", "ModuleFilter"],
       "style": "linear",
@@ -5697,7 +5697,7 @@
     },
     {
       "name": "DSS_HEALTH_NATIONAL_DASHBOARD_SMC_HEADING",
-      "id": "national-health-dashboard",
+      "id": "national-health-dashboard-smc",
       "isActive": "",
       "style": "linear",
       "visualizations": [
@@ -5905,7 +5905,7 @@
               "noUnit": true,
               "isCollapsible": false,
               "ref": {
-                "url": "provincial-health-dashboard",
+                "url": "provincial-health-dashboard-smc",
                 "logoUrl": "",
                 "type": "internal"
               },

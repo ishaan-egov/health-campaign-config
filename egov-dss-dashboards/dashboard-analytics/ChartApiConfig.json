@@ -9007,6 +9007,7 @@
     "insight": { },
     "_comment": " "
   },
+
   "householdVisitedWithinDateRangeSMC": {
     "chartName": "DSS_HEALTH_OVERVIEW_HOUSEHOLDS_VISITED_OVER_DATERANGE",
     "queries": [
